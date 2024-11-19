@@ -85,7 +85,7 @@
             </div>
         </div>
 
-        <h2 class="text-center my-4 text-uppercase fw-bold">User Data</h2>
+        <h2 class="text-center my-4 text-uppercase fw-bold">Appoinment Details</h2>
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
                 <thead class="table-dark">
@@ -94,31 +94,72 @@
                         <th scope="col">Name</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Gender</th>
+                        <th scope="col">Booking Date</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Message</th>
                         <th scope="col" class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($appoinments as $appoinment)
                         <tr>
-                            <th scope="row">{{ $user['id'] }}</th>
-                            <td>{{ $user['name'] }}</td>
-                            <td>{{ $user['phone'] }}</td>
-                            <td>{{ $user['email'] }}</td>
-                            <td>{{ $user['address'] }}</td>
-                            <td>{{ $user['gender'] }}</td>
+                            <th scope="row">{{ $appoinment['id'] }}</th>
+                            <td>{{ $appoinment['name'] }}</td>
+                            <td>{{ $appoinment['phone'] }}</td>
+                            <td>{{ $appoinment['email'] }}</td>
+                            <td>{{ $appoinment['booking_date'] }}</td>
+                            <td>{{ $appoinment['department'] }}</td>
+                            <td>{{ $appoinment['doctor_name'] }}</td>
+                            <td>{{ $appoinment['message'] }}</td>
                             <td class="text-center">
-                                <a href="/edit/{{ $user['id'] }}" class="btn btn-warning text-uppercase">Edit</a>
-                                <a href="/delete/{{ $user['id'] }}" class="btn btn-danger text-uppercase">Delete</a>
+                                <a href="/edit/{{ $appoinment['id'] }}" class="btn btn-warning text-uppercase">Edit</a>
+                                <a href="/delete/{{ $appoinment['id'] }}" class="btn btn-danger text-uppercase">Delete</a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            @if ($totalData > $maxPageLimit)
+            @if ($totalAppoinments > $maxPageLimit)
                 <div class="text-center pagination-container">
-                    {{ $users->links() }}
+                    {{ $appoinments->links() }}
+                </div>
+            @endif
+        </div>
+        <h2 class="text-center my-4 text-uppercase fw-bold">Contact Details</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Message</th>
+                        <th scope="col" class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($contactData as $contact)
+                        <tr>
+                            <th scope="row">{{ $contact['id'] }}</th>
+                            <td>{{ $contact['name'] }}</td>
+                            <td>{{ $contact['phone'] }}</td>
+                            <td>{{ $contact['email'] }}</td>
+                            <td>{{ $contact['subject'] }}</td>
+                            <td>{{ $contact['message'] }}</td>
+                            <td class="text-center">
+                                <a href="/edit/{{ $contact['id'] }}" class="btn btn-warning text-uppercase">Edit</a>
+                                <a href="/delete/{{ $contact['id'] }}" class="btn btn-danger text-uppercase">Delete</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @if ($totalContacts > $maxPageLimit)
+                <div class="text-center pagination-container">
+                    {{ $contactData->links() }}
                 </div>
             @endif
         </div>

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
-use App\Models\User;
+use App\Models\AppointmentDetail;
+use App\Models\ContactDetail;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -11,17 +12,25 @@ class AdminController extends Controller
     public function getData(Request $req)
     {
         $data = null;
+        $contactData = null;
         $maxPageLimit = 10;
-        $totalData = User::count();
-        if ($totalData > $maxPageLimit) {
-            $data = User::paginame($maxPageLimit);
+        $totalAppoinments = AppointmentDetail::count();
+        $totalContacts = ContactDetail::count();
+        if ($totalAppoinments > $maxPageLimit) {
+            $data = AppointmentDetail::paginame($maxPageLimit);
         } else {
-            $data = User::all();
+            $data = AppointmentDetail::all();
         }
-        $admin = Admin::where('email', 'sayan@gmail.com')
+
+        if ($totalContacts > $maxPageLimit) {
+            $contactData = ContactDetail::paginame($maxPageLimit);
+        } else {
+            $contactData = ContactDetail::all();
+        }
+        $admin = Admin::where('email', 'sayan@test.com')
             ->where('password', 'password123')
             ->first();
 
-        return view('cms.dashboard', ['users' => $data, "maxPageLimit" => $maxPageLimit, "totalData" => $totalData, "admin" => $admin]);
+        return view('cms.dashboard', ['appoinments' => $data, 'contactData'=> $contactData, "maxPageLimit" => $maxPageLimit, "totalAppoinments" => $totalAppoinments,"totalContacts" => $totalContacts, "admin" => $admin]);
     }
 }
