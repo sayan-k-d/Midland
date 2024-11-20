@@ -6,6 +6,11 @@
 /* Side menu default styles */
 .side-menu {
     width: 250px;
+    min-height: 100vh;
+    transition: all 0.3s ease;
+    height: 100%;
+    position: fixed;
+    overflow-y: auto;
     transition: all 0.3s ease;
 }
 
@@ -28,6 +33,7 @@
     justify-content: center;
 }
 .side-menu.collapsed .menu-header {
+    width: 70px;
     justify-content: center !important;
 }
 /* Adjust button rotation */
@@ -43,8 +49,13 @@
 .menu-header {
     height: 60px;
     border-bottom: 1px solid #444;
+    background-color: rgb(33, 37, 41);
 }
 
+.main-container {
+    margin-left: 250px;
+    padding: 0 1rem;
+}
 .admin-details {
     .admin-avatar {
         border-radius: 50%;

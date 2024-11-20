@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\AppointmentDetailsMail;
 use App\Models\AppointmentDetail;
 use App\Models\ContactDetail;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -70,8 +71,11 @@ class FormController extends Controller
             'message' => $request->input('umsg'),
         ];
         try {
+            $admin = Admin::where('email', 'sayan@test.com')
+                ->where('password', 'password123')
+                ->first();
             // Send the email
-            Mail::to('sayankd2001@gmail.com')->send(new AppointmentDetailsMail($emailData));
+            Mail::to($admin->receiverEmail)->send(new AppointmentDetailsMail($emailData));
 
             // Return success response
             return redirect()->back()->with('success', 'Appointment has been successfully scheduled, and an email has been sent!');

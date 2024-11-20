@@ -36,13 +36,13 @@ class AdminController extends Controller
 
     public function setEmail(Request $req)
     {
-        if ($req->input('recieverEmail')) {
+        if ($req->input('receiverEmail')) {
             $admin = Admin::where('email', 'sayan@test.com')
                 ->where('password', 'password123')
                 ->first();
-            $admin->recieverEmail = $req->input('recieverEmail');
+            $admin->receiverEmail = $req->input('receiverEmail');
             $admin->save();
-            return redirect()->back()->with('success', "Reciever Email Updated Succesfully");
+            return redirect()->back()->with('success', "Receiver Email Updated Successfully");
         }
     }
 }

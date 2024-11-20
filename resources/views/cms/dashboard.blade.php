@@ -12,9 +12,8 @@
 
 <body>
     @include('\cms\layout\dashboard-nav')
-    <div class="d-flex min-vh-100">
         <div id="sidebar" class="side-menu bg-dark">
-            <div class="menu-header d-flex align-items-center justify-content-between px-3">
+            <div class="menu-header sticky-top d-flex align-items-center justify-content-between px-3">
                 <span class="text-white fs-5 menu-header-text">Dashboard</span>
                 <button class="btn btn-sm btn-light slider-button" onclick="toggleSidebar()">
                     <i class="bi bi-caret-left-fill"></i>
@@ -46,7 +45,7 @@
             </ul>
         </div>
 
-        <div class="container mt-3 main-container">
+        <div class="mt-3 main-container">
             <div class="d-flex align-items-center justify-content-between admin-details">
                 <div class="admin-avatar">
                     <img src="\assets\img\avatartest.svg" alt="avatar" />
@@ -152,12 +151,11 @@
                 ])
             </div>
         </div>
-    </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Enter Email</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Enter Reciever Email</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -165,7 +163,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" name="recieverEmail" id="exampleInputEmail1"
+                            <input type="email" class="form-control" name="receiverEmail" id="exampleInputEmail1"
                                 aria-describedby="emailHelp">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
