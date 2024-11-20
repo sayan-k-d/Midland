@@ -16,3 +16,4 @@ Route::post('/contact-form', [FormController::class, 'storeContactDetail'])->nam
 Route::post('/appointment-form', [FormController::class, 'storeAppointmentDetail'])->name('appointment.store');
 
 Route::get("/dashboard", [AdminController::class, "getData"])->name("dashboard");
+Route::post("/setEmail", [AdminController::class, "setEmail"])->name("setemail");

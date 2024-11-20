@@ -31,6 +31,18 @@ class AdminController extends Controller
             ->where('password', 'password123')
             ->first();
 
-        return view('cms.dashboard', ['appoinments' => $data, 'contactData'=> $contactData, "maxPageLimit" => $maxPageLimit, "totalAppoinments" => $totalAppoinments,"totalContacts" => $totalContacts, "admin" => $admin]);
+        return view('cms.dashboard', ['appoinments' => $data, 'contactData' => $contactData, "maxPageLimit" => $maxPageLimit, "totalAppoinments" => $totalAppoinments, "totalContacts" => $totalContacts, "admin" => $admin]);
+    }
+
+    public function setEmail(Request $req)
+    {
+        if ($req->input('recieverEmail')) {
+            $admin = Admin::where('email', 'sayan@test.com')
+                ->where('password', 'password123')
+                ->first();
+            $admin->recieverEmail = $req->input('recieverEmail');
+            $admin->save();
+            return redirect()->back()->with('success', "Reciever Email Updated Succesfully");
+        }
     }
 }

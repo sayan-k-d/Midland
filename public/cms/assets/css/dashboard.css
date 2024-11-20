@@ -1,3 +1,50 @@
+::-webkit-scrollbar {
+    width: 100% !important;
+    height: 10px !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+/* Side menu default styles */
+.side-menu {
+    width: 250px;
+    transition: all 0.3s ease;
+}
+
+.side-menu.collapsed {
+    width: 70px !important;
+    /* flex: 0 0 70px !important; */
+}
+
+/* Hide text when collapsed */
+
+.side-menu.collapsed {
+    .menu-text,
+    .menu-header-text {
+        display: none;
+    }
+}
+
+/* Center icons when collapsed */
+.side-menu.collapsed .nav-link {
+    justify-content: center;
+}
+.side-menu.collapsed .menu-header {
+    justify-content: center !important;
+}
+/* Adjust button rotation */
+.slider-button {
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+}
+.side-menu.collapsed .slider-button {
+    transform: rotate(180deg);
+}
+
+/* Menu header styling */
+.menu-header {
+    height: 60px;
+    border-bottom: 1px solid #444;
+}
+
 .admin-details {
     .admin-avatar {
         border-radius: 50%;
