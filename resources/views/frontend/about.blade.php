@@ -1,5 +1,5 @@
 @extends('frontend.layouts.main')
-@section('title', 'Contact Page')
+@section('title', 'About Page')
 @section('content')
 
     <div class="st-content">

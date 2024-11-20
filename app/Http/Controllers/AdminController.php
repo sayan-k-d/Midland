@@ -45,4 +45,5 @@ class AdminController extends Controller
             return redirect()->back()->with('success', "Receiver Email Updated Successfully");
         }
     }
+    
 }
