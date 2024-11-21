@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
-            $table->id();
-            $table->string('service_name');
-            $table->string('image')->nullable();
-            $table->text('short_details');
-            $table->longText('long_details');
-            $table->timestamps();
-           
+        Schema::table('services', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::table('services', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -21,12 +21,13 @@
                 'data' => $services,
                 'actions' => [
                     [
-                        'url' => fn($id) => "/edit/$id",
+                        'url' => fn($id) => "services/edit/$id",
                         'class' => 'btn-warning',
                         'label' => 'Edit',
                     ],
                     [
-                        'url' => fn($id) => "/delete/$id",
+                        'url' => fn($id) => "services/delete/$id",
+                        'route_name' => 'service.destroy',
                         'class' => 'btn-danger',
                         'label' => 'Delete',
                     ],

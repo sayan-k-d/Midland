@@ -27,6 +27,7 @@
                     ],
                     [
                         'url' => fn($id) => "/delete/$id",
+                        'route_name' => 'department.destroy',
                         'class' => 'btn-danger',
                         'label' => 'Delete',
                     ],

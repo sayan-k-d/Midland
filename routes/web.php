@@ -22,7 +22,13 @@ Route::post("/setEmail", [AdminController::class, "setEmail"])->name("setemail")
 Route::get('/addDepartment', [DepartmentController::class, 'create'])->name('addDepartment');
 Route::get("/departmentDetails", [DepartmentController::class, "index"])->name("departmentDetails");
 Route::post('/department', [DepartmentController::class, 'store'])->name('department.store');
+Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('editDepartment');
+Route::put('department/{id}', [DepartmentController::class, 'update'])->name('department.update');
+Route::delete('/department/delete/{id}', [DepartmentController::class, 'destroy'])->name('department.destroy');
 
 Route::get('/addService', [ServicesController::class, 'create'])->name('addservice');
 Route::get("/serviceDetails", [ServicesController::class, "index"])->name("serviceDetails");
 Route::post('/service', [ServicesController::class, 'store'])->name('service.store');
+Route::get('/services/edit/{id}', [ServicesController::class, 'edit'])->name('editServices');
+Route::put('/service/{id}', [ServicesController::class, 'update'])->name('service.update');
+Route::delete('/services/delete/{id}', [ServicesController::class, 'destroy'])->name('service.destroy');

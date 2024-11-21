@@ -71,8 +71,9 @@
                         ],
                         [
                             'url' => fn($id) => "/delete/$id",
+                            'route_name' => '',
                             'class' => 'btn-danger',
-                            'label' => 'Delete',
+                            'label' => 'Delele',
                         ],
                     ],
                     'totalData' => $totalAppoinments,
@@ -99,8 +100,9 @@
                         ],
                         [
                             'url' => fn($id) => "/delete/$id",
+                            'route_name' => '',
                             'class' => 'btn-danger',
-                            'label' => 'Delete',
+                            'label' => 'Delele',
                         ],
                     ],
                     'totalData' => $totalContacts,
