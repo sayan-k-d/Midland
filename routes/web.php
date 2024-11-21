@@ -23,6 +23,6 @@ Route::get('/addDepartment', [DepartmentController::class, 'create'])->name('add
 Route::get("/departmentDetails", [DepartmentController::class, "index"])->name("departmentDetails");
 Route::post('/department', [DepartmentController::class, 'store'])->name('department.store');
 
-Route::get('/addservice', [ServicesController::class, 'create'])->name('addservice');
+Route::get('/addService', [ServicesController::class, 'create'])->name('addservice');
 Route::get("/serviceDetails", [ServicesController::class, "index"])->name("serviceDetails");
 Route::post('/service', [ServicesController::class, 'store'])->name('service.store');

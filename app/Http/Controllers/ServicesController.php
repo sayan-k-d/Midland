@@ -19,21 +19,22 @@ class ServicesController extends Controller
             $data = Services::all();
         }
 
-        return view('cms.service.index',['services' => $data, 'serviceData' => $serviceData, "maxPageLimit" => $maxPageLimit, "totalservice" => $totalservice]);
+        return view('cms.services.index',['services' => $data, 'serviceData' => $serviceData, "maxPageLimit" => $maxPageLimit, "totalservice" => $totalservice]);
     }
     public function create()
     {
-        return view('cms.service.addservice');
+        return view('cms.services.addService');
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'service_name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif',
             'short_details' => 'required|string|max:500',
             'long_details' => 'required|string',
         ]);
-
+    // dd($request->all());
         // Handle image upload
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('service_images', 'public');
@@ -49,6 +50,6 @@ class ServicesController extends Controller
             'long_details' => $request->long_details,
         ]);
 
-        return redirect()->route('addservice')->with('success', 'service created successfully!');
+        return redirect()->route('serviceDetails')->with('success', 'service created successfully!');
     }
 }
