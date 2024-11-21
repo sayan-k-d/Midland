@@ -56,6 +56,24 @@
     margin-left: 250px;
     padding: 0 1rem;
 }
+.content {
+    margin-left: 250px;
+    padding: 1rem;
+    .page-title {
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+    .breadcrumb {
+        a {
+            color: darkcyan;
+            text-decoration: none;
+        }
+        .breadcrumb-item.active {
+            font-weight: bold;
+            color: rgb(83, 83, 83);
+        }
+    }
+}
 .admin-details {
     .admin-avatar {
         border-radius: 50%;

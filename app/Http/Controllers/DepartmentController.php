@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Department;
-
+use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
@@ -20,7 +19,7 @@ class DepartmentController extends Controller
             $data = Department::all();
         }
 
-        return view('cms.department.index',['departments' => $data, 'departmentData' => $departmentData, "maxPageLimit" => $maxPageLimit, "totaldepartment" => $totaldepartment]);
+        return view('cms.department.index', ['departments' => $data, 'departmentData' => $departmentData, "maxPageLimit" => $maxPageLimit, "totaldepartment" => $totaldepartment]);
     }
     public function create()
     {
@@ -36,8 +35,10 @@ class DepartmentController extends Controller
         ]);
 
         // Handle image upload
+
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('department_images', 'public');
+            // $imagePath = file_get_contents($request->file('image')->getRealPath());
         } else {
             $imagePath = null;
         }
@@ -49,7 +50,6 @@ class DepartmentController extends Controller
             'short_details' => $request->short_details,
             'long_details' => $request->long_details,
         ]);
-
-        return redirect()->route('addDepartment')->with('success', 'Department created successfully!');
+        return redirect()->route('departmentDetails')->with('success', 'Department created successfully!');
     }
 }
