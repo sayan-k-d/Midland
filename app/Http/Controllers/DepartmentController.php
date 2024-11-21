@@ -19,6 +19,17 @@ class DepartmentController extends Controller
             $data = Department::all();
         }
 
+        foreach ($data as $department) {
+            if ($department->image) {
+                // Detect MIME type dynamically
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mimeType = finfo_buffer($finfo, $department->image);
+                finfo_close($finfo);
+
+                // Encode image with the detected MIME type
+                $department->image = 'data:' . $mimeType . ';base64,' . base64_encode($department->image);
+            }
+        }
         return view('cms.department.index', ['departments' => $data, 'departmentData' => $departmentData, "maxPageLimit" => $maxPageLimit, "totaldepartment" => $totaldepartment]);
     }
     public function create()
@@ -37,8 +48,8 @@ class DepartmentController extends Controller
         // Handle image upload
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('department_images', 'public');
-            // $imagePath = file_get_contents($request->file('image')->getRealPath());
+            // $imagePath = $request->file('image')->store('department_images', 'public');
+            $imagePath = file_get_contents($request->file('image')->getRealPath());
         } else {
             $imagePath = null;
         }
