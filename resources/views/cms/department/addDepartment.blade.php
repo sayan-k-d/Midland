@@ -13,7 +13,8 @@
                         </h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item active">{{ $editFlag ? 'Edit Department Details' : 'Add Department Details' }}</li>
+                            <li class="breadcrumb-item active">
+                                {{ $editFlag ? 'Edit Department Details' : 'Add Department Details' }}</li>
                         </ul>
                     </div>
 
@@ -51,58 +52,37 @@
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form> --}}
-            <form action="{{ $editFlag ? route('department.update', $department->id) : route('department.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ $editFlag ? route('department.update', ['id' => $department->id]) : route('department.store') }}"
+                method="POST" enctype="multipart/form-data">
                 @csrf
-                @if($editFlag)
+                @if ($editFlag)
                     @method('PUT')
                 @endif
 
                 <div class="form-group mb-3">
                     <label for="department_name" class="mb-1">Department Name</label>
-                    <input 
-                        type="text" 
-                        class="form-control" 
-                        id="department_name" 
-                        name="department_name" 
-                        value="{{ old('department_name', $editFlag ? $department->department_name : '') }}" 
-                        required>
+                    <input type="text" class="form-control" id="department_name" name="department_name"
+                        value="{{ old('department_name', $editFlag ? $department->department_name : '') }}" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="image" class="mb-1">Department Image</label>
-                    <input 
-                        type="file" 
-                        class="form-control" 
-                        id="image" 
-                        name="image" 
-                        accept="image/*">
-                    @if($editFlag && $department->image_path)
+                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                    @if ($editFlag && $department->image)
                         <div class="mt-2">
-                            <img src="{{ asset('storage/' . $department->image_path) }}" 
-                                alt="Department Image" 
-                                style="width: 100px; height: auto;">
+                            <img src="{{ $department->image }}" alt="Department Image" style="width: 100px; height: auto;">
                         </div>
                     @endif
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="short_details" class="mb-1">Short Details</label>
-                    <textarea 
-                        class="form-control" 
-                        id="short_details" 
-                        name="short_details" 
-                        rows="3" 
-                        required>{{ old('short_details', $editFlag ? $department->short_details : '') }}</textarea>
+                    <textarea class="form-control" id="short_details" name="short_details" rows="3" required>{{ old('short_details', $editFlag ? $department->short_details : '') }}</textarea>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="long_details" class="mb-1">Long Details</label>
-                    <textarea 
-                        class="form-control" 
-                        id="long_details" 
-                        name="long_details" 
-                        rows="5" 
-                        required>{{ old('long_details', $editFlag ? $department->long_details : '') }}</textarea>
+                    <textarea class="form-control" id="long_details" name="long_details" rows="5" required>{{ old('long_details', $editFlag ? $department->long_details : '') }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">

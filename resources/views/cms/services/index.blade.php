@@ -19,6 +19,7 @@
                     'long_details' => 'Long Details',
                 ],
                 'data' => $services,
+                'wrapContent' => true,
                 'actions' => [
                     [
                         'url' => fn($id) => "services/edit/$id",

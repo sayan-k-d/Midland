@@ -8101,8 +8101,12 @@ RTL - Right to Left
     min-height: unset;
 }
 
-.departments-card {
+.departments-card,
+.services-card {
     height: 400px;
+}
+.no-data {
+    color: #d3d0cd;
 }
 
 .pagination-container {

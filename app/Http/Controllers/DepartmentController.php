@@ -35,7 +35,7 @@ class DepartmentController extends Controller
     public function create()
     {
         $editFlag = false;
-        return view('cms.department.addDepartment', compact( 'editFlag'));
+        return view('cms.department.addDepartment', compact('editFlag'));
     }
     public function store(Request $request)
     {
@@ -68,19 +68,27 @@ class DepartmentController extends Controller
     {
         $department = Department::findOrFail($id); // Fetch the department or throw a 404
         $editFlag = true; // Set the flag to indicate "Edit" mode
+        if ($department->image) {
+            // Detect MIME type dynamically
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mimeType = finfo_buffer($finfo, $department->image);
+            finfo_close($finfo);
+
+            // Encode image with the detected MIME type
+            $department->image = 'data:' . $mimeType . ';base64,' . base64_encode($department->image);
+        }
 
         return view('cms.department.addDepartment', compact('department', 'editFlag'));
     }
     public function update(Request $request, $id)
     {
         $department = Department::findOrFail($id); // Fetch the department
-
         // Validate the input
         $request->validate([
             'department_name' => 'required|string|max:255',
             'short_details' => 'required|string',
             'long_details' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif',
         ]);
 
         // Update fields
@@ -90,19 +98,13 @@ class DepartmentController extends Controller
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete old image if it exists
-            if ($department->image_path) {
-                \Storage::delete('public/' . $department->image_path);
-            }
-
-            // Store the new image
-            $path = $request->file('image')->store('images', 'public');
-            $department->image_path = $path;
+            // Save to database as a blob or to storage
+            $imagePath = file_get_contents($request->file('image')->getRealPath());
+            $department->image = $imagePath;
         }
 
         // Save the department
         $department->save();
-
         return redirect()->route('departmentDetails')->with('success', 'Department updated successfully.');
     }
     public function destroy($id)
@@ -115,6 +117,5 @@ class DepartmentController extends Controller
 
         return redirect()->route('departmentDetails')->with('success', 'Service deleted successfully.');
     }
-
 
 }

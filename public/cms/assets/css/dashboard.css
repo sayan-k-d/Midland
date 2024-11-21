@@ -4,10 +4,9 @@
     background-color: rgba(0, 0, 0, 0.5) !important;
 }
 /* Side menu default styles */
-.side-menu {
+#sidebar {
     width: 250px;
     min-height: 100vh;
-    transition: all 0.3s ease;
     height: 100%;
     position: fixed;
     overflow-y: auto;
