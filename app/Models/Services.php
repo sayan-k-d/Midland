@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Department extends Model
+class Services extends Model
 {
-    use HasFactory;
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
+    use HasFactory;
     protected $fillable = [
-        'department_name', 'image', 'short_details', 'long_details',
+        'service_name', 'image', 'short_details', 'long_details',
     ];
     public $timestamps = false;
 }

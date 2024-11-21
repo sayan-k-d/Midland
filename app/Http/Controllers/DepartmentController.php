@@ -34,7 +34,8 @@ class DepartmentController extends Controller
     }
     public function create()
     {
-        return view('cms.department.addDepartment');
+        $editFlag = false;
+        return view('cms.department.addDepartment', compact( 'editFlag'));
     }
     public function store(Request $request)
     {
@@ -63,4 +64,57 @@ class DepartmentController extends Controller
         ]);
         return redirect()->route('departmentDetails')->with('success', 'Department created successfully!');
     }
+    public function edit($id)
+    {
+        $department = Department::findOrFail($id); // Fetch the department or throw a 404
+        $editFlag = true; // Set the flag to indicate "Edit" mode
+
+        return view('cms.department.addDepartment', compact('department', 'editFlag'));
+    }
+    public function update(Request $request, $id)
+    {
+        $department = Department::findOrFail($id); // Fetch the department
+
+        // Validate the input
+        $request->validate([
+            'department_name' => 'required|string|max:255',
+            'short_details' => 'required|string',
+            'long_details' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Update fields
+        $department->department_name = $request->department_name;
+        $department->short_details = $request->short_details;
+        $department->long_details = $request->long_details;
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if it exists
+            if ($department->image_path) {
+                \Storage::delete('public/' . $department->image_path);
+            }
+
+            // Store the new image
+            $path = $request->file('image')->store('images', 'public');
+            $department->image_path = $path;
+        }
+
+        // Save the department
+        $department->save();
+
+        return redirect()->route('departmentDetails')->with('success', 'Department updated successfully.');
+    }
+    public function destroy($id)
+    {
+        // Find the service by its ID
+        $department = Department::findOrFail($id);
+
+        // Perform soft delete
+        $department->delete();
+
+        return redirect()->route('departmentDetails')->with('success', 'Service deleted successfully.');
+    }
+
+
 }
