@@ -2,10 +2,10 @@
     <thead class="table-dark">
         <tr>
             @foreach ($columns as $column)
-                <th scope="col">{{ $column }}</th>
+                <th scope="col" class="{{ $wrapContent ?? false ? '' : 'text-nowrap' }}">{{ $column }}</th>
             @endforeach
             @if (isset($actions))
-                <th scope="col" class="text-center">Actions</th>
+                <th scope="col" class="text-center ">Actions</th>
             @endif
         </tr>
     </thead>
@@ -14,7 +14,7 @@
             <tr>
                 @foreach ($columns as $key => $column)
                     <td class="{{ $wrapContent ?? false ? '' : 'text-nowrap' }}">
-                        @if (strtolower($column) === 'image')
+                        @if (strtolower($column) == 'image')
                             @if (!empty($row[$key]))
                                 <img src="{{ $row[$key] }}" alt="Department Image"
                                     style="max-width: 50px; height: auto;">
@@ -25,7 +25,7 @@
                             {{ $row[$key] ?? 'N/A' }}
                         @endif
                     </td>
-                    <!-- <td class="text-nowrap">{{ $row[$key] ?? 'N/A' }}</td> -->
+                    {{-- <!-- <td class="text-nowrap">{{ $row[$key] ?? 'N/A' }}</td> --> --}}
                 @endforeach
                 @if (isset($actions))
                     <td class="text-center ">

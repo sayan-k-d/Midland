@@ -57,6 +57,13 @@
                     <span class="ms-2 menu-text">Service Details</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('doctorDetails') }}" class="nav-link text-white d-flex align-items-center"
+                    data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Doctor Details">
+                    <i class="bi bi-headset fs-4 menu-icon"></i>
+                    <span class="ms-2 menu-text">Doctor Details</span>
+                </a>
+            </li>
 
         </ul>
     </div>

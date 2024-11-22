@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\Doctor;
 use App\Models\Services;
 use Illuminate\View\View;
 
@@ -86,7 +87,64 @@ class PageController extends Controller
     }
     public function doctors()
     {
-        return view('frontend.doctors');
+        $data = null;
+        $maxPageLimit = 10;
+        $totalDoctors = Doctor::count();
+        if ($totalDoctors > $maxPageLimit) {
+            $data = Doctor::paginate($maxPageLimit);
+        } else {
+            $data = Doctor::all();
+        }
+
+        foreach ($data as $doctor) {
+            if ($doctor->image) {
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mimeType = finfo_buffer($finfo, $doctor->image);
+                finfo_close($finfo);
+                $doctor->image = 'data:' . $mimeType . ';base64,' . base64_encode($doctor->image);
+            }
+            if ($doctor->department) {
+                $department = Department::findOrFail($doctor->department);
+                $departmentName = $department->department_name;
+            }
+            if ($doctor->isHead == 1) {
+                $hod = $doctor;
+            }
+        }
+
+        $workingSchedules = explode(',', $doctor->workingSchedules);
+        $schedules = [];
+        foreach ($workingSchedules as $schedule) {
+            $schedule = explode('=', $schedule);
+            $schedules[] = $schedule;
+        }
+
+        return view('frontend.doctors', ['doctors' => $data, 'hod' => $hod, 'departmentName' => $departmentName, "maxPageLimit" => $maxPageLimit, "totalDoctors" => $totalDoctors, 'schedules' => $schedules]);
+    }
+    public function doctorProfile($id)
+    {
+        $doctor = Doctor::findOrFail($id);
+        if ($doctor->image) {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mimeType = finfo_buffer($finfo, $doctor->image);
+            finfo_close($finfo);
+            $doctor->image = 'data:' . $mimeType . ';base64,' . base64_encode($doctor->image);
+        }
+        if ($doctor->department) {
+            $department = Department::findOrFail($doctor->department);
+            $departmentName = $department->department_name;
+        }
+        $workingSchedules = explode(',', $doctor->workingSchedules);
+        $schedules = [];
+        foreach ($workingSchedules as $schedule) {
+            $schedule = explode('=', $schedule);
+            $schedules[] = $schedule;
+        }
+        return view('frontend.doctor-profile', ['doctor' => $doctor, 'schedules' => $schedules, 'departmentName' => $departmentName]);
+    }
+    public function doctorProfilet2()
+    {
+        return view('frontend.doctor-profile-t2');
     }
 
     public function blogs()

@@ -94,7 +94,7 @@
       <!-- End Header Section -->
        --}}
 @extends('frontend.layouts.main')
-@section('title', 'Department Page')
+@section('title', 'Service Page')
 @section('content')
 
     <div class="st-content">
