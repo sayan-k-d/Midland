@@ -1,4 +1,5 @@
 {
+    "$schema": "https://getcomposer.org/schema.json",
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
@@ -6,11 +7,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "intervention/image": "^3.9",
-        "laravel/framework": "^11.9",
-        "laravel/tinker": "^2.9",
-        "sendgrid/sendgrid": "^8.1",
-        "sendinblue/api-v3-sdk": "^8.4"
+        "laravel/framework": "^11.31",
+        "laravel/tinker": "^2.9"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
