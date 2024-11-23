@@ -6,10 +6,11 @@ use App\Models\Admin;
 use App\Models\AppointmentDetail;
 use App\Models\ContactDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function getData(Request $req)
+    public function dashboard(Request $req)
     {
         $data = null;
         $contactData = null;
@@ -27,10 +28,10 @@ class AdminController extends Controller
         } else {
             $contactData = ContactDetail::all();
         }
-        $admin = Admin::where('email', 'sayan@test.com')
-            ->where('password', 'password123')
-            ->first();
-
+        // $admin = Admin::where('email', 'sayan@test.com')
+        //     ->where('password', 'password123')
+        //     ->first();
+        $admin = Auth::user();
         return view('cms.dashboard', ['appoinments' => $data, 'contactData' => $contactData, "maxPageLimit" => $maxPageLimit, "totalAppoinments" => $totalAppoinments, "totalContacts" => $totalContacts, "admin" => $admin]);
     }
 
@@ -45,5 +46,5 @@ class AdminController extends Controller
             return redirect()->back()->with('success', "Receiver Email Updated Successfully");
         }
     }
-    
+
 }
