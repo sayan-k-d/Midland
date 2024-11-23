@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Mail\AppointmentDetailsMail;
-use App\Models\AppointmentDetail;
-use App\Models\ContactDetail;
 use App\Models\Admin;
+use App\Models\ContactDetail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class FormController extends Controller
 {
@@ -70,24 +67,13 @@ class FormController extends Controller
             'doctor_name' => $request->input('udoctor'),
             'message' => $request->input('umsg'),
         ];
-        try {
-            $admin = Admin::where('email', 'sayan@test.com')
-                ->where('password', 'password123')
-                ->first();
-            // Send the email
-            Mail::to($admin->receiverEmail)->send(new AppointmentDetailsMail($emailData));
+        $admin = Admin::where('email', 'sayan@test.com')
+            ->where('password', 'password123')
+            ->first();
+        // dd($admin->recieverEmail);
+        // $to = $admin->receiverEmail;
+        // Mail::send(new EnqueryMail($emailData, $to));
+        return redirect()->back()->with('success', 'Your message has been sent successfully!');
 
-            // Return success response
-            return redirect()->back()->with('success', 'Appointment has been successfully scheduled, and an email has been sent!');
-        } catch (\Exception $e) {
-            // Log the error for debugging
-            \Log::error('Error sending email: ' . $e->getMessage());
-
-            // Return error response
-            return redirect()->back()->with('error', 'Appointment was scheduled, but the email could not be sent. Please try again later.');
-        }
-        // Mail::to('sayankumar.d2000@gmail.com')->send(new AppointmentDetailsMail($emailData));
-        // // Redirect back with a success message
-        // return redirect()->back()->with('success', 'Appointment has been successfully scheduled!');
     }
 }
