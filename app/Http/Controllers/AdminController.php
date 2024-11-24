@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
 use App\Models\AppointmentDetail;
 use App\Models\ContactDetail;
 use App\Models\Department;
 use App\Models\Doctor;
 use App\Models\Services;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -72,9 +72,7 @@ class AdminController extends Controller
     public function setEmail(Request $req)
     {
         if ($req->input('receiverEmail')) {
-            $admin = Admin::where('email', 'sayan@test.com')
-                ->where('password', 'password123')
-                ->first();
+            $admin = Auth::user();
             $admin->receiverEmail = $req->input('receiverEmail');
             $admin->save();
             return redirect()->back()->with('success', "Receiver Email Updated Successfully");
