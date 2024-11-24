@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\AppointmentDetail;
 use App\Models\ContactDetail;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
@@ -46,6 +48,7 @@ class FormController extends Controller
         ]);
 
         $bookingDate = \Carbon\Carbon::createFromFormat('m/d/Y', $request->input('udate'))->format('Y-m-d');
+        $departmentId = Department::where('department_name', $request->input('udepartment'))->value('id');
 
         // Store the appointment details in the database
         AppointmentDetail::create([
@@ -56,8 +59,8 @@ class FormController extends Controller
             'department' => $request->input('udepartment'),
             'doctor_name' => $request->input('udoctor'),
             'message' => $request->input('umsg'),
+            'department_id' => $departmentId,
         ]);
-
         $emailData = [
             'name' => $request->input('uname'),
             'email' => $request->input('uemail'),
@@ -66,6 +69,7 @@ class FormController extends Controller
             'department' => $request->input('udepartment'),
             'doctor_name' => $request->input('udoctor'),
             'message' => $request->input('umsg'),
+
         ];
         $admin = Admin::where('email', 'sayan@test.com')
             ->where('password', 'password123')

@@ -245,12 +245,17 @@
                                             <select name="udepartment" id="udepartment" class="st_select1"
                                                 data-placeholder="Select department">
                                                 <option></option>
-                                                <option value="dental-care">Dental Care</option>
+                                                @foreach ($departments as $department)
+                                                    <option value="{{ $department->department_name }}">
+                                                        {{ $department->department_name }}
+                                                    </option>
+                                                @endforeach
+                                                {{-- <option value="dental-care">Dental Care</option>
                                                 <option value="neurology">Neurology</option>
                                                 <option value="crutches">Crutches</option>
                                                 <option value="cardiology">Cardiology</option>
                                                 <option value="pulmonary">Pulmonary</option>
-                                                <option value="x-ray">X-Ray</option>
+                                                <option value="x-ray">X-Ray</option> --}}
                                             </select>
                                         </div>
                                     </div>

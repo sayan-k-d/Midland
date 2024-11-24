@@ -59,3 +59,4 @@ document.querySelectorAll(".delete-schedule-btn").forEach((button) => {
         this.closest(".d-flex").remove();
     });
 });
+

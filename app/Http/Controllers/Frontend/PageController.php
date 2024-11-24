@@ -12,7 +12,17 @@ class PageController extends Controller
 {
     public function index()
     {
-        return view('frontend.index');
+        $doctors = Doctor::all();
+        foreach ($doctors as $doctor) {
+            if ($doctor->image) {
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mimeType = finfo_buffer($finfo, $doctor->image);
+                finfo_close($finfo);
+                $doctor->image = 'data:' . $mimeType . ';base64,' . base64_encode($doctor->image);
+            }
+        }
+        $departments = Department::all();
+        return view('frontend.index', ['doctors' => $doctors, 'departments' => $departments]);
     }
 
     public function about()
@@ -140,7 +150,8 @@ class PageController extends Controller
             $schedule = explode('=', $schedule);
             $schedules[] = $schedule;
         }
-        return view('frontend.doctor-profile', ['doctor' => $doctor, 'schedules' => $schedules, 'departmentName' => $departmentName]);
+        $departments = Department::all();
+        return view('frontend.doctor-profile', ['doctor' => $doctor, 'schedules' => $schedules, 'departmentName' => $departmentName, 'departments' => $departments]);
     }
     public function doctorProfilet2()
     {
