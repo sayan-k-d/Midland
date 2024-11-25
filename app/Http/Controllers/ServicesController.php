@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Services;
+use Illuminate\Http\Request;
 
 class ServicesController extends Controller
 {
@@ -14,17 +14,29 @@ class ServicesController extends Controller
         $maxPageLimit = 10;
         $totalservice = Services::count();
         if ($totalservice > $maxPageLimit) {
-            $data = Services::paginame($maxPageLimit);
+            $data = Services::paginate($maxPageLimit);
         } else {
             $data = Services::all();
         }
+        foreach ($data as $service) {
+            if ($service->image) {
+                // Detect MIME type dynamically
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mimeType = finfo_buffer($finfo, $service->image);
+                finfo_close($finfo);
 
-        return view('cms.services.index',['services' => $data, 'serviceData' => $serviceData, "maxPageLimit" => $maxPageLimit, "totalservice" => $totalservice]);
+                // Encode image with the detected MIME type
+                $service->image = 'data:' . $mimeType . ';base64,' . base64_encode($service->image);
+            }
+        }
+
+        return view('cms.services.index', ['services' => $data, 'serviceData' => $serviceData, "maxPageLimit" => $maxPageLimit, "totalservice" => $totalservice]);
     }
     public function create()
     {
         $editFlag = false;
-        return view('cms.services.addService',compact('editFlag'));
+        $service = null;
+        return view('cms.services.addService', compact('service', 'editFlag'));
     }
     public function store(Request $request)
     {
@@ -35,10 +47,11 @@ class ServicesController extends Controller
             'short_details' => 'required|string|max:500',
             'long_details' => 'required|string',
         ]);
-    // dd($request->all());
+        // dd($request->all());
         // Handle image upload
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('service_images', 'public');
+            // $imagePath = $request->file('image')->store('service_images', 'public');
+            $imagePath = file_get_contents($request->file('image')->getRealPath());
         } else {
             $imagePath = null;
         }
@@ -57,6 +70,15 @@ class ServicesController extends Controller
     {
         $service = Services::findOrFail($id); // Find service by ID or show 404
         $editFlag = true; // Flag for edit mode
+        if ($service->image) {
+            // Detect MIME type dynamically
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mimeType = finfo_buffer($finfo, $service->image);
+            finfo_close($finfo);
+
+            // Encode image with the detected MIME type
+            $service->image = 'data:' . $mimeType . ';base64,' . base64_encode($service->image);
+        }
 
         return view('cms.services.addService', compact('service', 'editFlag'));
     }
@@ -69,7 +91,7 @@ class ServicesController extends Controller
             'service_name' => 'required|string|max:255',
             'short_details' => 'required|string',
             'long_details' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         // Update fields
@@ -79,15 +101,20 @@ class ServicesController extends Controller
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete old image if it exists
-            if ($service->image_path) {
-                \Storage::delete('public/' . $service->image_path);
-            }
-
-            // Store the new image
-            $path = $request->file('image')->store('images', 'public');
-            $service->image_path = $path;
+            // Read the new image as binary data
+            $imageBlob = file_get_contents($request->file('image')->getRealPath());
+            $service->image = $imageBlob; // Replace 'image_blob' with your actual column name for the image
         }
+        // if ($request->hasFile('image')) {
+        //     // Delete old image if it exists
+        //     if ($service->image_path) {
+        //         \Storage::delete('public/' . $service->image_path);
+        //     }
+
+        //     // Store the new image
+        //     $path = $request->file('image')->store('images', 'public');
+        //     $service->image_path = $path;
+        // }
 
         // Save the service
         $service->save();

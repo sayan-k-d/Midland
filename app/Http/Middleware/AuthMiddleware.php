@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class AuthMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Check if the user is logged in and has the 'admin' role
-        if (Auth::check() && Auth::user()->role !== 'admin') {
-            return redirect("/login")->withErrors(['Access denied. Admins only.']);
+        if (!Auth::check()) {
+            // Redirect to login if not authenticated
+            return redirect('/login')->withErrors(['You must be logged in to access this page.']);
         }
-        return $next($request); // Allow access
-
-        // Redirect to login or unauthorized page if not an admin
+        return $next($request);
     }
 }

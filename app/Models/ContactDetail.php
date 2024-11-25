@@ -8,6 +8,9 @@ class ContactDetail extends Model
 {
 
     protected $fillable = ['name', 'email', 'subject', 'phone', 'message'];
-    public $timestamps = false;
+    // public $timestamps = false;
+    protected $casts = [
+        'created_at' => 'datetime',
+    ];
 
 }

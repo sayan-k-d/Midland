@@ -5163,6 +5163,9 @@ hr {
     overflow: hidden;
     position: relative;
 }
+.doctor-image {
+    max-height: 250px;
+}
 
 .st-post.st-style3 .st-post-thumb:after {
     content: "";
@@ -8101,8 +8104,13 @@ RTL - Right to Left
     min-height: unset;
 }
 
-.departments-card {
+.departments-card,
+.services-card,
+.doctors-card {
     height: 400px;
+}
+.no-data {
+    color: #d3d0cd;
 }
 
 .pagination-container {

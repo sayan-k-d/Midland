@@ -19,9 +19,10 @@
                     'long_details' => 'Long Details',
                 ],
                 'data' => $departments,
+                'wrapContent' => true,
                 'actions' => [
                     [
-                        'url' => fn($id) => "/edit/$id",
+                        'url' => fn($id) => "/department/edit/$id",
                         'class' => 'btn-warning',
                         'label' => 'Edit',
                     ],

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html class="no-js" lang="en">
 
   <!-- Mirrored from html.laralink.com/nischinto/nischinto/blog-no-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Sep 2024 08:24:16 GMT -->
@@ -85,7 +85,7 @@
                       Doctor</a></li>
                   <li class="menu-item-has-children"><a href="blogs.html"
                       >Blog</a>
-                   
+
                   </li>
                   <li><a href="contact.html"
                       >Contact</a></li>
@@ -95,214 +95,229 @@
           </div>
         </div>
       </div>
-    </header>
-    <!-- End Header Section -->
-
+    </header> --}}
+<!-- End Header Section -->
+@extends('frontend.layouts.main')
+@section('title', 'Blogs Page')
+@section('content')
     <div class="st-content">
-      <div class="st-page-heading st-size-md st-dynamic-bg"
-        data-src="assets/img/hero-bg6.jpg">
+        <div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg6.jpg') }}">
+            <div class="container">
+                <div class="st-page-heading-in text-center">
+                    <h1 class="st-page-heading-title">Our Latest News</h1>
+                    <div class="st-page-heading-subtitle">Gate all update news
+                        here</div>
+                </div>
+            </div>
+        </div><!-- .st-page-heading -->
+        <div class="st-height-b100 st-height-lg-b80"></div>
         <div class="container">
-          <div class="st-page-heading-in text-center">
-            <h1 class="st-page-heading-title">Our Latest News</h1>
-            <div class="st-page-heading-subtitle">Gate all update news
-              here</div>
-          </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="st-post st-style3 st-zoom">
+                        <a href="blog-details.html" class="st-post-thumb">
+                            <img class="st-zoom-in" src="{{ asset('assets/img/blog7.jpg') }}" alt="blog1">
+                        </a>
+                        <div class="st-post-info">
+                            <h2 class="st-post-title"><a href="blog-details.html">Working in emergency
+                                    on...</a></h2>
+                            <div class="st-post-meta">
+                                <span>
+                                    <a href="#" class="st-post-avatar">
+                                        <span class="st-post-avatar-text">Admin</span>
+                                    </a>
+                                </span>
+                                <span class="st-post-date">August 07, 2020</span>
+                            </div>
+                            <div class="st-post-text">Lorem Ipsum is simply dummy text of
+                                the print ing and typesetting industry. lorem Ipsum the
+                                standard.</div>
+                        </div>
+                        <div class="st-post-footer">
+                            <a href="blog-details.html" class="st-btn st-style2 st-color1 st-size-medium">Read
+                                More</a>
+                        </div>
+                    </div>
+                    <div class="st-height-b30 st-height-lg-b30"></div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="st-post st-style3 st-zoom">
+                        <a href="blog-details.html" class="st-post-thumb">
+                            <img class="st-zoom-in" src="{{ asset('assets/img/blog8.jpg') }}" alt="blog1">
+                        </a>
+                        <div class="st-post-info">
+                            <h2 class="st-post-title"><a href="blog-details.html">Individual treatment
+                                    & as...</a></h2>
+                            <div class="st-post-meta">
+                                <span>
+                                    <a href="#" class="st-post-avatar">
+                                        <span class="st-post-avatar-text">Admin</span>
+                                    </a>
+                                </span>
+                                <span class="st-post-date">August 02, 2020</span>
+                            </div>
+                            <div class="st-post-text">Lorem Ipsum is simply dummy text of
+                                the print ing and typesetting industry. lorem Ipsum the
+                                standard.</div>
+                        </div>
+                        <div class="st-post-footer">
+                            <a href="blog-details.html" class="st-btn st-style2 st-color1 st-size-medium">Read
+                                More</a>
+                        </div>
+                    </div>
+                    <div class="st-height-b30 st-height-lg-b30"></div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="st-post st-style3 st-zoom">
+                        <a href="blog-details.html" class="st-post-thumb">
+                            <img class="st-zoom-in" src="{{ asset('assets/img/blog9.jpg') }}" alt="blog1">
+                        </a>
+                        <div class="st-post-info">
+                            <h2 class="st-post-title"><a href="blog-details.html">Child’s first
+                                    hospital...</a></h2>
+                            <div class="st-post-meta">
+                                <span>
+                                    <a href="#" class="st-post-avatar">
+                                        <span class="st-post-avatar-text">Admin</span>
+                                    </a>
+                                </span>
+                                <span class="st-post-date">August 01, 2020</span>
+                            </div>
+                            <div class="st-post-text">Lorem Ipsum is simply dummy text of
+                                the print ing and typesetting industry. lorem Ipsum the
+                                standard.</div>
+                        </div>
+                        <div class="st-post-footer">
+                            <a href="blog-details.html" class="st-btn st-style2 st-color1 st-size-medium">Read
+                                More</a>
+                        </div>
+                    </div>
+                    <div class="st-height-b30 st-height-lg-b30"></div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="st-post st-style3 st-zoom">
+                        <a href="blog-details.html" class="st-post-thumb">
+                            <img class="st-zoom-in" src="{{ asset('assets/img/blog10.jpg') }}" alt="blog1">
+                        </a>
+                        <div class="st-post-info">
+                            <h2 class="st-post-title"><a href="blog-details.html">Working in emergency
+                                    on...</a></h2>
+                            <div class="st-post-meta">
+                                <span>
+                                    <a href="#" class="st-post-avatar">
+                                        <span class="st-post-avatar-text">Admin</span>
+                                    </a>
+                                </span>
+                                <span class="st-post-date">August 07, 2020</span>
+                            </div>
+                            <div class="st-post-text">Lorem Ipsum is simply dummy text of
+                                the print ing and typesetting industry. lorem Ipsum the
+                                standard.</div>
+                        </div>
+                        <div class="st-post-footer">
+                            <a href="blog-details.html" class="st-btn st-style2 st-color1 st-size-medium">Read
+                                More</a>
+                        </div>
+                    </div>
+                    <div class="st-height-b30 st-height-lg-b30"></div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="st-post st-style3 st-zoom">
+                        <a href="blog-details.html" class="st-post-thumb">
+                            <img class="st-zoom-in" src="{{ asset('assets/img/blog11.jpg') }}" alt="blog1">
+                        </a>
+                        <div class="st-post-info">
+                            <h2 class="st-post-title"><a href="blog-details.html">Individual treatment
+                                    & as...</a></h2>
+                            <div class="st-post-meta">
+                                <span>
+                                    <a href="#" class="st-post-avatar">
+                                        <span class="st-post-avatar-text">Admin</span>
+                                    </a>
+                                </span>
+                                <span class="st-post-date">August 02, 2020</span>
+                            </div>
+                            <div class="st-post-text">Lorem Ipsum is simply dummy text of
+                                the print ing and typesetting industry. lorem Ipsum the
+                                standard.</div>
+                        </div>
+                        <div class="st-post-footer">
+                            <a href="blog-details.html" class="st-btn st-style2 st-color1 st-size-medium">Read
+                                More</a>
+                        </div>
+                    </div>
+                    <div class="st-height-b30 st-height-lg-b30"></div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="st-post st-style3 st-zoom">
+                        <a href="blog-details.html" class="st-post-thumb">
+                            <img class="st-zoom-in" src="{{ asset('assets/img/blog12.jpg') }}" alt="blog1">
+                        </a>
+                        <div class="st-post-info">
+                            <h2 class="st-post-title"><a href="blog-details.html">Child’s first
+                                    hospital...</a></h2>
+                            <div class="st-post-meta">
+                                <span>
+                                    <a href="#" class="st-post-avatar">
+                                        <span class="st-post-avatar-text">Admin</span>
+                                    </a>
+                                </span>
+                                <span class="st-post-date">August 01, 2020</span>
+                            </div>
+                            <div class="st-post-text">Lorem Ipsum is simply dummy text of
+                                the print ing and typesetting industry. lorem Ipsum the
+                                standard.</div>
+                        </div>
+                        <div class="st-post-footer">
+                            <a href="blog-details.html" class="st-btn st-style2 st-color1 st-size-medium">Read
+                                More</a>
+                        </div>
+                    </div>
+                    <div class="st-height-b30 st-height-lg-b30"></div>
+                </div>
+                <div class="col-lg-12">
+                    <ul class="pagination st-post-pagination">
+                        <li class="page-item disabled"><a class="page-link" href="#">Prev</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div><!-- .st-page-heading -->
-      <div class="st-height-b100 st-height-lg-b80"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="st-post st-style3 st-zoom">
-              <a href="blog-details.html" class="st-post-thumb">
-                <img class="st-zoom-in" src="assets/img/blog7.jpg" alt="blog1">
-              </a>
-              <div class="st-post-info">
-                <h2 class="st-post-title"><a
-                    href="blog-details.html">Working in emergency
-                    on...</a></h2>
-                <div class="st-post-meta">
-                  <span>
-                    <a href="#" class="st-post-avatar">
-                      <span class="st-post-avatar-text">Admin</span>
-                    </a>
-                  </span>
-                  <span class="st-post-date">August 07, 2020</span>
-                </div>
-                <div class="st-post-text">Lorem Ipsum is simply dummy text of
-                  the print ing and typesetting industry. lorem Ipsum the
-                  standard.</div>
-              </div>
-              <div class="st-post-footer">
-                <a href="blog-details.html"
-                  class="st-btn st-style2 st-color1 st-size-medium">Read
-                  More</a>
-              </div>
-            </div>
-            <div class="st-height-b30 st-height-lg-b30"></div>
-          </div>
-          <div class="col-lg-4">
-            <div class="st-post st-style3 st-zoom">
-              <a href="blog-details.html" class="st-post-thumb">
-                <img class="st-zoom-in" src="assets/img/blog8.jpg" alt="blog1">
-              </a>
-              <div class="st-post-info">
-                <h2 class="st-post-title"><a
-                    href="blog-details.html">Individual treatment
-                    & as...</a></h2>
-                <div class="st-post-meta">
-                  <span>
-                    <a href="#" class="st-post-avatar">
-                      <span class="st-post-avatar-text">Admin</span>
-                    </a>
-                  </span>
-                  <span class="st-post-date">August 02, 2020</span>
-                </div>
-                <div class="st-post-text">Lorem Ipsum is simply dummy text of
-                  the print ing and typesetting industry. lorem Ipsum the
-                  standard.</div>
-              </div>
-              <div class="st-post-footer">
-                <a href="blog-details.html"
-                  class="st-btn st-style2 st-color1 st-size-medium">Read
-                  More</a>
-              </div>
-            </div>
-            <div class="st-height-b30 st-height-lg-b30"></div>
-          </div>
-          <div class="col-lg-4">
-            <div class="st-post st-style3 st-zoom">
-              <a href="blog-details.html" class="st-post-thumb">
-                <img class="st-zoom-in" src="assets/img/blog9.jpg" alt="blog1">
-              </a>
-              <div class="st-post-info">
-                <h2 class="st-post-title"><a
-                    href="blog-details.html">Child’s first
-                    hospital...</a></h2>
-                <div class="st-post-meta">
-                  <span>
-                    <a href="#" class="st-post-avatar">
-                      <span class="st-post-avatar-text">Admin</span>
-                    </a>
-                  </span>
-                  <span class="st-post-date">August 01, 2020</span>
-                </div>
-                <div class="st-post-text">Lorem Ipsum is simply dummy text of
-                  the print ing and typesetting industry. lorem Ipsum the
-                  standard.</div>
-              </div>
-              <div class="st-post-footer">
-                <a href="blog-details.html"
-                  class="st-btn st-style2 st-color1 st-size-medium">Read
-                  More</a>
-              </div>
-            </div>
-            <div class="st-height-b30 st-height-lg-b30"></div>
-          </div>
-          <div class="col-lg-4">
-            <div class="st-post st-style3 st-zoom">
-              <a href="blog-details.html" class="st-post-thumb">
-                <img class="st-zoom-in" src="assets/img/blog10.jpg" alt="blog1">
-              </a>
-              <div class="st-post-info">
-                <h2 class="st-post-title"><a
-                    href="blog-details.html">Working in emergency
-                    on...</a></h2>
-                <div class="st-post-meta">
-                  <span>
-                    <a href="#" class="st-post-avatar">
-                      <span class="st-post-avatar-text">Admin</span>
-                    </a>
-                  </span>
-                  <span class="st-post-date">August 07, 2020</span>
-                </div>
-                <div class="st-post-text">Lorem Ipsum is simply dummy text of
-                  the print ing and typesetting industry. lorem Ipsum the
-                  standard.</div>
-              </div>
-              <div class="st-post-footer">
-                <a href="blog-details.html"
-                  class="st-btn st-style2 st-color1 st-size-medium">Read
-                  More</a>
-              </div>
-            </div>
-            <div class="st-height-b30 st-height-lg-b30"></div>
-          </div>
-          <div class="col-lg-4">
-            <div class="st-post st-style3 st-zoom">
-              <a href="blog-details.html" class="st-post-thumb">
-                <img class="st-zoom-in" src="assets/img/blog11.jpg" alt="blog1">
-              </a>
-              <div class="st-post-info">
-                <h2 class="st-post-title"><a
-                    href="blog-details.html">Individual treatment
-                    & as...</a></h2>
-                <div class="st-post-meta">
-                  <span>
-                    <a href="#" class="st-post-avatar">
-                      <span class="st-post-avatar-text">Admin</span>
-                    </a>
-                  </span>
-                  <span class="st-post-date">August 02, 2020</span>
-                </div>
-                <div class="st-post-text">Lorem Ipsum is simply dummy text of
-                  the print ing and typesetting industry. lorem Ipsum the
-                  standard.</div>
-              </div>
-              <div class="st-post-footer">
-                <a href="blog-details.html"
-                  class="st-btn st-style2 st-color1 st-size-medium">Read
-                  More</a>
-              </div>
-            </div>
-            <div class="st-height-b30 st-height-lg-b30"></div>
-          </div>
-          <div class="col-lg-4">
-            <div class="st-post st-style3 st-zoom">
-              <a href="blog-details.html" class="st-post-thumb">
-                <img class="st-zoom-in" src="assets/img/blog12.jpg" alt="blog1">
-              </a>
-              <div class="st-post-info">
-                <h2 class="st-post-title"><a
-                    href="blog-details.html">Child’s first
-                    hospital...</a></h2>
-                <div class="st-post-meta">
-                  <span>
-                    <a href="#" class="st-post-avatar">
-                      <span class="st-post-avatar-text">Admin</span>
-                    </a>
-                  </span>
-                  <span class="st-post-date">August 01, 2020</span>
-                </div>
-                <div class="st-post-text">Lorem Ipsum is simply dummy text of
-                  the print ing and typesetting industry. lorem Ipsum the
-                  standard.</div>
-              </div>
-              <div class="st-post-footer">
-                <a href="blog-details.html"
-                  class="st-btn st-style2 st-color1 st-size-medium">Read
-                  More</a>
-              </div>
-            </div>
-            <div class="st-height-b30 st-height-lg-b30"></div>
-          </div>
-          <div class="col-lg-12">
-            <ul class="pagination st-post-pagination">
-              <li class="page-item disabled"><a class="page-link"
-                  href="#">Prev</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item active"><a class="page-link"
-                  href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="st-height-b100 st-height-lg-b80"></div>
+        <div class="st-height-b100 st-height-lg-b80"></div>
     </div>
-
-    <!-- Start Footer -->
+    <!-- Start Video Popup -->
+    <div class="st-video-popup">
+        <div class="st-video-popup-overlay"></div>
+        <div class="st-video-popup-content">
+            <div class="st-video-popup-layer"></div>
+            <div class="st-video-popup-container">
+                <div class="st-video-popup-align">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="about:blank"></iframe>
+                    </div>
+                </div>
+                <div class="st-video-popup-close"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End Video Popup -->
+    <!-- Scripts -->
+    <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/isotope.pkg.min.js"></script>
+    <script src="assets/js/jquery.slick.min.js"></script>
+    <script src="assets/js/mailchimp.min.js"></script>
+    <script src="assets/js/counter.min.js"></script>
+    <script src="assets/js/lightgallery.min.js"></script>
+    <script src="assets/js/ripples.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/select2.min.js"></script>
+    <script src="assets/js/main.js"></script>
+@endsection
+{{-- <!-- Start Footer -->
     <footer class="st-site-footer st-dynamic-bg"
       data-src="assets/img/footer-bg.png">
       <div class="st-main-footer">
@@ -411,39 +426,14 @@
           </div>
         </div>
       </div>
-    </footer>
-    <!-- End Footer -->
+    </footer> --}}
+<!-- End Footer -->
 
-    <!-- Start Video Popup -->
-    <div class="st-video-popup">
-      <div class="st-video-popup-overlay"></div>
-      <div class="st-video-popup-content">
-        <div class="st-video-popup-layer"></div>
-        <div class="st-video-popup-container">
-          <div class="st-video-popup-align">
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="about:blank"></iframe>
-            </div>
-          </div>
-          <div class="st-video-popup-close"></div>
-        </div>
-      </div>
-    </div>
-    <!-- End Video Popup -->
 
-    <!-- Scripts -->
-    <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="assets/js/isotope.pkg.min.js"></script>
-    <script src="assets/js/jquery.slick.min.js"></script>
-    <script src="assets/js/mailchimp.min.js"></script>
-    <script src="assets/js/counter.min.js"></script>
-    <script src="assets/js/lightgallery.min.js"></script>
-    <script src="assets/js/ripples.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/select2.min.js"></script>
-    <script src="assets/js/main.js"></script>
-  </body>
 
-  <!-- Mirrored from html.laralink.com/nischinto/nischinto/blog-no-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Sep 2024 08:24:18 GMT -->
-</html>
+
+{{-- </body>
+
+<!-- Mirrored from html.laralink.com/nischinto/nischinto/blog-no-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Sep 2024 08:24:18 GMT -->
+
+</html> --}}
