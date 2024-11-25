@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminFormController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\Frontend\FormController;
@@ -18,6 +19,8 @@ Route::post('/contact-form', [FormController::class, 'storeContactDetail'])->nam
 Route::post('/appointment-form', [FormController::class, 'storeAppointmentDetail'])->name('appointment.store');
 
 Route::get("/dashboard", [AdminController::class, "getData"])->name("dashboard");
+Route::get("/contactDetails", [AdminFormController::class, "getContactData"])->name("contactDetails");
+Route::get("/appointmentDetails", [AdminFormController::class, "getAppointmentData"])->name("appointmentDetails");
 Route::post("/setEmail", [AdminController::class, "setEmail"])->name("setemail");
 Route::get('/addDepartment', [DepartmentController::class, 'create'])->name('addDepartment');
 Route::get("/departmentDetails", [DepartmentController::class, "index"])->name("departmentDetails");
