@@ -13,6 +13,34 @@
 
 <body>
     @include('\cms\layout\dashboard-nav')
+        <div id="sidebar" class="side-menu bg-dark">
+            <div class="menu-header sticky-top d-flex align-items-center justify-content-between px-3">
+                <span class="text-white fs-5 menu-header-text">Dashboard</span>
+                <button class="btn btn-sm btn-light slider-button" onclick="toggleSidebar()">
+                    <i class="bi bi-caret-left-fill"></i>
+                </button>
+            </div>
+            <ul class="nav flex-column py-2">
+                <li class="nav-item">
+                    <a href="{{ route('appointmentDetails') }}" class="nav-link text-white d-flex align-items-center" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Appoinment Details">
+                        <i class="bi bi-calendar-week fs-4 menu-icon"></i>
+                        <span class="ms-2 menu-text">Appoinment Details</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('contactDetails') }}" class="nav-link text-white d-flex align-items-center" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Contact Details">
+                        <i class="bi bi-people fs-4 menu-icon"></i>
+                        <span class="ms-2 menu-text">Contact Details</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Email Control">
+                    <a href="#" class="nav-link text-white d-flex align-items-center" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        <i class="bi bi-envelope-plus fs-4 menu-icon"></i>
+                        <span class="ms-2 menu-text">Email Control</span>
+                    </a>
     <div id="sidebar" class="side-menu bg-dark">
         <div class="menu-header sticky-top d-flex align-items-center justify-content-between px-3">
             <span class="text-white fs-5 menu-header-text">Dashboard</span>

@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminFormController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\Frontend\FormController;
 use App\Http\Controllers\Frontend\PageController;
-use App\Http\Controllers\ServicesController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('/frontend/about', [PageController::class, 'about'])->name('about');
@@ -23,15 +25,21 @@ Route::get('/frontend/contact', [PageController::class, 'contact'])->name('conta
 Route::post('/frontend/contact-form', [FormController::class, 'storeContactDetail'])->name('contact.store');
 Route::post('/frontend/appointment-form', [FormController::class, 'storeAppointmentDetail'])->name('appointment.store');
 
+
 Route::get('/register', [AuthController::class, 'registerForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
+
+
 Route::middleware('admin-auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get("/dashboard", [AdminController::class, "dashboard"])->name("dashboard");
     Route::post("/setEmail", [AdminController::class, "setEmail"])->name("setemail");
+
+    Route::get("/contactDetails", [AdminFormController::class, "getContactData"])->name("contactDetails");
+    Route::get("/appointmentDetails", [AdminFormController::class, "getAppointmentData"])->name("appointmentDetails");
 
     Route::get("/departmentDetails", [DepartmentController::class, "index"])->name("departmentDetails");
     Route::get('/addDepartment', [DepartmentController::class, 'create'])->name('addDepartment');
@@ -54,3 +62,9 @@ Route::middleware('admin-auth')->group(function () {
     Route::put('/doctor/{id}', [DoctorController::class, 'update'])->name('doctor.update');
     Route::delete('/doctors/delete/{id}', [DoctorController::class, 'destroy'])->name('doctor.destroy');
 });
+
+
+
+
+
+
