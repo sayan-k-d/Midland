@@ -26,7 +26,7 @@
                         <div class="founder_img">
                             <a href="/{{ route('doctor-profile', ['id' => -1]) }}" class="st-post-thumb">
                                 <img class="st-zoom-in"
-                                    src={{ $hod->isHead && $hod->image ? $hod->image : asset('assets/img/user.png') }}
+                                    src="{{ $hod->isHead && $hod->image ? $hod->image : asset('assets/img/user.png') }}"
                                     alt="blog1">
 
                             </a>

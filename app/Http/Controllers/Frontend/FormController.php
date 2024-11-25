@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
+use App\Models\User;
 use App\Models\AppointmentDetail;
 use App\Models\ContactDetail;
 use App\Models\Department;
+use App\Models\ReceiverEmail;
 use Illuminate\Http\Request;
+use App\Mail\EnqueryMail;
+use Illuminate\Support\Facades\Mail;
 
 class FormController extends Controller
 {
@@ -71,12 +74,9 @@ class FormController extends Controller
             'message' => $request->input('umsg'),
 
         ];
-        $admin = Admin::where('email', 'sayan@test.com')
-            ->where('password', 'password123')
-            ->first();
-        // dd($admin->recieverEmail);
-        // $to = $admin->receiverEmail;
-        // Mail::send(new EnqueryMail($emailData, $to));
+        $receiverEmail = ReceiverEmail::all()->first();
+        // dd($receiverEmail);
+        Mail::send(new EnqueryMail($emailData, $receiverEmail->receiver_email));
         return redirect()->back()->with('success', 'Your message has been sent successfully!');
 
     }
