@@ -73,8 +73,9 @@ class AdminController extends Controller
     {
         if ($req->input('receiverEmail')) {
             $admin = Auth::user();
-            $admin->receiverEmail = $req->input('receiverEmail');
-            $admin->save();
+            $admin->receiverEmail()->create([
+                'receiver_email' => $req->input('receiverEmail'),
+            ]);
             return redirect()->back()->with('success', "Receiver Email Updated Successfully");
         }
     }

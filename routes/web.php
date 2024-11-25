@@ -17,7 +17,7 @@ Route::get('/frontend/services', [PageController::class, 'services'])->name('ser
 Route::get('/frontend/serviceDetails/{id}', [PageController::class, 'serviceDetails'])->name('service.details');
 Route::get('/frontend/doctors', [PageController::class, 'doctors'])->name('doctors');
 Route::get("/frontend/doctorProfile/{id}", [PageController::class, "doctorProfile"])->name("doctor-profile");
-Route::get("/doctorProfilet2", [PageController::class, "doctorProfilet2"])->name("doctor-profile-t2");
+// Route::get("/doctorProfilet2", [PageController::class, "doctorProfilet2"])->name("doctor-profile-t2");
 Route::get('/frontend/blogs', [PageController::class, 'blogs'])->name('blogs');
 Route::get('/frontend/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/frontend/contact-form', [FormController::class, 'storeContactDetail'])->name('contact.store');
