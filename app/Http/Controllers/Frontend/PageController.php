@@ -105,7 +105,7 @@ class PageController extends Controller
         } else {
             $data = Doctor::all();
         }
-
+        // dd($data);
         foreach ($data as $doctor) {
             if ($doctor->image) {
                 $finfo = finfo_open(FILEINFO_MIME_TYPE);
