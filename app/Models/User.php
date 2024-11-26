@@ -11,7 +11,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $fillable = ['email', 'password'];
+    protected $fillable = ['email','name','role_id', 'password'];
     public $timestamps = false;
     public function receiverEmail()
     {

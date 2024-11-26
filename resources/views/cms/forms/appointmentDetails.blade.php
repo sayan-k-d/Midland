@@ -24,7 +24,7 @@
                     'data' => $appoinments,
                     'actions' => [
                         [
-                            'url' => fn($id) => "/editreschedule/$id",
+                            'url' => fn($id) => "/editReschedule/$id",
                             'class' => 'btn-warning',
                             'label' => 'Reschedule',
                         ],

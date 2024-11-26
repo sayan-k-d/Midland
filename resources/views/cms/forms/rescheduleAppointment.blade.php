@@ -57,7 +57,7 @@
                         <div class="form-group mb-3">
                             <label>Booking Date</label>
                             <input class="form-control" name="udate" type="date" id="udate" value="{{ $appointment->booking_date }}" required>
-                            <div class="form-field-icon"><i class="fa fa-calendar"></i></div>
+                            
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -65,7 +65,7 @@
                             <label>Department</label>
                             <div class="st-custom-select-wrap">
                                 <select name="udepartment" id="udepartment" class="form-control" required>
-                                    <option value="">Select department</option>
+                                    {{-- <option value="">Select department</option> --}}
                                     @foreach ($departments as $department)
                                         <option value="{{ $department->department_name }}"
                                             {{ $appointment->department == $department->department_name ? 'selected' : '' }}>
@@ -81,7 +81,7 @@
                             <label>Doctor</label>
                             <div class="st-custom-select-wrap">
                                 <select name="udoctor" id="udoctor" class="form-control" required>
-                                    <option value="">Select doctor</option>
+                                    {{-- <option value="">Select doctor</option> --}}
                                     @foreach ($doctors as $doctor)
                                         <option value="{{ $doctor->doctor_name }}"
                                             {{ $appointment->doctor_name == $doctor->doctor_name ? 'selected' : '' }}>
@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-lg-12">
                         <button class="btn btn-primary" type="submit"
-                            id="appointment-submit" name="submit">Reschedule Appointment</button>
+                            id="appointment-submit" >Reschedule Appointment</button>
                     </div>
                 </div>
             </form>

@@ -12,10 +12,10 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="#">Settings</a>
                 </li> --}}
                 <li class="nav-item">
