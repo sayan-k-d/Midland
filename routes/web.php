@@ -40,6 +40,10 @@ Route::middleware('admin-auth')->group(function () {
 
     Route::get("/contactDetails", [AdminFormController::class, "getContactData"])->name("contactDetails");
     Route::get("/appointmentDetails", [AdminFormController::class, "getAppointmentData"])->name("appointmentDetails");
+    Route::get('/editreschedule/{id}', [AdminFormController::class, 'editreschedule'])->name('editreschedule');
+    Route::put('/appointments/reschedule/{id}', [AdminFormController::class, 'reschedule'])->name('appointment.reschedule');
+    Route::delete('/appointments/delete/{id}', [AdminFormController::class, 'destroyAppointment'])->name('appointment.destroy');
+    Route::delete('/contact/delete/{id}', [AdminFormController::class, 'destroyContact'])->name('contact.destroy');
 
     Route::get("/departmentDetails", [DepartmentController::class, "index"])->name("departmentDetails");
     Route::get('/addDepartment', [DepartmentController::class, 'create'])->name('addDepartment');
