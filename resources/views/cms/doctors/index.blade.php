@@ -21,7 +21,7 @@
         ];
 
     @endphp
-    <div class="mt-3 main-container">
+    <div class="mt-3 main-container dashboard-table">
         <div class="d-flex align-items-center justify-content-between admin-details">
             {{-- <h3> Department Details</h3> --}}
             <h2 class="text-center my-4 text-uppercase fw-bold flex-grow-1">Doctor Details</h2>
@@ -97,7 +97,7 @@
                                         Edit
                                     </a>
                                     <form action="/doctors/delete/{{ $row['id'] }}" method="POST"
-                                        onsubmit="return confirm('Are you sure you want to delete this service?');">
+                                        onsubmit="return confirm('Are you sure you want to delete this doctor?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger text-uppercase">

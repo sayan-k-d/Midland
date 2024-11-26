@@ -1,15 +1,15 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminFormController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\Frontend\FormController;
 use App\Http\Controllers\Frontend\PageController;
+use App\Http\Controllers\ServicesController;
 use Illuminate\Support\Facades\Route;
-
 
 Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('/frontend/about', [PageController::class, 'about'])->name('about');
@@ -21,25 +21,26 @@ Route::get('/frontend/doctors', [PageController::class, 'doctors'])->name('docto
 Route::get("/frontend/doctorProfile/{id}", [PageController::class, "doctorProfile"])->name("doctor-profile");
 // Route::get("/doctorProfilet2", [PageController::class, "doctorProfilet2"])->name("doctor-profile-t2");
 Route::get('/frontend/blogs', [PageController::class, 'blogs'])->name('blogs');
+Route::get('/frontend/blogDetails/{id}', [PageController::class, 'blogDetails'])->name('blog.details');
+Route::get('/frontend/recentBlogDetails/{id}', [PageController::class, 'recentBlogDetails'])->name('blog-details-right');
 Route::get('/frontend/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/frontend/contact-form', [FormController::class, 'storeContactDetail'])->name('contact.store');
 Route::post('/frontend/appointment-form', [FormController::class, 'storeAppointmentDetail'])->name('appointment.store');
-
 
 Route::get('/register', [AuthController::class, 'registerForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
-
-
 Route::middleware('admin-auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get("/dashboard", [AdminController::class, "dashboard"])->name("dashboard");
-    Route::post("/setEmail", [AdminController::class, "setEmail"])->name("setemail");
 
     Route::get("/contactDetails", [AdminFormController::class, "getContactData"])->name("contactDetails");
     Route::get("/appointmentDetails", [AdminFormController::class, "getAppointmentData"])->name("appointmentDetails");
+
+    Route::get("/setEmail", [AdminController::class, "showEmailForm"])->name("setemail");
+    Route::post("/setEmail", [AdminController::class, "setEmail"])->name("setemail");
 
     Route::get("/departmentDetails", [DepartmentController::class, "index"])->name("departmentDetails");
     Route::get('/addDepartment', [DepartmentController::class, 'create'])->name('addDepartment');
@@ -61,10 +62,11 @@ Route::middleware('admin-auth')->group(function () {
     Route::get('/doctors/edit/{id}', [DoctorController::class, 'edit'])->name('editDoctors');
     Route::put('/doctor/{id}', [DoctorController::class, 'update'])->name('doctor.update');
     Route::delete('/doctors/delete/{id}', [DoctorController::class, 'destroy'])->name('doctor.destroy');
+
+    Route::get("/blogDetails", [BlogController::class, "index"])->name("blogDetails");
+    Route::get('/addBlog', [BlogController::class, 'create'])->name('addBlog');
+    Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
+    Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('editBlogs');
+    Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
+    Route::delete('/blogs/delete/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
 });
-
-
-
-
-
-

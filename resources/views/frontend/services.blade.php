@@ -19,21 +19,21 @@
                         <div class="col-lg-4">
                             <div
                                 class="st-post st-style3 st-zoom st_departments_otr services-card d-flex flex-column justify-content-between overflow-hidden">
-                                <a href="service-details.html" class="st-post-thumb">
+                                <a href="{{ route('service.details', ['id' => $service->id]) }}" class="st-post-thumb">
                                     <img class="st-zoom-in" src="{{ $service->image }}" alt="blog1">
                                 </a>
                                 <div class="st-post-info">
                                     <h2 class="st-post-title"><a
-                                            href="service-details.html">{{ $service->service_name }}</a>
+                                            href="{{ route('service.details', ['id' => $service->id]) }}">{{ $service->service_name }}</a>
                                     </h2>
                                     <!-- <div class="st-post-meta">
-                                        <span>
-                                        <a href="#" class="st-post-avatar">
-                                            <span class="st-post-avatar-text">Admin</span>
-                                        </a>
-                                        </span>
-                                        <span class="st-post-date">August 07, 2020</span>
-                                    </div> -->
+                                            <span>
+                                            <a href="#" class="st-post-avatar">
+                                                <span class="st-post-avatar-text">Admin</span>
+                                            </a>
+                                            </span>
+                                            <span class="st-post-date">August 07, 2020</span>
+                                        </div> -->
                                     <div class="st-post-text">{{ $service->short_details }}
                                     </div>
                                 </div>
