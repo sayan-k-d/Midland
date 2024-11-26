@@ -9,27 +9,33 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use App\Models\Role;
 
 class AuthController extends Controller
 {
     public function registerForm()
     {
-        return view('cms.auth.adminRegister');
+        $roles = Role::all();
+        return view('cms.auth.adminRegister',compact('roles'));
     }
 
     public function register(Request $request)
     {
         $request->validate([
             'email' => 'required|email|unique:users',
+            'role' => 'required',
+            'name' => 'required|string',
             'password' => 'required|string|min:6',
         ]);
 
         User::create([
             'email' => $request->email,
+            'name' => $request->name,
+            'role_id' => $request->role,
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect("/login");
+        return redirect("/dashboard");
     }
 
     public function loginForm()

@@ -24,15 +24,15 @@
                     'data' => $appoinments,
                     'actions' => [
                         [
-                            'url' => fn($id) => "/edit/$id",
+                            'url' => fn($id) => "/editReschedule/$id",
                             'class' => 'btn-warning',
-                            'label' => 'Edit',
+                            'label' => 'Reschedule',
                         ],
                         [
-                            'url' => fn($id) => "/delete/$id",
-                            'route_name' => '',
+                            'url' => fn($id) => "/appointments/delete/$id",
+                            'route_name' => 'appointment.destroy',
                             'class' => 'btn-danger',
-                            'label' => 'Delele',
+                            'label' => 'Delete',
                         ],
                     ],
                     'totalData' => $totalAppoinments,

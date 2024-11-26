@@ -20346,6 +20346,15 @@ th.width-64 {
   background: #FFF;
   overflow: hidden;
 }
+
+.password-hint {
+  display: none;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #1e88e5;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
 @media (max-width: 575px) {
   .profile-img-wrap {
     position: relative;

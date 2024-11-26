@@ -27,20 +27,29 @@ Route::get('/frontend/contact', [PageController::class, 'contact'])->name('conta
 Route::post('/frontend/contact-form', [FormController::class, 'storeContactDetail'])->name('contact.store');
 Route::post('/frontend/appointment-form', [FormController::class, 'storeAppointmentDetail'])->name('appointment.store');
 
-Route::get('/register', [AuthController::class, 'registerForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('admin-auth')->group(function () {
+    Route::get('/register', [AuthController::class, 'registerForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get("/dashboard", [AdminController::class, "dashboard"])->name("dashboard");
+    Route::get("/profile", [AdminController::class, "profile"])->name("profile");
+    Route::put('profile/{id}', [AdminController::class, 'profileUpdate'])->name('profile.update');
+    Route::get("/changePassword", [AdminController::class, "changePassword"])->name("changePassword");
+    Route::post('/password/update', [AdminController::class, 'updatePassword'])->name('password.update');
 
     Route::get("/contactDetails", [AdminFormController::class, "getContactData"])->name("contactDetails");
     Route::get("/appointmentDetails", [AdminFormController::class, "getAppointmentData"])->name("appointmentDetails");
 
     Route::get("/setEmail", [AdminController::class, "showEmailForm"])->name("setemail");
     Route::post("/setEmail", [AdminController::class, "setEmail"])->name("setemail");
+
+    Route::get('/editReschedule/{id}', [AdminFormController::class, 'editreschedule'])->name('editReschedule');
+    Route::put('/appointments/reschedule/{id}', [AdminFormController::class, 'reschedule'])->name('appointment.reschedule');
+    Route::delete('/appointments/delete/{id}', [AdminFormController::class, 'destroyAppointment'])->name('appointment.destroy');
+    Route::delete('/contact/delete/{id}', [AdminFormController::class, 'destroyContact'])->name('contact.destroy');
 
     Route::get("/departmentDetails", [DepartmentController::class, "index"])->name("departmentDetails");
     Route::get('/addDepartment', [DepartmentController::class, 'create'])->name('addDepartment');

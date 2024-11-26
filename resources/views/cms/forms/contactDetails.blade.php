@@ -21,16 +21,16 @@
             ],
             'data' => $contactData,
             'actions' => [
+                // [
+                //     'url' => fn($id) => "/edit/$id",
+                //     'class' => 'btn-warning',
+                //     'label' => 'Edit',
+                // ],
                 [
-                    'url' => fn($id) => "/edit/$id",
-                    'class' => 'btn-warning',
-                    'label' => 'Edit',
-                ],
-                [
-                    'url' => fn($id) => "/delete/$id",
-                    'route_name' => '',
+                    'url' => fn($id) => "/contact/delete/$id",
+                    'route_name' => 'contact.destroy',
                     'class' => 'btn-danger',
-                    'label' => 'Delele',
+                    'label' => 'Delete',
                 ],
             ],
             'totalData' => $totalContacts,

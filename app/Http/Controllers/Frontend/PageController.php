@@ -233,6 +233,11 @@ class PageController extends Controller
     {
         return view('frontend.contact');
     }
+    public function showDepartment()
+    {
+        $departments = Department::all();
+        return view('component.AppointmentForm', ['departments' => $departments]);
+    }
 
     private function encodeImage($content)
     {
