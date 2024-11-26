@@ -56,13 +56,17 @@ class AdminController extends Controller
     }
     public function setEmail(Request $req)
     {
-        if ($req->input('receiverEmail')) {
-            $admin = Auth::user();
-            $admin->receiverEmail()->create([
-                'receiver_email' => $req->input('receiverEmail'),
-            ]);
-            return redirect()->back()->with('success', "Receiver Email Updated Successfully");
+        $validatedData = $req->validate([
+            'receiverEmail' => 'required|email',
+        ]);
+        $email = ReceiverEmail::first();
+        $admin = Auth::user();
+        if ($email) {
+            $admin->receiverEmail()->update(['receiver_email' => $req->input('receiverEmail')]);
+        } else {
+            $admin->receiverEmail()->create(['receiver_email' => $req->input('receiverEmail')]);
         }
+        return redirect()->back()->with('success', "Receiver Email Updated Successfully");
     }
     public function profile()
     {
