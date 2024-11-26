@@ -14,7 +14,7 @@ class DepartmentController extends Controller
         $maxPageLimit = 10;
         $totaldepartment = Department::count();
         if ($totaldepartment > $maxPageLimit) {
-            $data = Department::paginame($maxPageLimit);
+            $data = Department::paginate($maxPageLimit);
         } else {
             $data = Department::all();
         }
