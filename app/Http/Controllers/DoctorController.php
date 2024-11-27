@@ -180,14 +180,14 @@ class DoctorController extends Controller
         }
         $doctor->save();
 
-        return redirect()->route('doctorDetails')->with('success', 'Service updated successfully.');
+        return redirect()->route('doctorDetails')->with('success', 'Doctor updated successfully.');
     }
     public function destroy($id)
     {
         $doctor = Doctor::findOrFail($id);
         $doctor->delete();
 
-        return redirect()->route('doctorDetails')->with('success', 'Service deleted successfully.');
+        return redirect()->route('doctorDetails')->with('success', 'Doctor deleted successfully.');
     }
 
 }

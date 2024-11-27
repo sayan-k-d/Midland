@@ -6,8 +6,9 @@ use App\Models\AppointmentDetail;
 use App\Models\ContactDetail;
 use App\Models\Department;
 use App\Models\Doctor;
-use App\Models\User;
+use App\Models\ReceiverEmail;
 use App\Models\Services;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,70 +48,57 @@ class AdminController extends Controller
             'appointmentsCalendar',
             'recentContacts'
         ));
-        // $data = null;
-        // $contactData = null;
-        // $maxPageLimit = 10;
-        // $totalAppoinments = AppointmentDetail::count();
-        // $totalContacts = ContactDetail::count();
-        // if ($totalAppoinments > $maxPageLimit) {
-        //     $data = AppointmentDetail::paginame($maxPageLimit);
-        // } else {
-        //     $data = AppointmentDetail::all();
-        // }
-
-        // if ($totalContacts > $maxPageLimit) {
-        //     $contactData = ContactDetail::paginame($maxPageLimit);
-        // } else {
-        //     $contactData = ContactDetail::all();
-        // }
-        // // $admin = Admin::where('email', 'sayan@test.com')
-        // //     ->where('password', 'password123')
-        // //     ->first();
-        // $admin = Auth::user();
-        // return view('cms.dashboard', ['appoinments' => $data, 'contactData' => $contactData, "maxPageLimit" => $maxPageLimit, "totalAppoinments" => $totalAppoinments, "totalContacts" => $totalContacts, "admin" => $admin]);
     }
-
+    public function showEmailForm()
+    {
+        $receiverEmail = ReceiverEmail::first();
+        return view('cms.layout.receiver-email-form', compact('receiverEmail'));
+    }
     public function setEmail(Request $req)
     {
-        if ($req->input('receiverEmail')) {
-            $admin = Auth::user();
-            $admin->receiverEmail()->create([
-                'receiver_email' => $req->input('receiverEmail'),
-            ]);
-            return redirect()->back()->with('success', "Receiver Email Updated Successfully");
+        $validatedData = $req->validate([
+            'receiverEmail' => 'required|email',
+        ]);
+        $email = ReceiverEmail::first();
+        $admin = Auth::user();
+        if ($email) {
+            $admin->receiverEmail()->update(['receiver_email' => $req->input('receiverEmail')]);
+        } else {
+            $admin->receiverEmail()->create(['receiver_email' => $req->input('receiverEmail')]);
         }
+        return redirect()->back()->with('success', "Receiver Email Updated Successfully");
     }
     public function profile()
     {
-       
-            $user = Auth::user();
-            
-            return view('cms.profile',compact('user'));
-       
+
+        $user = Auth::user();
+
+        return view('cms.profile', compact('user'));
+
     }
     public function profileUpdate(Request $request, $id)
     {
-       
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
             'role_id' => 'required|integer',
         ]);
-    
+
         $user = User::findOrFail($id);
         // dd($user);
         $user->update($validated);
-    
+
         return redirect()->back()->with('success', 'Profile updated successfully!');
-       
+
     }
     public function changePassword()
     {
-       
-            $user = Auth::user();
-            
-            return view('cms.changePassword',compact('user'));
-       
+
+        $user = Auth::user();
+
+        return view('cms.changePassword', compact('user'));
+
     }
     public function updatePassword(Request $request)
     {
@@ -120,7 +108,6 @@ class AdminController extends Controller
         ]);
 
         $user = Auth::user();
-
 
         if (!password_verify($request->current_password, $user->password)) {
             return redirect()->back()->with('error', 'Current password is incorrect.');

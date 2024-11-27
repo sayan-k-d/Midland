@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Department;
 use App\Models\Doctor;
 use App\Models\Services;
@@ -160,7 +161,72 @@ class PageController extends Controller
 
     public function blogs()
     {
-        return view('frontend.blogs');
+        $data = null;
+        $maxPageLimit = 10;
+        $totalBlogs = Blog::count();
+        if ($totalBlogs > $maxPageLimit) {
+            $data = Blog::paginate($maxPageLimit);
+        } else {
+            $data = Blog::all();
+        }
+
+        foreach ($data as $blog) {
+            $blog->content_image = $this->encodeImage($blog->content_image);
+            $blog->intro_image = $this->encodeImage($blog->intro_image);
+            $blog->diet_image = $this->encodeImage($blog->diet_image);
+        }
+
+        return view('frontend.blogs', ['blogs' => $data, "maxPageLimit" => $maxPageLimit, "totalBlogs" => $totalBlogs]);
+    }
+    public function blogDetails($id)
+    {
+        $blog = Blog::findOrFail($id);
+
+        $nextBlog = Blog::where('id', '>', $id)->orderBy('id', 'asc')->first();
+        $prevBlog = Blog::where('id', '<', $id)->orderBy('id', 'desc')->first();
+
+        $blog->content_image = $this->encodeImage($blog->content_image);
+        $blog->intro_image = $this->encodeImage($blog->intro_image);
+        $blog->diet_image = $this->encodeImage($blog->diet_image);
+
+        $dietContents = explode('.', $blog->diet_content);
+        array_pop($dietContents);
+        $diets = [];
+        foreach ($dietContents as $content) {
+            $content = explode(':', $content);
+            $diets[] = $content;
+        }
+
+        $recentBlogs = Blog::where('is_recent', 1)->paginate(5);
+        foreach ($recentBlogs as $recentBlog) {
+            $recentBlog->content_image = $this->encodeImage($recentBlog->content_image);
+            $recentBlog->intro_image = $this->encodeImage($recentBlog->intro_image);
+            $recentBlog->diet_image = $this->encodeImage($recentBlog->diet_image);
+        }
+
+        return view('frontend.blog-details', ['blog' => $blog, 'diets' => $diets, 'recentBlogs' => $recentBlogs, 'nextBlog' => $nextBlog, 'prevBlog' => $prevBlog]);
+    }
+
+    public function recentBlogDetails($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->content_image = $this->encodeImage($blog->content_image);
+        $blog->intro_image = $this->encodeImage($blog->intro_image);
+        $blog->diet_image = $this->encodeImage($blog->diet_image);
+
+        $recentBlogs = Blog::where('is_recent', 1)->get();
+        $maxPageLimit = 10;
+        $totalBlogs = $recentBlogs->count();
+        if ($totalBlogs > $maxPageLimit) {
+            $recentBlogs = Blog::where('is_recent', 1)->paginate($maxPageLimit);
+        }
+
+        foreach ($recentBlogs as $recentBlog) {
+            $recentBlog->content_image = $this->encodeImage($recentBlog->content_image);
+            $recentBlog->intro_image = $this->encodeImage($recentBlog->intro_image);
+            $recentBlog->diet_image = $this->encodeImage($recentBlog->diet_image);
+        }
+        return view('frontend.blog-right-sidebar', ['blog' => $blog, 'recentBlogs' => $recentBlogs, 'totalBlogs' => $totalBlogs, 'maxPageLimit' => $maxPageLimit]);
     }
 
     public function contact()
@@ -177,5 +243,17 @@ class PageController extends Controller
     {
         $departments = Department::all();
         return view('component.AppointmentForm', ['departments' => $departments]);
+    }
+
+    private function encodeImage($content)
+    {
+        if ($content) {
+            // Detect MIME type
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mimeType = finfo_buffer($finfo, $content);
+            finfo_close($finfo);
+            return 'data:' . $mimeType . ';base64,' . base64_encode($content);
+        }
+        return null;
     }
 }

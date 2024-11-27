@@ -32,8 +32,7 @@
                         </a>
                     </li>
                     <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Email Control">
-                        <a href="#" class="nav-link text-white d-flex align-items-center" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
+                        <a href="{{ route('setemail') }}" class="nav-link text-white d-flex align-items-center">
                             <i class="bi bi-envelope-plus fs-4 menu-icon"></i>
                             <span class="ms-2 menu-text">Email Control</span>
                         </a>
@@ -53,7 +52,7 @@
                         <span class="ms-2 menu-text">Contact Details</span>
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="{{ route('departmentDetails') }}" class="nav-link text-white d-flex align-items-center"
                         data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Department Details">
@@ -80,7 +79,7 @@
 
     @yield('content')
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -100,7 +99,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <script src="{{ asset('cms/assets/js/dashboard.js') }}"></script>
 </body>
 

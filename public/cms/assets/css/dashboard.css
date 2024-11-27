@@ -54,6 +54,10 @@
 .main-container {
     margin-left: 250px;
     padding: 0 1rem;
+    transition: all 0.3s ease;
+}
+.main-container.adjust-margin{
+    margin-left: 70px;
 }
 .content {
     margin-left: 250px;
@@ -161,4 +165,15 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.dashboard-table {
+    ::-webkit-scrollbar {
+        width: 100% !important;
+        height: 10px !important;
+        background-color: rgba(0, 0, 0, 0.5) !important;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: #202020;
+        cursor: pointer;
+      }
 }

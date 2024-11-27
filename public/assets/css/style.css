@@ -8109,6 +8109,9 @@ RTL - Right to Left
 .doctors-card {
     height: 400px;
 }
+.blog-card{
+    max-height: 550px;
+}
 .no-data {
     color: #d3d0cd;
 }

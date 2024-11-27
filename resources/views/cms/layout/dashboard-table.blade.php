@@ -2,7 +2,7 @@
     <thead class="table-dark">
         <tr>
             @foreach ($columns as $column)
-                <th scope="col" class="{{ $wrapContent ?? false ? '' : 'text-nowrap' }}">{{ $column }}</th>
+                <th scope="col" class="{{ $wrapHeaderContent ?? false ? '' : 'text-nowrap' }}">{{ $column }}</th>
             @endforeach
             @if (isset($actions))
                 <th scope="col" class="text-center ">Actions</th>
@@ -28,7 +28,7 @@
                     {{-- <!-- <td class="text-nowrap">{{ $row[$key] ?? 'N/A' }}</td> --> --}}
                 @endforeach
                 @if (isset($actions))
-                    <td class="text-center ">
+                    <td class="text-center">
                         <div class="d-flex gap-2 justify-content-center">
                             @foreach ($actions as $action)
                                 @if ($action['label'] === 'Delete')

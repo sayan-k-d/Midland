@@ -1,5 +1,6 @@
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
+    const mainContainer = document.querySelector(".main-container");
     const tooltipTriggerList = document.querySelectorAll(
         '[data-bs-toggle="tooltip"]'
     );
@@ -8,7 +9,9 @@ function toggleSidebar() {
         [...tooltipTriggerList].forEach((tooltipTriggerEl) => {
             new bootstrap.Tooltip(tooltipTriggerEl);
         });
+        mainContainer.classList.add("adjust-margin");
     } else {
+        mainContainer.classList.remove("adjust-margin");
         [...tooltipTriggerList].forEach((tooltipTriggerEl) => {
             const tooltipInstance =
                 bootstrap.Tooltip.getInstance(tooltipTriggerEl);
@@ -59,4 +62,3 @@ document.querySelectorAll(".delete-schedule-btn").forEach((button) => {
         this.closest(".d-flex").remove();
     });
 });
-

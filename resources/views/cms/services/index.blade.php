@@ -2,7 +2,7 @@
 @section('title', 'Service')
 @section('content')
 
-    <div class="mt-3 main-container">
+    <div class="mt-3 main-container dashboard-table">
         <div class="d-flex align-items-center justify-content-between admin-details">
             {{-- <h3> service Details</h3> --}}
             <h2 class="text-center my-4 text-uppercase fw-bold flex-grow-1">Service Details</h2>
