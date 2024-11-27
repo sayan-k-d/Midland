@@ -23,6 +23,7 @@ Route::get("/frontend/doctorProfile/{id}", [PageController::class, "doctorProfil
 Route::get('/frontend/blogs', [PageController::class, 'blogs'])->name('blogs');
 Route::get('/frontend/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/frontend/contact-form', [FormController::class, 'storeContactDetail'])->name('contact.store');
+Route::get('/frontend/appointment', [PageController::class, 'appointment'])->name('appointment');
 Route::post('/frontend/appointment-form', [FormController::class, 'storeAppointmentDetail'])->name('appointment.store');
 
 

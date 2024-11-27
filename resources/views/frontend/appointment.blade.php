@@ -5,7 +5,7 @@
     <div class="st-content">
 
       <div class="st-hero-wrap st-color1 st-bg st-dynamic-bg overflow-hidden"
-      data-src="assets/img/hero-bg11.jpg">
+      data-src="{{ asset('assets/img/hero-bg11.jpg') }}">
       <div class="container">
         <div class="st-hero st-style1 st-type1">
           <div class="container">
@@ -17,91 +17,97 @@
                 consectetur mag. <br>
                 Tempor incididunt ut labore et dolore elit.</div>
               <div class="st-hero-btn">
-                <a href="/departments.html"
+                <a href="/frontend/departments"
                   class="st-btn st-style1 st-color3 st-smooth-move">Departments</a>
               </div>
             </div>
-            <form method="POST"
-              action="https://html.laralink.com/nischinto/nischinto/assets/php/appointment.php"
-              class="st-appointment-form" id="appointment-form">
-              <div class="st-wave-animation st-white"></div>
-              <h2 class="st-appointment-form-title text-center">Make an
-                Appointment</h2>
+            <form method="POST" action="{{ route('appointment.store') }}" class="st-appointment-form">
+              @csrf
               <div id="st-alert1"></div>
               <div class="row">
-                <div class="col-lg-6">
-                  <div class="st-form-field st-style1">
-                    <input type="text" id="uname" name="uname"
-                      placeholder="Jhon Doe" required>
+                  <div class="col-lg-6">
+                      <div class="st-form-field st-style1">
+                          <label>Full Name</label>
+                          <input type="text" id="uname" name="uname" placeholder="Jhon Doe"
+                              required>
+                      </div>
                   </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="st-form-field st-style1">
-                    <input type="text" id="uemail" name="uemail"
-                      placeholder="example@gmail.com" required>
+                  <div class="col-lg-6">
+                      <div class="st-form-field st-style1">
+                          <label>Email Address</label>
+                          <input type="text" id="uemail" name="uemail"
+                              placeholder="example@gmail.com" required>
+                      </div>
                   </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="st-form-field st-style1">
-                    <input type="text" id="unumber" name="unumber"
-                      placeholder="+00 141 23 234" required>
+                  <div class="col-lg-6">
+                      <div class="st-form-field st-style1">
+                          <label>Phone Number</label>
+                          <input type="text" id="unumber" name="unumber" placeholder="+00 141 23 234"
+                              required>
+                      </div>
                   </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="st-form-field st-style1">
-                    <input name="udate" type="text" id="udate"
-                      placeholder="dd/mm/yy">
-                    <div class="form-field-icon"><i
-                        class="fa fa-calendar"></i></div>
+                  <div class="col-lg-6">
+                      <div class="st-form-field st-style1">
+                          <label>Booking Date</label>
+                          <input name="udate" type="text" id="udate" placeholder="dd/mm/yy">
+                          <div class="form-field-icon"><i class="fa fa-calendar"></i></div>
+                      </div>
                   </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="st-form-field st-style1">
-                    <div class="st-custom-select-wrap">
-                      <select name="udepartment" id="udepartment"
-                        class="st_select1" data-placeholder="Select department">
-                        <option></option>
-                        <option value="dental-care">Dental Care</option>
-                        <option value="neurology">Neurology</option>
-                        <option value="crutches">Crutches</option>
-                        <option value="cardiology">Cardiology</option>
-                        <option value="pulmonary">Pulmonary</option>
-                        <option value="x-ray">X-Ray</option>
-                      </select>
-                    </div>
+                  <div class="col-lg-6">
+                      <div class="st-form-field st-style1">
+                          <label>Department</label>
+                          <div class="st-custom-select-wrap">
+                              <select name="udepartment" id="udepartment" class="st_select1"
+                                  data-placeholder="Select department">
+                                  <option></option>
+                                  @foreach ($departments as $department)
+                                      <option value="{{ $department->department_name }}">
+                                          {{ $department->department_name }}
+                                      </option>
+                                  @endforeach
+                                  {{-- <option value="dental-care">Dental Care</option>
+                                  <option value="neurology">Neurology</option>
+                                  <option value="crutches">Crutches</option>
+                                  <option value="cardiology">Cardiology</option>
+                                  <option value="pulmonary">Pulmonary</option>
+                                  <option value="x-ray">X-Ray</option> --}}
+                              </select>
+                          </div>
+                      </div>
                   </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="st-form-field st-style1">
-                    <div class="st-custom-select-wrap">
-                      <select name="udoctor" class="st_select1" id="udoctor"
-                        data-placeholder="Doctors">
-                        <option></option>
-                        <option value="jhon-doe">Dr. Jhon Doe</option>
-                        <option value="mak-rushi">Dr. Mak Roshi</option>
-                        <option value="mohoshin-kabir">Dr. Mohoshin
-                          Kabir</option>
-                        <option value="nayon-borua">Dr. Nayon Borua</option>
-                        <option value="rasel-islam">Dr. Rasel Islam</option>
-                        <option value="mahid-islam">Dr. Mahid Islam</option>
-                      </select>
-                    </div>
+                  <div class="col-lg-6">
+                      <div class="st-form-field st-style1">
+                          <label>Doctor</label>
+                          <div class="st-custom-select-wrap">
+                              <select name="udoctor" class="st_select1" id="udoctor"
+                                  data-placeholder="Select doctor">
+                                  <option></option>
+                                  @foreach ($doctors as $doctor)
+                                      <option value="{{ $doctor->doctor_name }}">{{ $doctor->doctor_name }}
+                                      </option>
+                                  @endforeach
+                                  {{-- <option value="mak-rushi">Dr. Mak Roshi</option>
+            <option value="mohoshin-kabir">Dr. Mohoshin
+              Kabir</option>
+            <option value="nayon-borua">Dr. Nayon Borua</option>
+            <option value="rasel-islam">Dr. Rasel Islam</option>
+            <option value="mahid-islam">Dr. Mahid Islam</option> --}}
+                              </select>
+                          </div>
+                      </div>
                   </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="st-form-field st-style1">
-                    <textarea cols="30" rows="10" id="umsg" name="umsg"
-                      placeholder="Write something here..."></textarea>
+                  <div class="col-lg-12">
+                      <div class="st-form-field st-style1">
+                          <label>Message</label>
+                          <textarea cols="30" rows="10" id="umsg" name="umsg" placeholder="Write something here..."></textarea>
+                      </div>
                   </div>
-                </div>
-                <div class="col-lg-12">
-                  <button
-                    class="st-btn st-style1 st-color1 st-size-medium w-100"
-                    type="submit" id="appointment-submit" name="submit">Check
-                    Available Doctors</button>
-                </div>
+                  <div class="col-lg-12">
+                      <button class="st-btn st-style1 st-color1 st-size-medium" type="submit"
+                          id="appointment-submit" name="submit">Appointment</button>
+                  </div>
               </div>
-            </form>
+          </form>
           </div>
         </div>
       </div>
@@ -112,7 +118,7 @@
       <!-- Start FAQ Section -->
       <section class="st-faq-wrap st-shape-wrap apmt_faq_otr">
         <div class="st-shape5">
-          <img src="assets/img/shape/faq-bg.svg" alt="shape1">
+          <img src="{{ asset('assets/img/shape/faq-bg.svg')}}" alt="shape1">
         </div>
         <div class="st-height-b120 st-height-lg-b80"></div>
         <div class="container">
@@ -121,7 +127,7 @@
               <div class="st-vertical-middle">
                 <div class="st-vertical-middle-in">
                   <div class="st-faq-img">
-                    <img src="assets/img/faq-img.png" alt="Faq Image">
+                    <img src="{{ asset('assets/img/faq-img.png')}}" alt="Faq Image">
                   </div>
                 </div>
               </div>
@@ -249,9 +255,9 @@
 
       <!-- Start Contact Section -->
       <section class="st-shape-wrap" id="contact">
-        <div class="st-shape1"><img src="assets/img/shape/contact-shape1.svg"
+        <div class="st-shape1"><img src="{{ asset('assets/img/shape/contact-shape1.svg')}}"
             alt="shape1"></div>
-        <div class="st-shape2"><img src="assets/img/shape/contact-shape2.svg"
+        <div class="st-shape2"><img src="{{ asset('assets/img/shape/contact-shape2.svg')}}"
             alt="shape2"></div>
         <div class="st-height-b120 st-height-lg-b80"></div>
         <div class="container">
@@ -260,7 +266,7 @@
             <div class="st-seperator">
               <div class="st-seperator-left wow fadeInLeft"
                 data-wow-duration="1s" data-wow-delay="0.2s"></div>
-              <div class="st-seperator-center"><img src="assets/img/icons/4.png"
+              <div class="st-seperator-center"><img src="{{asset('assets/img/icons/4.png')}}"
                   alt="icon"></div>
               <div class="st-seperator-right wow fadeInRight"
                 data-wow-duration="1s" data-wow-delay="0.2s"></div>
@@ -275,54 +281,50 @@
           <div class="row">
             <div class="col-lg-10 offset-lg-1">
               <div id="st-alert"></div>
-              <form
-                action="https://html.laralink.com/nischinto/nischinto/assets/php/mail.php"
-                class="row st-contact-form st-type1" method="post"
-                id="contact-form">
+              <form action="{{ route('contact.store') }}" method="POST" class="row st-contact-form st-type1">
+                {{-- <form action="{{ route('contact.store') }}" method="POST" class="row st-contact-form st-type1" id="contact-form"> --}}
+                @csrf
                 <div class="col-lg-6">
-                  <div class="st-form-field st-style1">
-                    <label>Full Name</label>
-                    <input type="text" id="name" name="name"
-                      placeholder="Jhon Doe" required>
-                  </div>
+                    <div class="st-form-field st-style1">
+                        <label>Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    </div>
                 </div><!-- .col -->
                 <div class="col-lg-6">
-                  <div class="st-form-field st-style1">
-                    <label>Email Address</label>
-                    <input type="text" id="email" name="email"
-                      placeholder="example@gmail.com" required>
-                  </div>
+                    <div class="st-form-field st-style1">
+                        <label>Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="example@gmail.com"
+                            required>
+                    </div>
                 </div><!-- .col -->
                 <div class="col-lg-6">
-                  <div class="st-form-field st-style1">
-                    <label>Subject</label>
-                    <input type="text" id="subject" name="subject"
-                      placeholder="Write subject" required>
-                  </div>
+                    <div class="st-form-field st-style1">
+                        <label>Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Write subject"
+                            required>
+                    </div>
                 </div><!-- .col -->
                 <div class="col-lg-6">
-                  <div class="st-form-field st-style1">
-                    <label>Phone</label>
-                    <input type="text" id="phone" name="phone"
-                      placeholder="+00 376 12 465" required>
-                  </div>
+                    <div class="st-form-field st-style1">
+                        <label>Phone</label>
+                        <input type="text" id="phone" name="phone" placeholder="+00 376 12 465"
+                            required>
+                    </div>
                 </div><!-- .col -->
                 <div class="col-lg-12">
-                  <div class="st-form-field st-style1">
-                    <label>Your Message</label>
-                    <textarea cols="30" rows="10" id="msg" name="msg"
-                      placeholder="Write something here..." required></textarea>
-                  </div>
+                    <div class="st-form-field st-style1">
+                        <label>Your Message</label>
+                        <textarea cols="30" rows="10" id="msg" name="msg" placeholder="Write something here..." required></textarea>
+                    </div>
                 </div><!-- .col -->
                 <div class="col-lg-12">
-                  <div class="text-center">
-                    <div class="st-height-b10 st-height-lg-b10"></div>
-                    <button class="st-btn st-style1 st-color1 st-size-medium"
-                      type="submit" id="submit" name="submit">Send
-                      message</button>
-                  </div>
+                    <div class="text-center">
+                        <div class="st-height-b10 st-height-lg-b10"></div>
+                        <button class="st-btn st-style1 st-color1 st-size-medium" type="submit"
+                            id="submit" name="submit">Send message</button>
+                    </div>
                 </div><!-- .col -->
-              </form>
+            </form>
             </div><!-- .col -->
           </div>
         </div>
