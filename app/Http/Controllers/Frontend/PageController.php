@@ -43,6 +43,7 @@ class PageController extends Controller
 
     public function about()
     {
+        
         return view('frontend.about');
     }
 
@@ -234,11 +235,11 @@ class PageController extends Controller
         $doctors = Doctor::all();
         return view('frontend.appointment', ['doctors' => $doctors, 'departments' => $departments]);
     }
-    public function showDepartment()
-    {
-        $departments = Department::all();
-        return view('component.AppointmentForm', ['departments' => $departments]);
-    }
+    // public function showDepartment()
+    // {
+    //     $departments = Department::all();
+    //     return view('frontend.layouts.footer', ['departments' => $departments]);
+    // }
 
     private function encodeImage($content)
     {
