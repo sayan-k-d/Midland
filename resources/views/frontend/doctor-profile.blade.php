@@ -205,9 +205,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1">
-                        <form method="POST"
-                            action="https://html.laralink.com/nischinto/nischinto/assets/php/appointment.php"
-                            class="st-appointment-form" id="appointment-form">
+                        <form method="POST" action="{{ route('appointment.store') }}" class="st-appointment-form">
+                            @csrf
                             <div id="st-alert1"></div>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -267,13 +266,11 @@
                                             <select name="udoctor" class="st_select1" id="udoctor"
                                                 data-placeholder="Select doctor">
                                                 <option></option>
-                                                <option value="jhon-doe">Dr. Jhon Doe</option>
-                                                <option value="mak-rushi">Dr. Mak Roshi</option>
-                                                <option value="mohoshin-kabir">Dr. Mohoshin
-                                                    Kabir</option>
-                                                <option value="nayon-borua">Dr. Nayon Borua</option>
-                                                <option value="rasel-islam">Dr. Rasel Islam</option>
-                                                <option value="mahid-islam">Dr. Mahid Islam</option>
+                                                @foreach ($doctors as $doctor)
+                                                    <option value="{{ $doctor->doctor_name }}">{{ $doctor->doctor_name }}
+                                                    </option>
+                                                @endforeach
+                                                
                                             </select>
                                         </div>
                                     </div>

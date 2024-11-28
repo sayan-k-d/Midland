@@ -59,8 +59,10 @@ class AdminController extends Controller
         $validatedData = $req->validate([
             'receiverEmail' => 'required|email',
         ]);
+        // dd($validatedData);
         $email = ReceiverEmail::first();
         $admin = Auth::user();
+        // dd($email);
         if ($email) {
             $admin->receiverEmail()->update(['receiver_email' => $req->input('receiverEmail')]);
         } else {

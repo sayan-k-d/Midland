@@ -8,7 +8,16 @@
                 <!-- Swiper -->
                 <div class="swiper bnrSwiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
+                        @foreach($banners as $banner)
+                            <div class="swiper-slide">
+                                <a href="{{ $banner->page_url }}">
+                                <div class="slider_img">
+                                    <img src="{{  $banner->image }}" alt="{{ $banner->banner_title }}">
+                                </div>
+                                </a>
+                            </div>
+                        @endforeach
+                        {{-- <div class="swiper-slide">
                             <div class="slider_img">
                                 <img src="assets/img/bnr_1.webp" alt="bnr_img">
                             </div>
@@ -24,7 +33,7 @@
                             <div class="slider_img">
                                 <img src="assets/img/bnr_3.webp" alt="bnr_img">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="bnr_btn_box">
                         <div class="bnr_btn_next">
@@ -37,6 +46,7 @@
                 </div>
             </div>
         </div>
+       
         <!-- End Hero Seciton -->
 
         <!-- Start Feature Seciton -->
@@ -436,7 +446,7 @@
                                                         gynecologist in Lucknow for normal delivery.</div>
                                                 </div>
                                                 <div class="st-imagebox-btn">
-                                                    <a href="#"
+                                                    <a href="{{route('departments')}}"
                                                         class="st-btn st-style1 st-size-medium st-color1">Read
                                                         More</a>
                                                 </div>

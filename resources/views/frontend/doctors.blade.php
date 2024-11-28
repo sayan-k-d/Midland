@@ -11,7 +11,7 @@
                         passion to prove the highest quality of care.</div>
 
                     <div class="st-hero-btn">
-                        <a href="appointment.html" class="st-btn st-style1 st-color1 st-smooth-move">Appointment</a>
+                        <a href="/frontend/appointment" class="st-btn st-style1 st-color1 st-smooth-move">Appointment</a>
                     </div>
                 </div>
             </div>

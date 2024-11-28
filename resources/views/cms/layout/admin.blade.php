@@ -39,6 +39,13 @@
                     </li>
                 @endif
                 <li class="nav-item">
+                    <a href="{{ route('bannerDetails') }}" class="nav-link text-white d-flex align-items-center"
+                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Service Details">
+                        <i class="bi bi-person-badge fs-4 menu-icon"></i>
+                        <span class="ms-2 menu-text">Banner Details</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('appointmentDetails') }}" class="nav-link text-white d-flex align-items-center" data-bs-toggle="tooltip"
                         data-bs-placement="right" data-bs-title="Appoinment Details">
                         <i class="bi bi-calendar-week fs-4 menu-icon"></i>

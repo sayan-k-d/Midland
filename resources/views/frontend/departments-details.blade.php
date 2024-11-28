@@ -32,61 +32,31 @@
                     <div class="st-height-b60 st-height-lg-b60"></div>
                     <div class="comments-area doctor_list_area">
                         <div class="comment-list-outer">
-                            <h2 class="comments-title">Anaesthesia And Pain Management
-                                Doctors</h2>
+                            <h2 class="comments-title">{{ $department->department_name }}</h2>
+                            
                             <ol class="comment-list">
-                                <li class="comment">
-                                    <div class="comment-body">
-                                        <div class="comment-meta">
-                                            <div class="comment-author">
-                                                <img src="https://midlandhealthcare.org/wp-content/uploads/2019/01/Dr-Kapil-Rastogi-e1552640562274.jpg"
-                                                    alt="comment1" class="avatar">
-                                                <a href="/doctor-profile.html" class="nm">Dr. Kapil
-                                                    Rastogi</a>
-                                            </div><!-- .comment-author -->
-                                        </div><!-- .comment-meta -->
-                                        <div class="comment-content">
-                                            <p>Department of Anesthesiology and Pain Medicine</p>
-                                        </div>
-                                        <div class="reply"><a href="/doctor-profile.html" class="comment-reply-link">View
-                                                Profile</a></div>
-                                    </div>
-                                </li>
-                                <li class="comment">
-                                    <div class="comment-body">
-                                        <div class="comment-meta">
-                                            <div class="comment-author">
-                                                <img src="https://midlandhealthcare.org/wp-content/uploads/2019/01/Dr-Kapil-Rastogi-e1552640562274.jpg"
-                                                    alt="comment1" class="avatar">
-                                                <a href="/doctor-profile.html" class="nm">Dr. Kapil
-                                                    Rastogi</a>
-                                            </div><!-- .comment-author -->
-                                        </div><!-- .comment-meta -->
-                                        <div class="comment-content">
-                                            <p>Department of Anesthesiology and Pain Medicine</p>
-                                        </div>
-                                        <div class="reply"><a href="/doctor-profile.html" class="comment-reply-link">View
-                                                Profile</a></div>
-                                    </div>
-                                </li>
-                                <li class="comment">
-                                    <div class="comment-body">
-                                        <div class="comment-meta">
-                                            <div class="comment-author">
-                                                <img src="https://midlandhealthcare.org/wp-content/uploads/2019/01/Dr-Kapil-Rastogi-e1552640562274.jpg"
-                                                    alt="comment1" class="avatar">
-                                                <a href="/doctor-profile.html" class="nm">Dr. Kapil
-                                                    Rastogi</a>
-                                            </div><!-- .comment-author -->
-                                        </div><!-- .comment-meta -->
-                                        <div class="comment-content">
-                                            <p>Department of Anesthesiology and Pain Medicine</p>
-                                        </div>
-                                        <div class="reply"><a href="/doctor-profile.html" class="comment-reply-link">View
-                                                Profile</a></div>
-                                    </div>
-                                </li>
-                            </ol><!-- .comment-list -->
+                                @foreach($doctors as $doctor)
+                                    @if($doctor->department === $department->id)
+                                        <li class="comment">
+                                            <div class="comment-body">
+                                                <div class="comment-meta">
+                                                    <div class="comment-author">
+                                                        <img src="{{ $doctor->image }}" alt="{{ $doctor->name }}" class="avatar">
+                                                        <a href="#" class="nm">{{ $doctor->doctor_name }}</a>
+                                                    </div><!-- .comment-author -->
+                                                </div><!-- .comment-meta -->
+                                                <div class="comment-content">
+                                                    <p>{{ $department->department_name }}</p>
+                                                </div>
+                                                <div class="reply">
+                                                    <a href="{{ route('doctor-profile', ['id' => $doctor->id]) }}" class="comment-reply-link">View Profile</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ol>
+                        
                         </div>
                         <div class="st-height-b60 st-height-lg-b60"></div>
 
@@ -113,16 +83,15 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-1">
-                                    <form method="POST"
-                                        action="https://html.laralink.com/nischinto/nischinto/assets/php/appointment.php"
-                                        class="st-appointment-form" id="appointment-form">
+                                    <form method="POST" action="{{ route('appointment.store') }}" class="st-appointment-form">
+                                        @csrf
                                         <div id="st-alert1"></div>
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="st-form-field st-style1">
                                                     <label>Full Name</label>
-                                                    <input type="text" id="uname" name="uname"
-                                                        placeholder="Jhon Doe" required>
+                                                    <input type="text" id="uname" name="uname" placeholder="Jhon Doe"
+                                                        required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -135,15 +104,14 @@
                                             <div class="col-lg-6">
                                                 <div class="st-form-field st-style1">
                                                     <label>Phone Number</label>
-                                                    <input type="text" id="unumber" name="unumber"
-                                                        placeholder="+00 141 23 234" required>
+                                                    <input type="text" id="unumber" name="unumber" placeholder="+00 141 23 234"
+                                                        required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="st-form-field st-style1">
                                                     <label>Booking Date</label>
-                                                    <input name="udate" type="text" id="udate"
-                                                        placeholder="dd/mm/yy">
+                                                    <input name="udate" type="text" id="udate" placeholder="dd/mm/yy">
                                                     <div class="form-field-icon"><i class="fa fa-calendar"></i></div>
                                                 </div>
                                             </div>
@@ -154,12 +122,17 @@
                                                         <select name="udepartment" id="udepartment" class="st_select1"
                                                             data-placeholder="Select department">
                                                             <option></option>
-                                                            <option value="dental-care">Dental Care</option>
+                                                            @foreach ($departments as $department)
+                                                                <option value="{{ $department->department_name }}">
+                                                                    {{ $department->department_name }}
+                                                                </option>
+                                                            @endforeach
+                                                            {{-- <option value="dental-care">Dental Care</option>
                                                             <option value="neurology">Neurology</option>
                                                             <option value="crutches">Crutches</option>
                                                             <option value="cardiology">Cardiology</option>
                                                             <option value="pulmonary">Pulmonary</option>
-                                                            <option value="x-ray">X-Ray</option>
+                                                            <option value="x-ray">X-Ray</option> --}}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -171,16 +144,11 @@
                                                         <select name="udoctor" class="st_select1" id="udoctor"
                                                             data-placeholder="Select doctor">
                                                             <option></option>
-                                                            <option value="jhon-doe">Dr. Jhon Doe</option>
-                                                            <option value="mak-rushi">Dr. Mak Roshi</option>
-                                                            <option value="mohoshin-kabir">Dr. Mohoshin
-                                                                Kabir</option>
-                                                            <option value="nayon-borua">Dr. Nayon
-                                                                Borua</option>
-                                                            <option value="rasel-islam">Dr. Rasel
-                                                                Islam</option>
-                                                            <option value="mahid-islam">Dr. Mahid
-                                                                Islam</option>
+                                                            @foreach ($doctors as $doctor)
+                                                                <option value="{{ $doctor->doctor_name }}">{{ $doctor->doctor_name }}
+                                                                </option>
+                                                            @endforeach
+                                                            
                                                         </select>
                                                     </div>
                                                 </div>

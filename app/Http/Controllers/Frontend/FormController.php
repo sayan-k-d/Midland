@@ -10,6 +10,7 @@ use App\Models\Department;
 use App\Models\ReceiverEmail;
 use Illuminate\Http\Request;
 use App\Mail\EnqueryMail;
+use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Mail;
 
 class FormController extends Controller
@@ -33,8 +34,17 @@ class FormController extends Controller
             'phone' => $request->input('phone'),
             'message' => $request->input('msg'),
         ]);
+        $emailData = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'subject' => $request->input('subject'),
+            'phone' => $request->input('phone'),
+            'message' => $request->input('msg'),
 
-        // Redirect back with a success message
+        ];
+        $receiverEmail = ReceiverEmail::all()->first();
+        // dd($receiverEmail);
+        Mail::send(new ContactMail($emailData, $receiverEmail->receiver_email));
         return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
     public function storeAppointmentDetail(Request $request)

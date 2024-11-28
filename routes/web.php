@@ -9,6 +9,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\Frontend\FormController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\BannerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index'])->name('index');
@@ -79,4 +80,11 @@ Route::middleware('admin-auth')->group(function () {
     Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('editBlogs');
     Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
     Route::delete('/blogs/delete/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
+
+    Route::get('/addBanners', [BannerController::class, 'create'])->name('addBanners');
+    Route::get('/bannerDetails', [BannerController::class, 'index'])->name('bannerDetails');
+    Route::get('/banners/edit/{id}', [BannerController::class, 'edit'])->name('editBanner');
+    Route::post('/banners', [BannerController::class, 'store'])->name('banners.store');
+    Route::put('/banners/{id}', [BannerController::class, 'update'])->name('banners.update');
+    Route::delete('/banners/delete/{id}', [BannerController::class, 'destroy'])->name('banners.destroy');
 });

@@ -86,12 +86,7 @@
                                       <option value="{{ $doctor->doctor_name }}">{{ $doctor->doctor_name }}
                                       </option>
                                   @endforeach
-                                  {{-- <option value="mak-rushi">Dr. Mak Roshi</option>
-            <option value="mohoshin-kabir">Dr. Mohoshin
-              Kabir</option>
-            <option value="nayon-borua">Dr. Nayon Borua</option>
-            <option value="rasel-islam">Dr. Rasel Islam</option>
-            <option value="mahid-islam">Dr. Mahid Islam</option> --}}
+                                  
                               </select>
                           </div>
                       </div>

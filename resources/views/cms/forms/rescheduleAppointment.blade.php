@@ -37,6 +37,9 @@
                             <label>Full Name</label>
                             <input class="form-control" type="text" id="uname" name="uname" placeholder="John Doe"
                                 value="{{ $appointment->name }}" required>
+                            @error('uname')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -44,6 +47,9 @@
                             <label>Email Address</label>
                             <input class="form-control" type="email" id="uemail" name="uemail" placeholder="example@gmail.com"
                                 value="{{ $appointment->email }}" required>
+                            @error('uemail')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -51,13 +57,18 @@
                             <label>Phone Number</label>
                             <input class="form-control" type="text" id="unumber" name="unumber" placeholder="+00 141 23 234"
                                 value="{{ $appointment->phone }}" required>
+                            @error('unumber')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group mb-3">
                             <label>Booking Date</label>
                             <input class="form-control" name="udate" type="date" id="udate" value="{{ $appointment->booking_date }}" required>
-                            
+                        @error('udate')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror   
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -73,6 +84,9 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('udepartment')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror 
                             </div>
                         </div>
                     </div>
@@ -89,6 +103,9 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('udoctor')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror 
                             </div>
                         </div>
                     </div>
@@ -96,6 +113,9 @@
                         <div class="form-group mb-3">
                             <label>Message</label>
                             <textarea class="form-control" cols="30" rows="10" id="umsg" name="umsg" placeholder="Write something here...">{{ $appointment->message }}</textarea>
+                            @error('umsg')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                         </div>
                     </div>
                     <div class="col-lg-12">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Banner;
 use App\Models\Department;
 use App\Models\Doctor;
 use App\Models\Services;
@@ -23,7 +24,21 @@ class PageController extends Controller
             }
         }
         $departments = Department::all();
-        return view('frontend.index', ['doctors' => $doctors, 'departments' => $departments]);
+        $banners = Banner::where('page', 'Home')
+        ->where('type', 'carousel')
+        ->where('is_active', true)
+        ->orderBy('position')
+        ->get();
+        foreach ($banners as $banner) {
+            if ($banner->image) {
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mimeType = finfo_buffer($finfo, $banner->image);
+                finfo_close($finfo);
+                $banner->image = 'data:' . $mimeType . ';base64,' . base64_encode($banner->image);
+            }
+        }
+        // dd($banners);
+        return view('frontend.index', ['doctors' => $doctors, 'departments' => $departments,'banners'=>$banners]);
     }
 
     public function about()
@@ -56,13 +71,15 @@ class PageController extends Controller
     public function departmentDetails($id)
     {
         $department = Department::findOrFail($id);
+        $doctors = Doctor::all();
+        $departments = Department::all();
         if ($department->image) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $mimeType = finfo_buffer($finfo, $department->image);
             finfo_close($finfo);
             $department->image = 'data:' . $mimeType . ';base64,' . base64_encode($department->image);
         }
-        return view('frontend.departments-details', ['department' => $department]);
+        return view('frontend.departments-details', ['department' => $department,'departments' => $departments,'doctors' => $doctors]);
     }
     public function services()
     {
@@ -88,6 +105,7 @@ class PageController extends Controller
     public function serviceDetails($id)
     {
         $service = Services::findOrFail($id);
+
         if ($service->image) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $mimeType = finfo_buffer($finfo, $service->image);
@@ -135,6 +153,7 @@ class PageController extends Controller
     public function doctorProfile($id)
     {
         $doctor = Doctor::findOrFail($id);
+        $doctors = Doctor::all();
         if ($doctor->image) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $mimeType = finfo_buffer($finfo, $doctor->image);
@@ -152,7 +171,7 @@ class PageController extends Controller
             $schedules[] = $schedule;
         }
         $departments = Department::all();
-        return view('frontend.doctor-profile', ['doctor' => $doctor, 'schedules' => $schedules, 'departmentName' => $departmentName, 'departments' => $departments]);
+        return view('frontend.doctor-profile', ['doctor' => $doctor, 'schedules' => $schedules, 'departmentName' => $departmentName, 'departments' => $departments,'doctors' => $doctors]);
     }
     public function doctorProfilet2()
     {
