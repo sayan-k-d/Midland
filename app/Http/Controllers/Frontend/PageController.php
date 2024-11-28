@@ -222,6 +222,12 @@ class PageController extends Controller
     {
         return view('frontend.contact');
     }
+    public function appointment()
+    {
+        $departments = Department::all();
+        $doctors = Doctor::all();
+        return view('frontend.appointment', ['doctors' => $doctors, 'departments' => $departments]);
+    }
     public function showDepartment()
     {
         $departments = Department::all();

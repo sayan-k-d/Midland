@@ -1645,18 +1645,19 @@
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <div id="st-alert"></div>
-                        <form action="https://html.laralink.com/nischinto/nischinto/assets/php/mail.php"
-                            class="row st-contact-form st-type1" method="post" id="contact-form">
+                        <form action="{{ route('contact.store') }}" method="POST" class="row st-contact-form st-type1">
+                            {{-- <form action="{{ route('contact.store') }}" method="POST" class="row st-contact-form st-type1" id="contact-form"> --}}
+                            @csrf
                             <div class="col-lg-6">
                                 <div class="st-form-field st-style1">
                                     <label>Full Name</label>
-                                    <input type="text" id="name" name="name" placeholder="Jhon Doe" required>
+                                    <input type="text" id="name" name="name" placeholder="John Doe" required>
                                 </div>
                             </div><!-- .col -->
                             <div class="col-lg-6">
                                 <div class="st-form-field st-style1">
                                     <label>Email Address</label>
-                                    <input type="text" id="email" name="email" placeholder="example@gmail.com"
+                                    <input type="email" id="email" name="email" placeholder="example@gmail.com"
                                         required>
                                 </div>
                             </div><!-- .col -->
@@ -1677,16 +1678,14 @@
                             <div class="col-lg-12">
                                 <div class="st-form-field st-style1">
                                     <label>Your Message</label>
-                                    <textarea cols="30" rows="10" id="msg" name="msg" placeholder="Write something here..."
-                                        required></textarea>
+                                    <textarea cols="30" rows="10" id="msg" name="msg" placeholder="Write something here..." required></textarea>
                                 </div>
                             </div><!-- .col -->
                             <div class="col-lg-12">
                                 <div class="text-center">
                                     <div class="st-height-b10 st-height-lg-b10"></div>
                                     <button class="st-btn st-style1 st-color1 st-size-medium" type="submit"
-                                        id="submit" name="submit">Send
-                                        message</button>
+                                        id="submit" name="submit">Send message</button>
                                 </div>
                             </div><!-- .col -->
                         </form>

@@ -26,6 +26,7 @@ Route::get('/frontend/blogDetails/{id}', [PageController::class, 'blogDetails'])
 Route::get('/frontend/recentBlogDetails/{id}', [PageController::class, 'recentBlogDetails'])->name('blog-details-right');
 Route::get('/frontend/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/frontend/contact-form', [FormController::class, 'storeContactDetail'])->name('contact.store');
+Route::get('/frontend/appointment', [PageController::class, 'appointment'])->name('appointment');
 Route::post('/frontend/appointment-form', [FormController::class, 'storeAppointmentDetail'])->name('appointment.store');
 
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
