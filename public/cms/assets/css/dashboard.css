@@ -1,8 +1,12 @@
-::-webkit-scrollbar {
-    width: 100% !important;
-    height: 10px !important;
+/* ::-webkit-scrollbar {
+    width: 15px !important;
+    height: 100% !important;
     background-color: rgba(0, 0, 0, 0.5) !important;
 }
+::-webkit-scrollbar-thumb {
+    background-color: #4d4d4d;
+    cursor: pointer;
+} */
 /* Side menu default styles */
 #sidebar {
     width: 250px;
@@ -56,7 +60,7 @@
     padding: 0 1rem;
     transition: all 0.3s ease;
 }
-.main-container.adjust-margin{
+.main-container.adjust-margin {
     margin-left: 70px;
 }
 .content {
@@ -175,5 +179,9 @@
     ::-webkit-scrollbar-thumb {
         background-color: #202020;
         cursor: pointer;
-      }
+    }
+}
+
+.ck-editor__editable{
+    min-height: 500px;
 }

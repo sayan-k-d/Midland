@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminFormController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CkeditorController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\Frontend\FormController;
@@ -87,4 +88,6 @@ Route::middleware('admin-auth')->group(function () {
     Route::post('/banners', [BannerController::class, 'store'])->name('banners.store');
     Route::put('/banners/{id}', [BannerController::class, 'update'])->name('banners.update');
     Route::delete('/banners/delete/{id}', [BannerController::class, 'destroy'])->name('banners.destroy');
+
+    Route::post('/ckeditor/upload', [CkeditorController::class, 'upload'])->name('ckeditor.upload');
 });

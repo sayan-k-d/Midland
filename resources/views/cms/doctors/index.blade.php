@@ -28,7 +28,7 @@
             <div><a class="btn btn-success" href="/addDoctor">Add Doctor</a></div>
         </div>
 
-        <div class="table-responsive">
+        <div class="table-responsive mb-5">
             <table class="table table-striped table-bordered">
                 <thead class="table-dark">
                     <tr>

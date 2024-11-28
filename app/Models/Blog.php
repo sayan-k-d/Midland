@@ -14,7 +14,6 @@ class Blog extends Model
     use HasFactory;
 
     protected $fillable = [
-        'meta_header', 'meta_desc', 'title', 'date', 'content', 'content_image', 'intro_heading', 'introduction', 'intro_image', 'video_heading', 'video_link',
-        'video_content', 'diet_heading', 'diet_image', 'diet_description', 'diet_content', 'diet_advice', 'test_heading', 'test_content', 'is_recent', 'tags', 'created_by',
+        'meta_header', 'meta_desc', 'title', 'content', 'image', 'short_description', 'slug', 'tags', 'created_by',
     ];
 }

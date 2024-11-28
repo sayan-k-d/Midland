@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <h2 class="text-center my-4 text-uppercase fw-bold">Appoinment Details</h2>
-        <div class="table-responsive">
+        <div class="table-responsive mb-5">
             <table class="table table-striped table-bordered">
                 <thead class="table-dark">
                     <tr>

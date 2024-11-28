@@ -115,7 +115,6 @@
 
  <!-- Swiper JS -->
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
  <!-- Scripts -->
  <script src="{{ asset('assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
  <script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
@@ -130,6 +129,7 @@
  <script src="{{ asset('assets/js/textRotate.min.js') }}"></script>
  <script src="{{ asset('assets/js/select2.min.js') }}"></script>
  <script src="{{ asset('assets/js/main.js') }}"></script>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  </body>
 
  <!-- Mirrored from html.laralink.com/nischinto/nischinto/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Sep 2024 08:24:11 GMT -->

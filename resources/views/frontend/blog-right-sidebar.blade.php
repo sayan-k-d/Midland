@@ -22,13 +22,12 @@
                                     <div class="st-post st-style3 st-zoom">
                                         <a href="{{ route('blog.details', ['id' => $recentBlog->id]) }}"
                                             class="st-post-thumb">
-                                            <img class="st-zoom-in" src="{{ $recentBlog->content_image }}" alt="blog1">
+                                            <img class="st-zoom-in" src="{{ $recentBlog->image }}" alt="blog1">
                                         </a>
                                         <div class="st-post-info">
                                             <h2 class="st-post-title"><a
-                                                    href="{{ route('blog.details', ['id' => $recentBlog->id]) }}">Working in
-                                                    emergency
-                                                    on...</a></h2>
+                                                    href="{{ route('blog.details', ['id' => $recentBlog->id]) }}">{{ $recentBlog->title }}</a>
+                                            </h2>
                                             <div class="st-post-meta">
                                                 <span>
                                                     <a href="#" class="st-post-avatar">
@@ -37,10 +36,11 @@
                                                     </a>
                                                 </span>
                                                 <span
-                                                    class="st-post-date">{{ \Carbon\Carbon::parse($blog->date)->format('F j, Y') }}</span>
+                                                    class="st-post-date">{{ \Carbon\Carbon::parse($blog->created_at)->format('F j, Y') }}</span>
                                             </div>
                                             <div class="st-post-text">
-                                                {{ \Illuminate\Support\Str::limit($blog->content, 150, '...') }}</div>
+                                                {{ \Illuminate\Support\Str::limit($blog->short_description, 150, '...') }}
+                                            </div>
                                         </div>
                                         <div class="st-post-footer">
                                             <a href="{{ route('blog.details', ['id' => $recentBlog->id]) }}"
@@ -104,14 +104,15 @@
                                 <li>
                                     <div class="st-post st-style1">
                                         <a href="{{ route('blog-details-right', ['id' => $recentBlog->id]) }}"
-                                            class="st-post-thumb st-zoom"><img src="{{ $recentBlog->content_image }}"
+                                            class="st-post-thumb st-zoom"><img src="{{ $recentBlog->image }}"
                                                 alt="post1" class="st-zoom-in"></a>
                                         <div class="st-post-info">
                                             <h2 class="st-post-title"><a
                                                     href="{{ route('blog-details-right', ['id' => $recentBlog->id]) }}">{{ $recentBlog->title }}</a>
                                             </h2>
                                             <div class="st-post-date">
-                                                {{ \Carbon\Carbon::parse($recentBlog->date)->format('F j, Y') }}</div>
+                                                {{ \Carbon\Carbon::parse($recentBlog->created_at)->format('F j, Y') }}
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
@@ -176,120 +177,3 @@
     <script src="assets/js/select2.min.js"></script>
     <script src="assets/js/main.js"></script>
 @endsection
-
-{{-- <!-- Start Footer -->
-    <footer class="st-site-footer st-dynamic-bg"
-      data-src="assets/img/footer-bg.png">
-      <div class="st-main-footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3">
-              <div class="st-footer-widget">
-                <div class="st-text-field">
-                  <img src="assets/img/footer-logo.png" alt="Nischinto"
-                    class="st-footer-logo">
-                  <div class="st-height-b25 st-height-lg-b25"></div>
-                  <div class="st-footer-text">Midland Healthcare & Research
-                    Center is one of the best hospitals in Lucknow. The
-                    service’s primary comprises of hospital, diagnostics and day
-                    care specialty facilities. Contact us now!</div>
-                  <div class="st-height-b25 st-height-lg-b25"></div>
-                  <ul class="st-social-btn st-style1 st-mp0">
-                    <li><a href="#"><i
-                          class="fab fa-facebook-square"></i></a></li>
-                    <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                    <li><a href="#"><i
-                          class="fab fa-pinterest-square"></i></a></li>
-                    <li><a href="#"><i
-                          class="fab fa-twitter-square"></i></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div><!-- .col -->
-            <div class="col-lg-3">
-              <div class="st-footer-widget">
-                <h2 class="st-footer-widget-title">Useful Links</h2>
-                <ul class="st-footer-widget-nav st-mp0">
-                  <li><a href="/index.html" class="st-smooth-move active"><i
-                        class="fas fa-chevron-right"></i>Home</a></li>
-                  <li><a href="/about.html" class="st-smooth-move active"><i
-                        class="fas fa-chevron-right"></i>About</a></li>
-                  <li><a href="/departments.html"
-                      class="st-smooth-move active"><i
-                        class="fas fa-chevron-right"></i>Department</a></li>
-                  <li><a href="/services.html" class="st-smooth-move active"><i
-                        class="fas fa-chevron-right"></i>Services</a></li>
-                  <li><a href="/doctors.html" class="st-smooth-move active"><i
-                        class="fas fa-chevron-right"></i>
-                      Find a Doctor</a></li>
-                  <li><a href="/blogs.html" class="st-smooth-move active"><i
-                        class="fas fa-chevron-right"></i>Blog</a></li>
-                  <li><a href="/contact.html" class="st-smooth-move active"><i
-                        class="fas fa-chevron-right"></i>Contact</a></li>
-                </ul>
-              </div>
-            </div><!-- .col -->
-            <div class="col-lg-3">
-              <div class="st-footer-widget">
-                <h2 class="st-footer-widget-title">Departments</h2>
-                <ul class="st-footer-widget-nav st-mp0">
-                  <li><a href="/departments.html"><i
-                        class="fas fa-chevron-right"></i>Gynaecology</a></li>
-                  <li><a href="/departments.html"><i
-                        class="fas fa-chevron-right"></i>Thoracic
-                      Surgery</a></li>
-                  <li><a href="/departments.html"><i
-                        class="fas fa-chevron-right"></i>Pulmonary</a></li>
-                  <li><a href="/departments.html"><i
-                        class="fas fa-chevron-right"></i>Respiratory and
-                      Critical Care</a></li>
-                  <li><a href="/departments.html"><i
-                        class="fas fa-chevron-right"></i>Urology</a></li>
-                  <li><a href="/departments.html"><i
-                        class="fas fa-chevron-right"></i>Neurology</a></li>
-                </ul>
-              </div>
-            </div><!-- .col -->
-            <div class="col-lg-3">
-              <div class="st-footer-widget">
-                <h2 class="st-footer-widget-title">Contacts</h2>
-                <ul class="st-footer-contact-list st-mp0">
-                  <li><span class="st-footer-contact-title">Address:</span>
-                    Mandir Marg, Mahanagar Lucknow, U.P.
-                  </li>
-                  <li><span class="st-footer-contact-title">Email:</span>
-                    info.midlandhealthcare@gmail.com</li>
-                  <li><span class="st-footer-contact-title">Phone:</span> <a
-                      href="tel:0522-4655555"> 0522-4655555</a></li>
-                  <li><span class="st-footer-contact-title"></span> <a
-                      href="tel:0522-4655555">
-                      8004024365</a></li>
-                  <li><span class="st-footer-contact-title"></span> <a
-                      href="tel:0522-4655555">
-                      0522-4042888</a></li>
-                </ul>
-              </div>
-            </div><!-- .col -->
-          </div>
-        </div>
-      </div>
-      <div class="st-copyright-wrap">
-        <div class="container">
-          <div class="st-copyright-in">
-            <div class="st-left-copyright">
-              <div class="st-copyright-text">© Copyright Midland Healthcare 2024
-                - All Rights Reserved</div>
-            </div>
-            <div class="st-right-copyright">
-              <div id="st-backtotop"><i class="fas fa-angle-up"></i></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- End Footer --> --}}
-
-{{-- </body>
-
-<!-- Mirrored from html.laralink.com/nischinto/nischinto/blog-right-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Sep 2024 08:24:16 GMT -->
-</html> --}}
