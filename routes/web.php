@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminFormController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CkeditorController;
 use App\Http\Controllers\DepartmentController;
@@ -10,7 +11,6 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\Frontend\FormController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\ServicesController;
-use App\Http\Controllers\BannerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index'])->name('index');

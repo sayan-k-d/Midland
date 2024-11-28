@@ -50,7 +50,7 @@
                                     @elseif ($key == 'image')
                                         @if (!empty($row[$key]))
                                             <img src="{{ $row[$key] }}" alt="{{ $column }}"
-                                                style="max-width: 50px; height: auto;">
+                                                style="max-width: 100%; height: auto;">
                                         @else
                                             No Image
                                         @endif

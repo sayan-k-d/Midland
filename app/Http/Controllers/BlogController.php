@@ -84,7 +84,7 @@ class BlogController extends Controller
     {
         $blog = Blog::findOrFail($id);
         $editFlag = true; // Flag for edit mode
-
+        $blog->image = $this->encodeImage($blog->image);
         return view('cms.blogs.addBlog', compact('blog', 'editFlag'));
     }
     public function update(Request $request, $id)

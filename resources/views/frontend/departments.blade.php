@@ -20,12 +20,12 @@
                         <div class="col-lg-4">
                             <div
                                 class="st-post st-style3 st-zoom st_departments_otr departments-card d-flex flex-column justify-content-between overflow-hidden">
-                                <a href="departments-details.html" class="st-post-thumb">
+                                <a href="{{ route('department.details', ['id' => $department->id]) }}" class="st-post-thumb">
                                     <img class="st-zoom-in" src="{{ $department->image }}" alt="blog1">
                                 </a>
                                 <div class="st-post-info">
                                     <h2 class="st-post-title"><a
-                                            href="departments-details.html">{{ $department->department_name }}</a></h2>
+                                            href="{{ route('department.details', ['id' => $department->id]) }}">{{ $department->department_name }}</a></h2>
                                     <!-- <div class="st-post-meta">
                               <span>
                                 <a href="#" class="st-post-avatar">

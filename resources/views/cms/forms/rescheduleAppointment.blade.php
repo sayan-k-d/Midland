@@ -27,7 +27,8 @@
                 </div>
             </div>
 
-            <form method="POST" action="{{ route('appointment.reschedule', ['id' => $appointment->id]) }}" class="st-appointment-form">
+            <form method="POST" action="{{ route('appointment.reschedule', ['id' => $appointment->id]) }}"
+                class="st-appointment-form">
                 @csrf
                 @method('PUT') <!-- Use PUT for updating an existing resource -->
                 <div id="st-alert1"></div>
@@ -45,8 +46,8 @@
                     <div class="col-lg-6">
                         <div class="form-group mb-3">
                             <label>Email Address</label>
-                            <input class="form-control" type="email" id="uemail" name="uemail" placeholder="example@gmail.com"
-                                value="{{ $appointment->email }}" required>
+                            <input class="form-control" type="email" id="uemail" name="uemail"
+                                placeholder="example@gmail.com" value="{{ $appointment->email }}" required>
                             @error('uemail')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -55,8 +56,8 @@
                     <div class="col-lg-6">
                         <div class="form-group mb-3">
                             <label>Phone Number</label>
-                            <input class="form-control" type="text" id="unumber" name="unumber" placeholder="+00 141 23 234"
-                                value="{{ $appointment->phone }}" required>
+                            <input class="form-control" type="text" id="unumber" name="unumber"
+                                placeholder="+00 141 23 234" value="{{ $appointment->phone }}" required>
                             @error('unumber')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -65,10 +66,11 @@
                     <div class="col-lg-6">
                         <div class="form-group mb-3">
                             <label>Booking Date</label>
-                            <input class="form-control" name="udate" type="date" id="udate" value="{{ $appointment->booking_date }}" required>
-                        @error('udate')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror   
+                            <input class="form-control" name="udate" type="date" id="udate"
+                                value="{{ $appointment->booking_date }}" required>
+                            @error('udate')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -85,8 +87,8 @@
                                     @endforeach
                                 </select>
                                 @error('udepartment')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror 
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -105,27 +107,34 @@
                                 </select>
                                 @error('udoctor')
                                     <span class="text-danger">{{ $message }}</span>
-                                @enderror 
+                                @enderror
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group mb-3">
                             <label>Message</label>
-                            <textarea class="form-control" cols="30" rows="10" id="umsg" name="umsg" placeholder="Write something here...">{{ $appointment->message }}</textarea>
+                            <textarea class="form-control" cols="30" rows="10" id="umsg" name="umsg"
+                                placeholder="Write something here...">{{ $appointment->message }}</textarea>
                             @error('umsg')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <button class="btn btn-primary" type="submit"
-                            id="appointment-submit" >Reschedule Appointment</button>
+                        <button class="btn btn-primary" type="submit" id="appointment-submit">Reschedule
+                            Appointment</button>
                     </div>
                 </div>
             </form>
-            
+
         </div>
 
     </div>
+@endsection
+@section('scripts')
+    <script>
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('udate').setAttribute('min', today);
+    </script>
 @endsection
