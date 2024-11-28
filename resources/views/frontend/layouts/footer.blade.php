@@ -26,20 +26,20 @@
                      <div class="st-footer-widget">
                          <h2 class="st-footer-widget-title">Useful Links</h2>
                          <ul class="st-footer-widget-nav st-mp0">
-                             <li><a href="/index.html" class="st-smooth-move active"><i
+                             <li><a href="/" class="st-smooth-move active"><i
                                          class="fas fa-chevron-right"></i>Home</a></li>
-                             <li><a href="/about.html" class="st-smooth-move active"><i
+                             <li><a href="/frontend/about" class="st-smooth-move active"><i
                                          class="fas fa-chevron-right"></i>About</a></li>
-                             <li><a href="/departments.html" class="st-smooth-move active"><i
+                             <li><a href="/frontend/departments" class="st-smooth-move active"><i
                                          class="fas fa-chevron-right"></i>Department</a></li>
-                             <li><a href="/services.html" class="st-smooth-move active"><i
+                             <li><a href="/frontend/services" class="st-smooth-move active"><i
                                          class="fas fa-chevron-right"></i>Services</a></li>
-                             <li><a href="/doctors.html" class="st-smooth-move active"><i
+                             <li><a href="/frontend/doctors" class="st-smooth-move active"><i
                                          class="fas fa-chevron-right"></i>
                                      Find a Doctor</a></li>
-                             <li><a href="/blogs.html" class="st-smooth-move active"><i
+                             <li><a href="/frontend/blogs" class="st-smooth-move active"><i
                                          class="fas fa-chevron-right"></i>Blog</a></li>
-                             <li><a href="/contact.html" class="st-smooth-move active"><i
+                             <li><a href="/frontend/contact" class="st-smooth-move active"><i
                                          class="fas fa-chevron-right"></i>Contact</a></li>
                          </ul>
                      </div>
@@ -48,6 +48,15 @@
                      <div class="st-footer-widget">
                          <h2 class="st-footer-widget-title">Departments</h2>
                          <ul class="st-footer-widget-nav st-mp0">
+                            @foreach($departments as $department)
+                                <li>
+                                    <a href="{{ route('department.details', ['id' => $department->id])}}">
+                                        <i class="fas fa-chevron-right"></i>{{ $department->department_name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                         {{-- <ul class="st-footer-widget-nav st-mp0">
                              <li><a href="/departments.html"><i class="fas fa-chevron-right"></i>Gynaecology</a></li>
                              <li><a href="/departments.html"><i class="fas fa-chevron-right"></i>Thoracic
                                      Surgery</a></li>
@@ -56,7 +65,7 @@
                                      Critical Care</a></li>
                              <li><a href="/departments.html"><i class="fas fa-chevron-right"></i>Urology</a></li>
                              <li><a href="/departments.html"><i class="fas fa-chevron-right"></i>Neurology</a></li>
-                         </ul>
+                         </ul> --}}
                      </div>
                  </div><!-- .col -->
                  <div class="col-lg-3">

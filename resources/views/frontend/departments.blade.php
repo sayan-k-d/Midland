@@ -25,7 +25,7 @@
                                 </a>
                                 <div class="st-post-info">
                                     <h2 class="st-post-title"><a
-                                            href="departments-details.html">{{ $department->department_name }}</a></h2>
+                                            href="{{ route('department.details', ['id' => $department->id])}}">{{ $department->department_name }}</a></h2>
                                     <!-- <div class="st-post-meta">
                               <span>
                                 <a href="#" class="st-post-avatar">

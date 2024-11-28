@@ -19,7 +19,7 @@
         <!-- Start Our Story Section -->
         <section class="st-faq-wrap st-shape-wrap abt_stry_otr">
             <div class="st-shape5">
-                <img src="assets/img/shape/faq-bg.svg" alt="shape1">
+                <img src="{{ asset('assets/img/shape/faq-bg.svg') }}" alt="shape1">
             </div>
             <div class="st-height-b120 st-height-lg-b80"></div>
             <div class="container">

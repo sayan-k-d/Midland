@@ -1519,7 +1519,7 @@
                             </div>
                         </div>
                         <div class="st-height-b0 st-height-lg-b30"></div>
-                    </div><!-- .col -->
+                    </div>
                     <div class="col-lg-4">
                         <div class="st-post st-style3">
                             <a href="blog-details.html" class="st-post-thumb st-link-hover-wrap st-zoom">
@@ -1546,7 +1546,7 @@
                                     More</a>
                             </div>
                         </div>
-                    </div><!-- .col -->
+                    </div>
                     <div class="col-lg-4">
                         <div class="st-post st-style3">
                             <a href="blog-details.html" class="st-post-thumb st-link-hover-wrap st-zoom">
@@ -1573,7 +1573,7 @@
                                     More</a>
                             </div>
                         </div>
-                    </div><!-- .col -->
+                    </div>
                 </div>
             </div>
             <div class="st-height-b120 st-height-lg-b80"></div>
