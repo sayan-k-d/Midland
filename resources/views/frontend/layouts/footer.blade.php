@@ -49,7 +49,7 @@
                          <h2 class="st-footer-widget-title">Departments</h2>
                          <ul class="st-footer-widget-nav st-mp0">
                              @foreach ($footerData['departments'] as $department)
-                                 <li><a href="frontend/departmentDetails/{{ $department->id }}"><i
+                                 <li><a href="/frontend/departmentDetails/{{ $department->id }}"><i
                                              class="fas fa-chevron-right"></i>{{ $department->department_name }}</a>
                                  </li>
                              @endforeach
