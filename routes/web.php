@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminFormController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CkeditorController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\Frontend\FormController;
@@ -78,4 +79,6 @@ Route::middleware('admin-auth')->group(function () {
     Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('editBlogs');
     Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
     Route::delete('/blogs/delete/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
+
+    Route::post('/ckeditor/upload', [CkeditorController::class, 'upload'])->name('ckeditor.upload');
 });

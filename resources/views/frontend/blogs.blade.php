@@ -21,7 +21,7 @@
                             <div
                                 class="st-post st-style3 st-zoom st_departments_otr blog-card d-flex flex-column justify-content-between overflow-hidden">
                                 <a href="{{ route('blog.details', ['id' => $blog->id]) }}" class="st-post-thumb">
-                                    <img class="st-zoom-in" src="{{ $blog->content_image }}" alt="blog1">
+                                    <img class="st-zoom-in" src="{{ $blog->image }}" alt="blog1">
                                 </a>
                                 <div class="st-post-info">
                                     <h2 class="st-post-title"><a
@@ -34,10 +34,10 @@
                                             </a>
                                         </span>
                                         <span
-                                            class="st-post-date">{{ \Carbon\Carbon::parse($blog->date)->format('F j, Y') }}</span>
+                                            class="st-post-date">{{ \Carbon\Carbon::parse($blog->created_at)->format('F j, Y') }}</span>
                                     </div>
                                     <div class="st-post-text">
-                                        {{ \Illuminate\Support\Str::limit($blog->content, 150, '...') }}</div>
+                                        {{ \Illuminate\Support\Str::limit($blog->short_description, 150, '...') }}</div>
                                 </div>
                                 <div class="st-post-footer">
                                     <a href="{{ route('blog.details', ['id' => $blog->id]) }}"

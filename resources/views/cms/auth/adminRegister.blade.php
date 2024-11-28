@@ -1,7 +1,7 @@
 @extends('cms.layout.admin')
 @section('title', 'Register')
 @section('content')
-<div class="content">
+<div class="content main-container">
     <div class="container">
         <div class="page-header mb-4">
             <div class="row align-items-center">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="role" class="mb-1">Role</label>
-                    
+
                     <select id="role" name="role" class="form-select" aria-label="Default select example"
                         required>
                         <option selected>Select role</option>
@@ -51,8 +51,8 @@
                         </ul>
                     </div>
                 </div>
-            
-                
+
+
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>
         </div>

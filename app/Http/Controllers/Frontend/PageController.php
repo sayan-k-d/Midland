@@ -171,9 +171,7 @@ class PageController extends Controller
         }
 
         foreach ($data as $blog) {
-            $blog->content_image = $this->encodeImage($blog->content_image);
-            $blog->intro_image = $this->encodeImage($blog->intro_image);
-            $blog->diet_image = $this->encodeImage($blog->diet_image);
+            $blog->image = $this->encodeImage($blog->image);
         }
 
         return view('frontend.blogs', ['blogs' => $data, "maxPageLimit" => $maxPageLimit, "totalBlogs" => $totalBlogs]);
@@ -185,46 +183,37 @@ class PageController extends Controller
         $nextBlog = Blog::where('id', '>', $id)->orderBy('id', 'asc')->first();
         $prevBlog = Blog::where('id', '<', $id)->orderBy('id', 'desc')->first();
 
-        $blog->content_image = $this->encodeImage($blog->content_image);
-        $blog->intro_image = $this->encodeImage($blog->intro_image);
-        $blog->diet_image = $this->encodeImage($blog->diet_image);
+        $blog->image = $this->encodeImage($blog->image);
 
-        $dietContents = explode('.', $blog->diet_content);
-        array_pop($dietContents);
-        $diets = [];
-        foreach ($dietContents as $content) {
-            $content = explode(':', $content);
-            $diets[] = $content;
-        }
-
-        $recentBlogs = Blog::where('is_recent', 1)->paginate(5);
+        // $recentBlogs = Blog::where('is_recent', 1)->paginate(5);
+        $recentBlogs = Blog::where('created_at', '>=', now()->subDays(3))->orderBy('created_at', 'desc') // Sort by newest
+            ->take(5) // Limit to 5 records
+            ->get();
         foreach ($recentBlogs as $recentBlog) {
-            $recentBlog->content_image = $this->encodeImage($recentBlog->content_image);
-            $recentBlog->intro_image = $this->encodeImage($recentBlog->intro_image);
-            $recentBlog->diet_image = $this->encodeImage($recentBlog->diet_image);
+            $recentBlog->image = $this->encodeImage($recentBlog->image);
         }
 
-        return view('frontend.blog-details', ['blog' => $blog, 'diets' => $diets, 'recentBlogs' => $recentBlogs, 'nextBlog' => $nextBlog, 'prevBlog' => $prevBlog]);
+        return view('frontend.blog-details', ['blog' => $blog, 'recentBlogs' => $recentBlogs, 'nextBlog' => $nextBlog, 'prevBlog' => $prevBlog]);
     }
 
     public function recentBlogDetails($id)
     {
         $blog = Blog::findOrFail($id);
-        $blog->content_image = $this->encodeImage($blog->content_image);
-        $blog->intro_image = $this->encodeImage($blog->intro_image);
-        $blog->diet_image = $this->encodeImage($blog->diet_image);
+        $blog->image = $this->encodeImage($blog->image);
 
-        $recentBlogs = Blog::where('is_recent', 1)->get();
+        // $recentBlogs = Blog::where('is_recent', 1)->get();
+        $recentBlogs = Blog::where('created_at', '>=', now()->subDays(3))
+            ->orderBy('created_by', 'desc')
+            ->get();
         $maxPageLimit = 10;
         $totalBlogs = $recentBlogs->count();
         if ($totalBlogs > $maxPageLimit) {
-            $recentBlogs = Blog::where('is_recent', 1)->paginate($maxPageLimit);
+            $recentBlogs = $recentBlogs = Blog::where('created_at', '>=', now()->subDays(3))
+                ->orderBy('created_by', 'desc')->paginate($maxPageLimit);
         }
 
         foreach ($recentBlogs as $recentBlog) {
-            $recentBlog->content_image = $this->encodeImage($recentBlog->content_image);
-            $recentBlog->intro_image = $this->encodeImage($recentBlog->intro_image);
-            $recentBlog->diet_image = $this->encodeImage($recentBlog->diet_image);
+            $recentBlog->image = $this->encodeImage($recentBlog->image);
         }
         return view('frontend.blog-right-sidebar', ['blog' => $blog, 'recentBlogs' => $recentBlogs, 'totalBlogs' => $totalBlogs, 'maxPageLimit' => $maxPageLimit]);
     }

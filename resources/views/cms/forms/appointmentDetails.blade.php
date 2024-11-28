@@ -9,7 +9,7 @@
 
     </div>
 
-            <div class="table-responsive">
+            <div class="table-responsive mb-5">
                 @include('\cms\layout\dashboard-table', [
                     'columns' => [
                         'id' => '#',
