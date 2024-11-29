@@ -19,6 +19,9 @@ class PageController extends Controller
             if ($doctor->image) {
                 $doctor->image = $this->encodeImage($doctor->image);
             }
+            if ($doctor->department) {
+                $doctor->department = Department::findOrFail($doctor->department)->department_name;
+            }
         }
         $departments = Department::all();
         $banners = Banner::where('page', 'Home')
@@ -43,7 +46,7 @@ class PageController extends Controller
 
     public function about()
     {
-        
+
         return view('frontend.about');
     }
 
