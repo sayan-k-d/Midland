@@ -78,7 +78,10 @@
       $('.player').YTPlayer();
     }
     if ($.exists('#udate')) {
-      $('#udate').datepicker();
+      $('#udate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        minDate: 0
+      });
     }
     if ($.exists('.st_select1')) {
       $(".st_select1").select2({
