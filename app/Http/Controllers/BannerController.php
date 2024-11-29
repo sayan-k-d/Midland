@@ -34,7 +34,8 @@ class BannerController extends Controller
     }
     public function create()
     {
-        return view('cms.banners.addBanner');
+        $editFlag = false;
+        return view('cms.banners.addBanner',compact( 'editFlag'));
     }
 
     /**

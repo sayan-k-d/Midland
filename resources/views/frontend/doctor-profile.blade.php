@@ -206,87 +206,107 @@
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <form method="POST" action="{{ route('appointment.store') }}" class="st-appointment-form">
-                            @csrf
-                            <div id="st-alert1"></div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="st-form-field st-style1">
-                                        <label>Full Name</label>
-                                        <input type="text" id="uname" name="uname" placeholder="Jhon Doe"
-                                            required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="st-form-field st-style1">
-                                        <label>Email Address</label>
-                                        <input type="text" id="uemail" name="uemail"
-                                            placeholder="example@gmail.com" required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="st-form-field st-style1">
-                                        <label>Phone Number</label>
-                                        <input type="text" id="unumber" name="unumber" placeholder="+00 141 23 234"
-                                            required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="st-form-field st-style1">
-                                        <label>Booking Date</label>
-                                        <input name="udate" type="text" id="udate" placeholder="dd/mm/yy">
-                                        <div class="form-field-icon"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="st-form-field st-style1">
-                                        <label>Department</label>
-                                        <div class="st-custom-select-wrap">
-                                            <select name="udepartment" id="udepartment" class="st_select1"
-                                                data-placeholder="Select department">
-                                                <option></option>
-                                                @foreach ($departments as $department)
-                                                    <option value="{{ $department->department_name }}">
-                                                        {{ $department->department_name }}
-                                                    </option>
-                                                @endforeach
-                                                {{-- <option value="dental-care">Dental Care</option>
-                                                <option value="neurology">Neurology</option>
-                                                <option value="crutches">Crutches</option>
-                                                <option value="cardiology">Cardiology</option>
-                                                <option value="pulmonary">Pulmonary</option>
-                                                <option value="x-ray">X-Ray</option> --}}
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="st-form-field st-style1">
-                                        <label>Doctor</label>
-                                        <div class="st-custom-select-wrap">
-                                            <select name="udoctor" class="st_select1" id="udoctor"
-                                                data-placeholder="Select doctor">
-                                                <option></option>
-                                                @foreach ($doctors as $doctor)
-                                                    <option value="{{ $doctor->doctor_name }}">{{ $doctor->doctor_name }}
-                                                    </option>
-                                                @endforeach
-                                                
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="st-form-field st-style1">
-                                        <label>Message</label>
-                                        <textarea cols="30" rows="10" id="umsg" name="umsg" placeholder="Write something here..."></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <button class="st-btn st-style1 st-color1 st-size-medium" type="submit"
-                                        id="appointment-submit" name="submit">Appointment</button>
-                                </div>
-                            </div>
-                        </form>
+              @csrf
+              <div id="st-alert1"></div>
+              <div class="row">
+                  <div class="col-lg-6">
+                      <div class="st-form-field st-style1">
+                          <label>Full Name</label>
+                          <input type="text" id="uname" name="uname" placeholder="Jhon Doe"
+                              required>
+                              @error('uname')
+                                    <span class="text-danger">{{ $message }}</span>
+                              @enderror
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="st-form-field st-style1">
+                          <label>Email Address</label>
+                          <input type="text" id="uemail" name="uemail"
+                              placeholder="example@gmail.com" required>
+                              @error('uemail')
+                              <span class="text-danger">{{ $message }}</span>
+                          @enderror
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="st-form-field st-style1">
+                          <label>Phone Number</label>
+                          <input type="text" id="unumber" name="unumber" placeholder="+00 141 23 234"
+                              required>
+                              @error('unumber')
+                              <span class="text-danger">{{ $message }}</span>
+                          @enderror
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="st-form-field st-style1">
+                          <label>Booking Date</label>
+                          <input name="udate" type="text" id="udate" placeholder="dd/mm/yy">
+                          <div class="form-field-icon"><i class="fa fa-calendar"></i></div>
+                          @error('udate')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="st-form-field st-style1">
+                          <label>Department</label>
+                          <div class="st-custom-select-wrap">
+                              <select name="udepartment" id="udepartment" class="st_select1"
+                                  data-placeholder="Select department">
+                                  <option></option>
+                                  @foreach ($departments as $department)
+                                      <option value="{{ $department->department_name }}">
+                                          {{ $department->department_name }}
+                                      </option>
+                                  @endforeach
+                                  @error('udepartment')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                                  {{-- <option value="dental-care">Dental Care</option>
+                                  <option value="neurology">Neurology</option>
+                                  <option value="crutches">Crutches</option>
+                                  <option value="cardiology">Cardiology</option>
+                                  <option value="pulmonary">Pulmonary</option>
+                                  <option value="x-ray">X-Ray</option> --}}
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="st-form-field st-style1">
+                          <label>Doctor</label>
+                          <div class="st-custom-select-wrap">
+                              <select name="udoctor" class="st_select1" id="udoctor"
+                                  data-placeholder="Select doctor">
+                                  <option></option>
+                                  @foreach ($doctors as $doctor)
+                                      <option value="{{ $doctor->doctor_name }}">{{ $doctor->doctor_name }}
+                                      </option>
+                                  @endforeach
+                                  @error('udoctor')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-12">
+                      <div class="st-form-field st-style1">
+                          <label>Message</label>
+                          <textarea cols="30" rows="10" id="umsg" name="umsg" placeholder="Write something here..."></textarea>
+                          @error('umsg')
+                            <span class="text-danger">{{ $message }}</span>
+                          @enderror
+                        </div>
+                  </div>
+                  <div class="col-lg-12">
+                      <button class="st-btn st-style1 st-color1 st-size-medium" type="submit"
+                          id="appointment-submit" name="submit">Appointment</button>
+                  </div>
+              </div>
+          </form>
                     </div>
                 </div>
             </div>

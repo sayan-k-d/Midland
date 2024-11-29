@@ -30,6 +30,9 @@
                           <label>Full Name</label>
                           <input type="text" id="uname" name="uname" placeholder="Jhon Doe"
                               required>
+                              @error('uname')
+                                    <span class="text-danger">{{ $message }}</span>
+                              @enderror
                       </div>
                   </div>
                   <div class="col-lg-6">
@@ -37,6 +40,9 @@
                           <label>Email Address</label>
                           <input type="text" id="uemail" name="uemail"
                               placeholder="example@gmail.com" required>
+                              @error('uemail')
+                              <span class="text-danger">{{ $message }}</span>
+                          @enderror
                       </div>
                   </div>
                   <div class="col-lg-6">
@@ -44,6 +50,9 @@
                           <label>Phone Number</label>
                           <input type="text" id="unumber" name="unumber" placeholder="+00 141 23 234"
                               required>
+                              @error('unumber')
+                              <span class="text-danger">{{ $message }}</span>
+                          @enderror
                       </div>
                   </div>
                   <div class="col-lg-6">
@@ -51,6 +60,9 @@
                           <label>Booking Date</label>
                           <input name="udate" type="text" id="udate" placeholder="dd/mm/yy">
                           <div class="form-field-icon"><i class="fa fa-calendar"></i></div>
+                          @error('udate')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                       </div>
                   </div>
                   <div class="col-lg-6">
@@ -65,6 +77,9 @@
                                           {{ $department->department_name }}
                                       </option>
                                   @endforeach
+                                  @error('udepartment')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                                   {{-- <option value="dental-care">Dental Care</option>
                                   <option value="neurology">Neurology</option>
                                   <option value="crutches">Crutches</option>
@@ -86,7 +101,9 @@
                                       <option value="{{ $doctor->doctor_name }}">{{ $doctor->doctor_name }}
                                       </option>
                                   @endforeach
-                                  
+                                  @error('udoctor')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                               </select>
                           </div>
                       </div>
@@ -95,7 +112,10 @@
                       <div class="st-form-field st-style1">
                           <label>Message</label>
                           <textarea cols="30" rows="10" id="umsg" name="umsg" placeholder="Write something here..."></textarea>
-                      </div>
+                          @error('umsg')
+                            <span class="text-danger">{{ $message }}</span>
+                          @enderror
+                        </div>
                   </div>
                   <div class="col-lg-12">
                       <button class="st-btn st-style1 st-color1 st-size-medium" type="submit"

@@ -113,6 +113,7 @@ class PageController extends Controller
         $data = null;
         $maxPageLimit = 10;
         $totalDoctors = Doctor::count();
+        // dd($totalDoctors);
         if ($totalDoctors > $maxPageLimit) {
             $data = Doctor::paginate($maxPageLimit);
         } else {
@@ -131,8 +132,9 @@ class PageController extends Controller
                 $hod = $doctor;
             }
         }
-
+        // dd($data);
         $workingSchedules = explode(',', $doctor->workingSchedules);
+        // dd($doctor->workingSchedules);
         $schedules = [];
         foreach ($workingSchedules as $schedule) {
             $schedule = explode('=', $schedule);

@@ -54,7 +54,7 @@ class FormController extends Controller
             'uname' => 'required|string|max:255', // Full Name
             'uemail' => 'required|email|max:255', // Email Address
             'unumber' => 'required|string|max:20', // Phone Number
-            'udate' => 'required|string', // Booking Date
+            'udate' => 'required|string|after:today', // Booking Date
             'udepartment' => 'required|string', // Department
             'udoctor' => 'required|string', // Doctor
             'umsg' => 'nullable|string', // Message
