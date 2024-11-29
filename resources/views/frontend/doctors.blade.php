@@ -37,7 +37,7 @@
                                         href="{{ route('doctor-profile', ['id' => $hod->id]) }}">
                                         {{ $hod->isHead ? $hod->doctor_name : 'N/A' }}</a></h2>
                                 <div class="st-post-meta">
-                                    <span class="st-post-date">Department of {{ $hod->isHead ? $hod->department : 'N/A' }}
+                                    <span class="st-post-date">Department of {{ $hod->isHead ? $departmentName : 'N/A' }}
                                     </span>
                                 </div>
                                 <div class="st-post-text">{{ $hod->isHead ? $hod->biography : 'N/A' }}
