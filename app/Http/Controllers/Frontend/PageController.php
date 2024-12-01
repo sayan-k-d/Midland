@@ -23,6 +23,7 @@ class PageController extends Controller
                 $doctor->department = Department::findOrFail($doctor->department)->department_name;
             }
         }
+        // dd($doctors);
         $departments = Department::all();
         $banners = Banner::where('page', 'Home')
             ->where('type', 'carousel')

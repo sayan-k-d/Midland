@@ -35,6 +35,9 @@
                     <label for="service_name" class="mb-1">Service Name</label>
                     <input type="text" class="form-control" id="service_name" name="service_name"
                         value="{{ old('service_name', $service->service_name ?? '') }}" required>
+                    @error('service_name')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
@@ -45,20 +48,30 @@
                             <img src="{{ $service->image }}" alt="Service Image" width="100">
                         </div>
                     @endif
+                    @error('image')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="short_details" class="mb-1">Short Details</label>
                     <textarea class="form-control" id="short_details" name="short_details" rows="3" required>{{ old('short_details', $service->short_details ?? '') }}</textarea>
+                    @error('short_details')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="long_details" class="mb-1">Long Details</label>
                     <textarea class="form-control" id="long_details" name="long_details" rows="5" required>{{ old('long_details', $service->long_details ?? '') }}</textarea>
+                    @error('long_details')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary">{{ $editFlag ? 'Update Service' : 'Submit' }}</button>
             </form>
+
         </div>
 
     </div>

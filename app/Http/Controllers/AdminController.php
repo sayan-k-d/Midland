@@ -61,12 +61,15 @@ class AdminController extends Controller
         ]);
         // dd($validatedData);
         $email = ReceiverEmail::first();
-        $admin = Auth::user();
-        // dd($email);
+        $admin = Auth::user()->id;
+        // dd($admin);
         if ($email) {
-            $admin->receiverEmail()->update(['receiver_email' => $req->input('receiverEmail')]);
+            $email->update(['receiver_email' => $req->input('receiverEmail'), 'user_id' => $admin]);
         } else {
-            $admin->receiverEmail()->create(['receiver_email' => $req->input('receiverEmail')]);
+            ReceiverEmail::create([
+                'receiver_email' => $req->input('receiverEmail'),
+                'user_id' => $admin,
+            ]);
         }
         return redirect()->back()->with('success', "Receiver Email Updated Successfully");
     }

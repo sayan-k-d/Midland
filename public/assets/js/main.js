@@ -79,7 +79,7 @@
     }
     if ($.exists('#udate')) {
       $('#udate').datepicker({
-        dateFormat: 'dd/mm/yy',
+        // dateFormat: 'dd/mm/yy',
         minDate: 0
       });
     }

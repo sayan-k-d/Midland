@@ -13,12 +13,18 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input type="email" class="form-control" name="receiverEmail" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" value="{{ $receiverEmail ? $receiverEmail->receiver_email : '' }}">
+                            aria-describedby="emailHelp" value="{{ $receiverEmail ? $receiverEmail->receiver_email : old('receiverEmail') }}">
+
+                        <!-- Display validation error for receiverEmail -->
+                        @error('receiverEmail')
+                            <div class="text-danger mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">
                         {{ $receiverEmail ? 'Update' : 'Submit' }}
                     </button>
                 </form>
+
             </div>
         </div>
     </div>

@@ -13,7 +13,7 @@ use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\ServicesController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PageController::class, 'index'])->name('index');
+Route::get('/index', [PageController::class, 'index'])->name('index');
 Route::get('/frontend/about', [PageController::class, 'about'])->name('about');
 Route::get('/frontend/departments', [PageController::class, 'departments'])->name('departments');
 Route::get('/frontend/departmentDetails/{id}', [PageController::class, 'departmentDetails'])->name('department.details');

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Banner;
+use Illuminate\Http\Request;
 
 class BannerController extends Controller
 {
@@ -35,7 +35,7 @@ class BannerController extends Controller
     public function create()
     {
         $editFlag = false;
-        return view('cms.banners.addBanner',compact( 'editFlag'));
+        return view('cms.banners.addBanner', compact('editFlag'));
     }
 
     /**
@@ -64,7 +64,7 @@ class BannerController extends Controller
             // dd($imagePath);
         } else {
             $imagePath = null;
-            
+
         }
         // dd($imagePath);
         // Insert into the database
@@ -79,7 +79,7 @@ class BannerController extends Controller
             'is_active' => $request->input('is_active'),
         ]);
 
-        return redirect()->back()->with('success', 'Banner added successfully.');
+        return redirect('bannerDetails')->with('success', 'Banner added successfully.');
     }
     public function edit($id)
     {
@@ -99,7 +99,7 @@ class BannerController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $banner = Banner::findOrFail($id); 
+        $banner = Banner::findOrFail($id);
         // Validate the input
         $request->validate([
             'page' => 'required|string|max:255',
@@ -129,7 +129,7 @@ class BannerController extends Controller
 
         // Save the department
         $banner->save();
-        return redirect()->route('bannerDetails')->with('success', 'Department updated successfully.');
+        return redirect()->route('bannerDetails')->with('success', 'Banner updated successfully.');
     }
     public function destroy($id)
     {
@@ -139,6 +139,6 @@ class BannerController extends Controller
         // Perform soft delete
         $banner->delete();
 
-        return redirect()->route('bannerDetails')->with('success', 'Service deleted successfully.');
+        return redirect()->route('bannerDetails')->with('success', 'Banner deleted successfully.');
     }
 }

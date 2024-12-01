@@ -35,18 +35,27 @@
                     <label for="doctor_name" class="mb-1">Doctor Name</label>
                     <input type="text" class="form-control" id="doctor_name" name="doctor_name"
                         value="{{ old('doctor_name', $doctor->doctor_name ?? '') }}" required>
+                    @error('doctor_name')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="phone" class="mb-1">Phone</label>
                     <input class="form-control" id="phone" name="phone" required
                         value="{{ old('phone', $doctor->phone ?? '') }}" placeholder="Separate With Commas(',')" />
+                    @error('phone')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="email" class="mb-1">Email</label>
                     <input class="form-control" id="email" name="email" type="email" required
                         value="{{ old('email', $doctor->email ?? '') }}" />
+                    @error('email')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
@@ -57,18 +66,22 @@
                             <img src="{{ $doctor->image }}" alt="Doctor Image" width="100">
                         </div>
                     @endif
+                    @error('image')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="doctor_post" class="mb-1">Doctor Post</label>
                     <input class="form-control" id="doctor_post" name="doctor_post" required
                         value="{{ old('doctor_post', $doctor->doctor_post ?? '') }}" />
+                    @error('doctor_post')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="department" class="mb-1">Department</label>
-                    {{-- <input class="form-control" id="department" name="department" required
-                    value="{{ old('department', $doctor->department ?? '') }}" /> --}}
                     <select id="department" name="department" class="form-select" aria-label="Default select example"
                         required>
                         <option selected>Select Department</option>
@@ -77,49 +90,67 @@
                                 {{ $department->department_name }}</option>
                         @endforeach
                     </select>
+                    @error('department')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
-
-
 
                 <div class="form-group mb-3">
                     <label for="biography" class="mb-1">Biography</label>
                     <textarea class="form-control" id="biography" name="biography" rows="3" required>{{ old('biography', $doctor->biography ?? '') }}</textarea>
+                    @error('biography')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="education" class="mb-1">Education</label>
                     <input class="form-control" id="education" name="education" required
                         value="{{ old('education', $doctor->education ?? '') }}" placeholder="Separate With Commas(',')" />
+                    @error('education')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="experience" class="mb-1">Experience</label>
                     <input class="form-control" id="experience" name="experience" type="number" required
                         placeholder="in Years" value="{{ old('experience', $doctor->experience ?? '') }}" />
+                    @error('experience')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="languages" class="mb-1">Languages</label>
                     <input class="form-control" id="languages" name="languages" required
-                        value="{{ old('languages', $doctor->languages ?? '') }}" placeholder="Separate With Commas(',')" />
+                        value="{{ old('languages', $doctor->languages ?? '') }}"
+                        placeholder="Separate With Commas(',')" />
+                    @error('languages')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="address" class="mb-1">Address</label>
                     <input class="form-control" id="address" name="address" required
                         value="{{ old('address', $doctor->address ?? '') }}" />
+                    @error('address')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="degree" class="mb-1">Degree</label>
                     <input class="form-control" id="degree" name="degree" required
                         value="{{ old('degree', $doctor->degree ?? '') }}" />
+                    @error('degree')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="workingHours" class="mb-1">Working Schedule</label>
-
-                    <!-- Container to hold the working schedules -->
                     <div id="working-schedules-container">
                         @if ($editFlag && count($schedules) > 0)
                             @foreach ($schedules as $index => $schedule)
@@ -162,29 +193,82 @@
                                     <span class="input-group-text">Hours</span>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-primary" id="add-schedule-btn"><i
-                                            class="bi bi-plus-circle"></i></button>
+                                    <button type="button" class="btn btn-primary" id="add-schedule-btn">
+                                        <i class="bi bi-plus-circle"></i>
+                                    </button>
                                 </div>
                             </div>
+                        @endif
                     </div>
-                    @endif
+                    @error('workingHours')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="isHead" value="checked"
-                            @if ($editFlag && $doctor['isHead'] == 1) @checked(true) @else
-                            @checked(false) @endif
+                            @if ($editFlag && $doctor['isHead'] == 1) @checked(true) @else @checked(false) @endif
                             id="is_head" />
                         <label class="form-check-label" for="is_head">
                             Is Founder / Department Head
                         </label>
                     </div>
+                    @error('isHead')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
+
                 <button type="submit" class="btn btn-primary">{{ $editFlag ? 'Update Doctor' : 'Submit' }}</button>
             </form>
+
         </div>
 
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+            const isHeadCheckbox = document.getElementById("is_head");
+
+            form.addEventListener("submit", function(event) {
+                if (isHeadCheckbox.checked) {
+                    // Check if another doctor already has isHead = 1
+                    const existingHead =
+                        {{ json_encode($existingHead) }}; // Pass existing head info from server-side
+
+                    if (existingHead) {
+                        event.preventDefault(); // Prevent form submission
+
+                        // SweetAlert to confirm if user wants to proceed
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "Another doctor is already marked as the Head of the Department. Are you sure you want to change this?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Yes, update it!',
+                            cancelButtonText: 'Cancel',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit(); // Submit the form if user confirms
+                            }
+                        });
+                    }
+                }
+            });
+
+        });
+    </script>
+    @if ($errors->has('isHead'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                text: "{{ $errors->first('isHead') }}",
+            });
+        </script>
+    @endif
+
+
 @endsection
 {{-- department wiill be used for Speciality, Types of: Department of <department> --}}

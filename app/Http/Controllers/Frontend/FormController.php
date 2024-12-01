@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Mail\ContactMail;
+use App\Mail\EnqueryMail;
 use App\Models\AppointmentDetail;
 use App\Models\ContactDetail;
 use App\Models\Department;
 use App\Models\ReceiverEmail;
 use Illuminate\Http\Request;
-use App\Mail\EnqueryMail;
-use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Mail;
 
 class FormController extends Controller
@@ -54,7 +53,7 @@ class FormController extends Controller
             'uname' => 'required|string|max:255', // Full Name
             'uemail' => 'required|email|max:255', // Email Address
             'unumber' => 'required|string|max:20', // Phone Number
-            'udate' => 'required|string|after:today', // Booking Date
+            'udate' => 'required|string|date_format:m/d/Y|after:today', // Booking Date
             'udepartment' => 'required|string', // Department
             'udoctor' => 'required|string', // Doctor
             'umsg' => 'nullable|string', // Message
@@ -62,7 +61,7 @@ class FormController extends Controller
 
         $bookingDate = \Carbon\Carbon::createFromFormat('m/d/Y', $request->input('udate'))->format('Y-m-d');
         $departmentId = Department::where('department_name', $request->input('udepartment'))->value('id');
-
+        // dd($request->input('udate'), $bookingDate);
         // Store the appointment details in the database
         AppointmentDetail::create([
             'name' => $request->input('uname'),

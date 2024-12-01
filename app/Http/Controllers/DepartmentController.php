@@ -86,7 +86,7 @@ class DepartmentController extends Controller
         // Validate the input
         $request->validate([
             'department_name' => 'required|string|max:255',
-            'short_details' => 'required|string',
+            'short_details' => 'required|string|max:500',
             'long_details' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif',
         ]);
@@ -115,7 +115,7 @@ class DepartmentController extends Controller
         // Perform soft delete
         $department->delete();
 
-        return redirect()->route('departmentDetails')->with('success', 'Service deleted successfully.');
+        return redirect()->route('departmentDetails')->with('success', 'Department deleted successfully.');
     }
 
 }

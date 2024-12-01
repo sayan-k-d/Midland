@@ -27,14 +27,15 @@
                                             href="{{ route('service.details', ['id' => $service->id]) }}">{{ $service->service_name }}</a>
                                     </h2>
                                     <!-- <div class="st-post-meta">
-                                            <span>
-                                            <a href="#" class="st-post-avatar">
-                                                <span class="st-post-avatar-text">Admin</span>
-                                            </a>
-                                            </span>
-                                            <span class="st-post-date">August 07, 2020</span>
-                                        </div> -->
-                                    <div class="st-post-text">{{ $service->short_details }}
+                                                <span>
+                                                <a href="#" class="st-post-avatar">
+                                                    <span class="st-post-avatar-text">Admin</span>
+                                                </a>
+                                                </span>
+                                                <span class="st-post-date">August 07, 2020</span>
+                                            </div> -->
+                                    <div class="st-post-text">
+                                        {{ \Illuminate\Support\Str::limit($service->short_details, 150, '...') }}
                                     </div>
                                 </div>
                                 <div class="st-post-footer">

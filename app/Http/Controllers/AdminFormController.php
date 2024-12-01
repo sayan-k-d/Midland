@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\AppointmentDetail;
 use App\Models\ContactDetail;
-use App\Models\Doctor;
 use App\Models\Department;
+use App\Models\Doctor;
+use Illuminate\Http\Request;
 
 class AdminFormController extends Controller
 {
     public function getContactData(Request $req)
     {
-       
+
         $contactData = null;
         $maxPageLimit = 10;
         $totalContacts = ContactDetail::count();
@@ -34,9 +34,8 @@ class AdminFormController extends Controller
         } else {
             $data = AppointmentDetail::all();
         }
-        
 
-        return view('cms.forms.appointmentDetails', ['appoinments' => $data,  "maxPageLimit" => $maxPageLimit, "totalAppoinments" => $totalAppoinments]);
+        return view('cms.forms.appointmentDetails', ['appoinments' => $data, "maxPageLimit" => $maxPageLimit, "totalAppoinments" => $totalAppoinments]);
     }
     public function editreschedule($id)
     {
@@ -81,7 +80,7 @@ class AdminFormController extends Controller
         // dd($appointment);
         $appointment->update($data);
 
-        return redirect()->back()->with('success', 'Appointment rescheduled successfully.');
+        return redirect("appointmentDetails")->with('success', 'Appointment rescheduled successfully.');
     }
 
     public function destroyAppointment($id)
@@ -92,7 +91,7 @@ class AdminFormController extends Controller
         // Perform soft delete
         $appointment->delete();
 
-        return redirect()->route('appointmentDetails')->with('success', 'Service deleted successfully.');
+        return redirect()->route('appointmentDetails')->with('success', 'Appointment deleted successfully.');
     }
     public function destroyContact($id)
     {
@@ -102,6 +101,6 @@ class AdminFormController extends Controller
         // Perform soft delete
         $contact->delete();
 
-        return redirect()->route('contactDetails')->with('success', 'Service deleted successfully.');
+        return redirect()->route('contactDetails')->with('success', 'Contact deleted successfully.');
     }
 }

@@ -89,7 +89,7 @@ class ServicesController extends Controller
         // Validate the input
         $request->validate([
             'service_name' => 'required|string|max:255',
-            'short_details' => 'required|string',
+            'short_details' => 'required|string|max:500',
             'long_details' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
