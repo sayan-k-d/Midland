@@ -77,7 +77,6 @@ class DoctorController extends Controller
             $workingSchedules[] = $request->workingDays[$i] . '=' . $request->workingHours[$i];
         }
         $implodedSchedules = implode(", ", $workingSchedules);
-
         // If the doctor being created is marked as the head, update the previous head's status
         $totalDoctors = Doctor::count();
         $existingHead = Doctor::where('isHead', 1)->first();
@@ -150,7 +149,7 @@ class DoctorController extends Controller
         $request->validate([
             'doctor_name' => 'required|string|max:255',
             'phone' => 'required|string',
-            'email' => 'required|email|unique:doctors,email,' . $doctor->id,
+            'email' => 'required|email',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'doctor_post' => 'required|string',
             'department' => 'required|integer',

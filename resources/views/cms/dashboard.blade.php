@@ -56,7 +56,7 @@
                 <canvas id="pieChart"></canvas>
             </div>
         </div>
-        <div class="row justify-content-around">
+        <div class="row justify-content-around" style="min-height: 500px">
             <div class="col-md-5 table-section">
                 <h5>Upcoming Appointments</h5>
                 <table class="table table-striped table-bordered">

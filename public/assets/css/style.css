@@ -8111,6 +8111,7 @@ RTL - Right to Left
 }
 .blog-card {
     max-height: 550px;
+    height: 100%;
 }
 .no-data {
     color: #d3d0cd;
