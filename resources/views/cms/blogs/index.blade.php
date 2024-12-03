@@ -5,13 +5,13 @@
         $columns = [
             'id' => '#',
             'title' => 'Title',
-            'content' => 'Content',
+            // 'content' => 'Content',
             'image' => 'Image',
             'created_at' => 'Date',
-            'short_description' => 'Short Description',
+            // 'short_description' => 'Short Description',
             'created_by' => 'Created By',
-            'tags' => 'Tags',
-            'slug' => 'Slug',
+            // 'tags' => 'Tags',
+            // 'slug' => 'Slug',
         ];
         $wrapContent = true;
     @endphp
@@ -39,18 +39,18 @@
                         <tr>
                             @foreach ($columns as $key => $column)
                                 <td class="{{ $wrapContent ?? false ? '' : 'text-nowrap' }}"
-                                    style="min-width: 850px; max-height: 500px; overflow: auto; @if ($key == 'content') display: block; @endif">
-                                    @if ($key == 'tags')
+                                    style="max-height: 500px; overflow: auto; @if ($key == 'content') display: block; @endif">
+                                    {{-- @if ($key == 'tags')
                                         @php
                                             $tags = explode(',', $row[$key]);
                                         @endphp
                                         @foreach ($tags as $tag)
                                             <p>{{ $tag }}</p>
-                                        @endforeach
-                                    @elseif ($key == 'image')
+                                        @endforeach --}}
+                                    @if ($key == 'image')
                                         @if (!empty($row[$key]))
                                             <img src="{{ $row[$key] }}" alt="{{ $column }}"
-                                                style="max-width: 100%; height: auto;">
+                                                style="max-width: 100px; height: auto;">
                                         @else
                                             No Image
                                         @endif

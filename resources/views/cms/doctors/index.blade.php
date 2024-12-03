@@ -43,7 +43,8 @@
                     @foreach ($doctors as $row)
                         <tr>
                             @foreach ($columns as $key => $column)
-                                <td class="{{ $wrapContent ?? false || $key != 'department' ? '' : 'text-nowrap' }}">
+                                <td class="{{ $wrapContent ?? false || $key != 'department' ? '' : 'text-nowrap' }}"
+                                    style="@if ($key == 'biography') display: block; min-width:400px; @endif">
                                     @if (strtolower($column) == 'phone')
                                         @php
                                             $phones = explode(',', $row['phone']);
