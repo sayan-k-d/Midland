@@ -45,10 +45,17 @@
                                 <h4>Role</h4>
                             </label>
                             <div class="data-rows">
-                                <select name="role_id" class="form-control">
-                                    <option value="1" {{ $user->role_id == 1 ? 'selected' : '' }}>Admin</option>
-                                    <option value="2" {{ $user->role_id == 2 ? 'selected' : '' }}>User</option>
-                                </select>
+                                @if ($user->role_id == 1)
+                                    <select name="role_id" class="form-control">
+                                        <option value="1" {{ $user->role_id == 1 ? 'selected' : '' }}>Admin</option>
+                                        <option value="2" {{ $user->role_id == 2 ? 'selected' : '' }}>User</option>
+                                    </select>
+                                @else
+                                    <select name="role_id" class="form-control" disabled>
+                                        <option value="1" {{ $user->role_id == 1 ? 'selected' : '' }}>Admin</option>
+                                        <option value="2" {{ $user->role_id == 2 ? 'selected' : '' }}>User</option>
+                                    </select>
+                                @endif
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success mt-3">Update</button>
