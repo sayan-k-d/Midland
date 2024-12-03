@@ -22,6 +22,9 @@ class PageController extends Controller
             if ($doctor->department) {
                 $doctor->department = Department::findOrFail($doctor->department)->department_name;
             }
+            if ($doctor->isHead == 1) {
+                $hod = $doctor;
+            }
         }
         // dd($doctors);
         $departments = Department::all();
@@ -42,7 +45,7 @@ class PageController extends Controller
             }
         }
         // dd($banners);
-        return view('frontend.index', ['doctors' => $doctors, 'departments' => $departments, 'banners' => $banners, 'blogs' => $blogs]);
+        return view('frontend.index', ['doctors' => $doctors, 'hod' => $hod, 'departments' => $departments, 'banners' => $banners, 'blogs' => $blogs]);
     }
 
     public function about()
