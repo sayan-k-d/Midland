@@ -50,8 +50,18 @@ class PageController extends Controller
 
     public function about()
     {
-
-        return view('frontend.about');
+        $banners = Banner::where('page', 'About')
+        ->where('type', 'single')
+        ->where('is_active', true)
+        ->orderBy('position')
+        ->get();
+        foreach ($banners as $banner) {
+            if ($banner->image) {
+                $banner->image = $this->encodeImage($banner->image);
+            }
+        }
+        // dd($banners );
+        return view('frontend.about',['banners' => $banners]);
     }
 
     public function departments()
@@ -70,7 +80,18 @@ class PageController extends Controller
                 $department->image = $this->encodeImage($department->image);
             }
         }
-        return view('frontend.departments', ['departments' => $data, "maxPageLimit" => $maxPageLimit, "totaldepartment" => $totaldepartment]);
+        $banners = Banner::where('page', 'Departments')
+        ->where('type', 'single')
+        ->where('is_active', true)
+        ->orderBy('position')
+        ->get();
+        foreach ($banners as $banner) {
+            if ($banner->image) {
+                $banner->image = $this->encodeImage($banner->image);
+            }
+        }
+        // dd($banners);
+        return view('frontend.departments', ['departments' => $data, "maxPageLimit" => $maxPageLimit, "totaldepartment" => $totaldepartment,'banners' => $banners]);
     }
 
     public function departmentDetails($id)
@@ -104,7 +125,18 @@ class PageController extends Controller
                 $service->image = $this->encodeImage($service->image);
             }
         }
-        return view('frontend.services', ['services' => $data, "maxPageLimit" => $maxPageLimit, "totalServices" => $totalServices]);
+        $banners = Banner::where('page', 'Services')
+        ->where('type', 'single')
+        ->where('is_active', true)
+        ->orderBy('position')
+        ->get();
+        foreach ($banners as $banner) {
+            if ($banner->image) {
+                $banner->image = $this->encodeImage($banner->image);
+            }
+        }
+        // dd($banners);
+        return view('frontend.services', ['services' => $data, "maxPageLimit" => $maxPageLimit, "totalServices" => $totalServices,'banners' => $banners]);
     }
     public function serviceDetails($id)
     {
@@ -139,6 +171,7 @@ class PageController extends Controller
                 $hod = $doctor;
             }
         }
+        
         // dd($data);
         $workingSchedules = explode(',', $doctor->workingSchedules);
         // dd($doctor->workingSchedules);
@@ -147,8 +180,19 @@ class PageController extends Controller
             $schedule = explode('=', $schedule);
             $schedules[] = $schedule;
         }
+        $banners = Banner::where('page', 'Doctors')
+        ->where('type', 'single')
+        ->where('is_active', true)
+        ->orderBy('position')
+        ->get();
+        foreach ($banners as $banner) {
+            if ($banner->image) {
+                $banner->image = $this->encodeImage($banner->image);
+            }
+        }
+        // dd($banners);
 
-        return view('frontend.doctors', ['doctors' => $data, 'hod' => $hod, 'departmentName' => $departmentName, "maxPageLimit" => $maxPageLimit, "totalDoctors" => $totalDoctors, 'schedules' => $schedules]);
+        return view('frontend.doctors', ['doctors' => $data, 'hod' => $hod, 'departmentName' => $departmentName, "maxPageLimit" => $maxPageLimit, "totalDoctors" => $totalDoctors, 'schedules' => $schedules,'banners' => $banners]);
     }
     public function doctorProfile($id)
     {
@@ -189,8 +233,18 @@ class PageController extends Controller
         foreach ($data as $blog) {
             $blog->image = $this->encodeImage($blog->image);
         }
-
-        return view('frontend.blogs', ['blogs' => $data, "maxPageLimit" => $maxPageLimit, "totalBlogs" => $totalBlogs]);
+        $banners = Banner::where('page', 'Blogs')
+        ->where('type', 'single')
+        ->where('is_active', true)
+        ->orderBy('position')
+        ->get();
+        foreach ($banners as $banner) {
+            if ($banner->image) {
+                $banner->image = $this->encodeImage($banner->image);
+            }
+        }
+        // dd($banners);
+        return view('frontend.blogs', ['blogs' => $data, "maxPageLimit" => $maxPageLimit, "totalBlogs" => $totalBlogs,'banners' => $banners]);
     }
     public function blogDetails($id)
     {
@@ -236,7 +290,18 @@ class PageController extends Controller
 
     public function contact()
     {
-        return view('frontend.contact');
+        $banners = Banner::where('page', 'Contact')
+        ->where('type', 'single')
+        ->where('is_active', true)
+        ->orderBy('position')
+        ->get();
+        foreach ($banners as $banner) {
+            if ($banner->image) {
+                $banner->image = $this->encodeImage($banner->image);
+            }
+        }
+        // dd($banners);
+        return view('frontend.contact',['banners' => $banners]);
     }
     public function appointment()
     {

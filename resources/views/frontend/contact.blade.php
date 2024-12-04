@@ -3,7 +3,9 @@
 @section('content')
 
     <div class="st-content">
-        <div class="st-page-heading st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg15.jpg') }}">
+        @foreach ($banners as $banner)
+        {{-- <div class="st-page-heading st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg15.jpg') }}"> --}}
+        <div class="st-page-heading st-dynamic-bg" data-src="{{ $banner->image }}">
             <div class="container">
                 <div class="st-page-heading-in text-center">
                     <h1 class="st-page-heading-title"> Contact Us
@@ -15,7 +17,7 @@
                 </div>
             </div>
         </div><!-- .st-page-heading -->
-
+        @endforeach
         <!-- Start Feature Seciton -->
         <section>
             <div class="st-height-b120 st-height-lg-b80 abt_ftr_otr"></div>

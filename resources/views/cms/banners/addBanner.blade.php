@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea name="description" id="description" class="form-control" value="{{ old('description', $editFlag ? $banner->description : '') }}"></textarea>
+                    <textarea name="description" id="description" class="form-control" value="{{ old('description', $editFlag ? $banner->description : '') }}">{{ old('description', $editFlag ? $banner->description : '') }}</textarea>
                     @error('description')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -69,8 +69,8 @@
                 <div class="col-md-6 mb-3">
                     <label for="type" class="form-label">Type</label>
                     <select name="type" id="type" class="form-control" required>
-                        <option value="carousel">Carousel</option>
-                        <option value="single">Single</option>
+                        <option value="carousel" {{ old('type', $editFlag ? $banner->type : '') == 'carousel' ? 'selected' : '' }}>Carousel</option>
+                        <option value="single" {{ old('type', $editFlag ? $banner->type : '') == 'single' ? 'selected' : '' }}>Single</option>
                     </select>
                     @error('type')
                     <span class="text-danger">{{ $message }}</span>
@@ -80,7 +80,7 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="position" class="form-label">Position</label>
-                    <input type="number" name="position" id="position" class="form-control" value="0" value="{{ old('position', $editFlag ? $banner->position : '') }}">
+                    <input type="number" name="position" id="position" class="form-control"  value="{{ old('position', $editFlag ? $banner->position : '0') }}">
                     @error('position')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -88,8 +88,8 @@
                 <div class="col-md-6 mb-3">
                     <label for="is_active" class="form-label">Active</label>
                     <select name="is_active" id="is_active" class="form-control" required>
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
+                        <option value="1" {{ old('is_active', $editFlag ? $banner->is_active : '') == '1' ? 'selected' : '' }}>Yes</option>
+                        <option value="0" {{ old('is_active', $editFlag ? $banner->is_active : '') == '0' ? 'selected' : '' }}>No</option>
                     </select>
                     @error('is_active')
                     <span class="text-danger">{{ $message }}</span>

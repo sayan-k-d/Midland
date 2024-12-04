@@ -3,7 +3,9 @@
 @section('content')
 
     <div class="st-content">
-        <div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg6.jpg') }}">
+        @foreach ($banners as $banner)
+        {{-- <div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg6.jpg') }}"> --}}
+        <div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ $banner->image }}">
             <div class="container">
                 <div class="st-page-heading-in text-center">
                     <h1 class="st-page-heading-title">Our Services</h1>
@@ -11,6 +13,7 @@
                 </div>
             </div>
         </div><!-- .st-page-heading -->
+        @endforeach
         <div class="st-height-b100 st-height-lg-b80"></div>
         <div class="container">
             <div class="row">
