@@ -27,6 +27,7 @@
                         'url' => fn($id) => "/editReschedule/$id",
                         'class' => 'btn-warning',
                         'label' => 'Reschedule',
+                        'disabled' => fn($row) => \Carbon\Carbon::parse($row['booking_date'])->startOfDay()->isBefore(\Carbon\Carbon::today()),
                     ],
                     [
                         'url' => fn($id) => "/appointments/delete/$id",

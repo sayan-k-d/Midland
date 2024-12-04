@@ -31,6 +31,9 @@
                     <td class="text-center">
                         <div class="d-flex gap-2 justify-content-center">
                             @foreach ($actions as $action)
+                                @php
+                                    $isDisabled = isset($action['disabled']) && $action['disabled']($row);
+                                @endphp
                                 @if ($action['label'] === 'Delete')
                                     <form action="{{ route($action['route_name'], $row['id']) }}" method="POST"
                                         onsubmit="return confirm('Are you sure you want to delete this service?');">
@@ -41,8 +44,9 @@
                                         </button>
                                     </form>
                                 @else
-                                    <a href="{{ $action['url']($row['id']) }}"
-                                        class="btn {{ $action['class'] }} text-uppercase">
+                                    <a href="{{ $isDisabled ? 'javascript:void(0)' : $action['url']($row['id']) }}"
+                                        class="btn {{ $action['class'] }} text-uppercase {{ $isDisabled ? 'disabled' : '' }}"
+                                        {{ $isDisabled ? 'disabled' : '' }}>
                                         {{ $action['label'] }}
                                     </a>
                                 @endif

@@ -30,9 +30,9 @@ class AdminFormController extends Controller
         $maxPageLimit = 10;
         $totalAppoinments = AppointmentDetail::count();
         if ($totalAppoinments > $maxPageLimit) {
-            $data = AppointmentDetail::paginate($maxPageLimit);
+            $data = AppointmentDetail::orderBy('booking_date', 'asc')->paginate($maxPageLimit);
         } else {
-            $data = AppointmentDetail::all();
+            $data = AppointmentDetail::orderBy('booking_date', 'asc')->get();
         }
 
         return view('cms.forms.appointmentDetails', ['appoinments' => $data, "maxPageLimit" => $maxPageLimit, "totalAppoinments" => $totalAppoinments]);
