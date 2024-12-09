@@ -80,7 +80,7 @@
                                 <select name="udepartment" id="udepartment" class="form-control" required>
                                     {{-- <option value="">Select department</option> --}}
                                     @foreach ($departments as $department)
-                                        <option value="{{ $department->department_name }}"
+                                        <option value="{{ $department->id }}"
                                             {{ $appointment->department == $department->department_name ? 'selected' : '' }}>
                                             {{ $department->department_name }}
                                         </option>
@@ -95,15 +95,17 @@
                     <div class="col-lg-6">
                         <div class="form-group mb-3">
                             <label>Doctor</label>
+                            <input type="hidden" name="udoctor_name" id='udoctor_name'
+                                value="{{ $appointment->doctor_name }}">
                             <div class="st-custom-select-wrap">
                                 <select name="udoctor" id="udoctor" class="form-control" required>
                                     {{-- <option value="">Select doctor</option> --}}
-                                    @foreach ($doctors as $doctor)
+                                    {{-- @foreach ($doctors as $doctor)
                                         <option value="{{ $doctor->doctor_name }}"
                                             {{ $appointment->doctor_name == $doctor->doctor_name ? 'selected' : '' }}>
                                             {{ $doctor->doctor_name }}
                                         </option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                                 @error('udoctor')
                                     <span class="text-danger">{{ $message }}</span>
@@ -134,7 +136,76 @@
 @endsection
 @section('scripts')
     <script>
+        // Ensure booking date cannot be in the past
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('udate').setAttribute('min', today);
+
+        // Function to fetch and update doctors based on the selected department
+        var departmentId = document.getElementById('udepartment').value;
+        var doctorName = document.getElementById('udoctor_name').value;
+        if (departmentId) {
+            var doctorDropdown = document.getElementById('udoctor');
+            doctorDropdown.innerHTML = `<option value="" selected>Select Doctor</option>`;
+            fetch('/get-doctors/' + departmentId)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && data.length > 0) {
+                        data.forEach(doctor => {
+                            var option = document.createElement('option');
+                            option.value = doctor.doctor_name;
+                            option.textContent = doctor.doctor_name;
+                            option.selected = doctor.doctor_name === doctorName;
+                            doctorDropdown.appendChild(option);
+                        });
+                    } else {
+                        var option = document.createElement('option');
+                        option.value = '';
+                        option.textContent = 'No doctors available';
+                        doctorDropdown.appendChild(option);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching doctors:', error);
+                });
+        }
+        document.getElementById('udepartment').addEventListener('change', function() {
+            const departmentId = this.value; // Get selected department
+            const doctorSelect = document.getElementById('udoctor');
+
+            // Clear the existing doctor options
+            doctorSelect.innerHTML = '<option value="">Select Doctor</option>';
+            fetch('/get-doctors/' + departmentId)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    // console.log(response);
+
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && data.length > 0) {
+                        data.forEach(doctor => {
+                            var option = document.createElement('option');
+                            option.value = doctor.doctor_name;
+                            option.textContent = doctor.doctor_name;
+                            doctorDropdown.appendChild(option);
+                        });
+                    } else {
+                        var option = document.createElement('option');
+                        option.value = '';
+                        option.textContent = 'No doctors available';
+                        doctorDropdown.appendChild(option);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching doctors:', error);
+                });
+        });
     </script>
 @endsection

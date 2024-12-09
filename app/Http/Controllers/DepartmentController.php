@@ -150,12 +150,23 @@ class DepartmentController extends Controller
         // Find the service by its ID
         $department = Department::findOrFail($id);
         $doctors = Doctor::where('department', $id)->where('is_active_department', true)->get();
+        $appointments = AppointmentDetail::where('department_id', $id)->whereDate('booking_date', '>=', \Carbon\Carbon::today())->get();
+        $errorMessages = [];
         foreach ($doctors as $doctor) {
             if ($doctor->isHead) {
-                return redirect()->back()->withErrors([
-                    'doctorIsHead' => 'Cannot Delete this department as it has a head doctor assigned. Please assign a new head doctor to another department before proceeding.',
-                ]);
+                $errorMessages[] = 'Cannot Delete this department as it has a head doctor assigned. Please assign a new head doctor to another department before proceeding.';
+                break;
             }
+        }
+        if ($appointments->count() > 0) {
+            $errorMessages[] = 'Cannot Delete this department as it has Appointments assigned.';
+        }
+        if (!empty($errorMessages)) {
+            return redirect()->back()->withErrors([
+                'doctorIsHead' => implode(' ', $errorMessages),
+            ]);
+        }
+        foreach ($doctors as $doctor) {
             $doctor->department = null;
             $doctor->is_active_department = false;
             $doctor->save();

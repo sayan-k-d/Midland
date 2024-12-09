@@ -55,7 +55,7 @@
         <script>
             Swal.fire({
                 icon: 'error',
-                title: 'Cannot Delete: Head Doctor Exists',
+                title: 'Cannot Delete',
                 text: "{{ $errors->first('doctorIsHead') }}",
             });
         </script>

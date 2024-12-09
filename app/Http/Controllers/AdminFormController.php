@@ -67,14 +67,14 @@ class AdminFormController extends Controller
         ]);
         // dd($validated);
         // $bookingDate = \Carbon\Carbon::createFromFormat('m/d/Y', $request->input('udate'))->format('Y-m-d');
-        $departmentId = Department::where('department_name', $request->input('udepartment'))->value('id');
+        $departmentName = Department::where('id', $request->input('udepartment'))->value('department_name');
         $data = [
             'name' => $validated['uname'],
             'email' => $validated['uemail'],
             'phone' => $validated['unumber'],
             'booking_date' => $validated['udate'],
-            'department_id' => $departmentId,
-            'department' => $validated['udepartment'],
+            'department_id' => $validated['udepartment'],
+            'department' => $departmentName,
             'doctor_name' => $validated['udoctor'],
             'message' => $validated['umsg'],
         ];

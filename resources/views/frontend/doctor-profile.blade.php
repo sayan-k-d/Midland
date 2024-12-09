@@ -364,6 +364,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('udatemodal').setAttribute('min', today);
+
             const modal = document.getElementById('exampleModal');
             const appointmentForm = document.querySelector('.st-appointment-form-modal');
             const departmentSelector = document.getElementById('udepartmentmodal');

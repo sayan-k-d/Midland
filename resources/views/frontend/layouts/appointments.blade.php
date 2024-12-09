@@ -98,6 +98,9 @@
 </form>
 
 <script>
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('udate').setAttribute('min', today);
+
     const errorMessage = document.getElementById('doctor-error-message');
     const overlay = document.getElementById('doctor-overlay');
 
