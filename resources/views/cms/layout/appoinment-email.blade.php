@@ -78,7 +78,7 @@
     </table>
     <p>Please review the enquiry and take the necessary action.</p>
     <footer>
-        <p>&copy; {{ date('Y') }} Your Clinic Name. All rights reserved.</p>
+        <p>&copy; {{ date('Y') }} Midland Healthcare. All rights reserved.</p>
     </footer>
 </body>
 
