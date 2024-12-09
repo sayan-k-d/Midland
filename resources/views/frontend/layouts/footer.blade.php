@@ -127,6 +127,9 @@
  <script src="{{ asset('assets/js/select2.min.js') }}"></script>
  <script src="{{ asset('assets/js/main.js') }}"></script>
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+ </script>
  </body>
 
  <!-- Mirrored from html.laralink.com/nischinto/nischinto/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Sep 2024 08:24:11 GMT -->

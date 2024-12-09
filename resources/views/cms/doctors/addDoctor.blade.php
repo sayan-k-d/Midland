@@ -61,6 +61,9 @@
                 <div class="form-group mb-3">
                     <label for="image" class="mb-1">Doctor Image</label>
                     <input type="file" class="form-control" id="image" name="image" accept="image/*" />
+                    <small class="form-text text-muted">
+                        Please upload an image with a size of up to 2MB and a 1:1 aspect ratio (e.g., 100x100, 200x200).
+                    </small>
                     @if ($editFlag && $doctor->image)
                         <div class="mt-2">
                             <img src="{{ $doctor->image }}" alt="Doctor Image" width="100">
@@ -121,33 +124,50 @@
                     @enderror
                 </div>
 
-                <div class="form-group mb-3">
+                {{-- <div class="form-group mb-3">
                     <label for="languages" class="mb-1">Languages</label>
-                    <input class="form-control" id="languages" name="languages" required
+                    <input class="form-control" id="languages" name="languages"
                         value="{{ old('languages', $doctor->languages ?? '') }}"
                         placeholder="Separate With Commas(',')" />
                     @error('languages')
                         <div class="text-danger mt-2">{{ $message }}</div>
                     @enderror
+                </div> --}}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="degree" class="mb-1">Degree</label>
+                            <input class="form-control" id="degree" name="degree" required
+                                value="{{ old('degree', $doctor->degree ?? '') }}" />
+                            @error('degree')
+                                <div class="text-danger mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="is_active" class="form-label mb-1">Active</label>
+                            <select name="is_active" id="is_active" class="form-control" required>
+                                <option value="1"
+                                    {{ old('is_active', $editFlag ? $doctor->is_active : '') == '1' ? 'selected' : '' }}>
+                                    Yes
+                                </option>
+                                <option value="0"
+                                    {{ old('is_active', $editFlag ? $doctor->is_active : '') == '0' ? 'selected' : '' }}>No
+                                </option>
+                            </select>
+                            @error('is_active')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="hidden" class="form-control" id="is_active_department"
+                                name="is_active_department"
+                                value="{{ old('is_active_department', $doctor->is_active_department ?? true) }}" />
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group mb-3">
-                    <label for="address" class="mb-1">Address</label>
-                    <input class="form-control" id="address" name="address" required
-                        value="{{ old('address', $doctor->address ?? '') }}" />
-                    @error('address')
-                        <div class="text-danger mt-2">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="degree" class="mb-1">Degree</label>
-                    <input class="form-control" id="degree" name="degree" required
-                        value="{{ old('degree', $doctor->degree ?? '') }}" />
-                    @error('degree')
-                        <div class="text-danger mt-2">{{ $message }}</div>
-                    @enderror
-                </div>
 
                 <div class="form-group mb-3">
                     <label for="workingHours" class="mb-1">Working Schedule</label>
@@ -157,13 +177,12 @@
                                 <div class="d-flex">
                                     <div class="input-group working-schedule mb-2">
                                         <span class="input-group-text">Working Days</span>
-                                        <input id="workingDays" name="workingDays[]" required type="text"
+                                        <input id="workingDays" name="workingDays[]" type="text"
                                             aria-label="Working Days" class="form-control"
                                             value="{{ $schedule[0] }}" />
                                         <span class="input-group-text">Working Hours</span>
                                         <input id="workingHours" name="workingHours[]" type="text"
-                                            aria-label="Working Hours" class="form-control" required
-                                            value="{{ $schedule[1] }}">
+                                            aria-label="Working Hours" class="form-control" value="{{ $schedule[1] }}">
                                         <span class="input-group-text">Hours</span>
                                     </div>
                                     <div>
@@ -183,12 +202,12 @@
                             <div class="d-flex">
                                 <div class="input-group working-schedule mb-2">
                                     <span class="input-group-text">Working Days</span>
-                                    <input id="workingDays" name="workingDays[]" required type="text"
+                                    <input id="workingDays" name="workingDays[]" type="text"
                                         aria-label="Working Days" class="form-control"
                                         value="{{ old('workingDays') }}" />
                                     <span class="input-group-text">Working Hours</span>
                                     <input id="workingHours" name="workingHours[]" type="text"
-                                        aria-label="Working Hours" class="form-control" required
+                                        aria-label="Working Hours" class="form-control"
                                         value="{{ old('workingHours') }}">
                                     <span class="input-group-text">Hours</span>
                                 </div>
@@ -219,6 +238,70 @@
                     @enderror
                 </div>
 
+                <div class="card mb-3" style="transform: none">
+                    <div class="card-header">
+                        Social Media Profiles
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="facebook" class="form-label mb-1">Facebook</label>
+                                    <input class="form-control" type="url" id="facebook" name="facebook"
+                                        value="{{ old('facebook', $doctor->facebook ?? '') }}">
+                                    @error('facebook')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="instagram" class="form-label mb-1">Instagram</label>
+                                    <input class="form-control" type="url" id="instagram" name="instagram"
+                                        value="{{ old('instagram', $doctor->instagram ?? '') }}">
+                                    @error('instagram')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="linkedin" class="form-label mb-1">LinkedIn</label>
+                                    <input class="form-control" type="url" id="linkedin" name="linkedin"
+                                        value="{{ old('linkedin', $doctor->linkedin ?? '') }}">
+                                    @error('linkedin')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="twitter" class="form-label mb-1">Twitter</label>
+                                    <input class="form-control" type="url" id="twitter" name="twitter"
+                                        value="{{ old('twitter', $doctor->twitter ?? '') }}">
+                                    @error('twitter')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="youtube" class="form-label mb-1">Youtube</label>
+                                    <input class="form-control" type="url" id="youtube" name="youtube"
+                                        value="{{ old('youtube', $doctor->youtube ?? '') }}">
+                                    @error('youtube')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary">{{ $editFlag ? 'Update Doctor' : 'Submit' }}</button>
             </form>
 

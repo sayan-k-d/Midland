@@ -51,12 +51,33 @@
                         placeholder="Separate With Commas(',')" />
                 </div>
 
-
-                <div class="form-group mb-3">
-                    <label for="created_by" class="mb-1">Created By</label>
-                    <input class="form-control" id="created_by" name="created_by"
-                        value="{{ old('created_by', $blog->created_by ?? $user->name) }}" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="created_by" class="mb-1">Created By</label>
+                            <input class="form-control" id="created_by" name="created_by"
+                                value="{{ old('created_by', $blog->created_by ?? $user->name) }}" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="is_active" class="form-label mb-1">Active</label>
+                            <select name="is_active" id="is_active" class="form-control" required>
+                                <option value="1"
+                                    {{ old('is_active', $editFlag ? $blog->is_active : '') == '1' ? 'selected' : '' }}>
+                                    Yes
+                                </option>
+                                <option value="0"
+                                    {{ old('is_active', $editFlag ? $blog->is_active : '') == '0' ? 'selected' : '' }}>No
+                                </option>
+                            </select>
+                            @error('is_active')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
+
 
                 <div class="form-group mb-3">
                     <label for="image" class="mb-1">Blog Image</label>

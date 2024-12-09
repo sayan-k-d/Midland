@@ -3,8 +3,8 @@
 @section('content')
 
     <div class="st-content">
-        @foreach ($banners as $banner)
-        {{-- <div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg6.jpg') }}"> --}}
+        {{-- @foreach ($banners as $banner)
+        <!--<div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg6.jpg') }}"> -->
         <div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ $banner->image }}">
             <div class="container">
                 <div class="st-page-heading-in text-center">
@@ -13,7 +13,51 @@
                 </div>
             </div>
         </div><!-- .st-page-heading -->
-        @endforeach
+        @endforeach --}}
+        @if ($banners->count() > 0)
+            @if ($banners->first()->type === 'carousel')
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        @foreach ($banners as $key => $banner)
+                            <button type="button" data-bs-target="#carouselExampleSlidesOnly"
+                                data-bs-slide-to="{{ $key }}" class="{{ $key === 0 ? 'active' : '' }}"
+                                aria-current="{{ $key === 0 ? 'true' : '' }}"
+                                aria-label="Slide {{ $key + 1 }}"></button>
+                        @endforeach
+                    </div>
+                    <div class="carousel-inner">
+                        @foreach ($banners as $key => $banner)
+                            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                                <img src="{{ $banner->image }}" class="d-block w-100" alt="{{ $banner->banner_title }}">
+                                @if (!empty($banner->banner_title) || !empty($banner->page_url))
+                                    <div class="carousel-caption d-none d-md-block text-start"
+                                        style="left: 10%; top: 0; transform: translateY(40%); max-width: 700px;">
+                                        <h1 class="text-white">{{ $banner->banner_title }}</h1>
+                                        <h5>{{ $banner->description }}</h5>
+                                        @if (!empty($banner->page_url))
+                                            <a href="{{ $banner->page_url }}"
+                                                class="btn btn-primary">{{ $banner->button_label }}</a>
+                                        @endif
+                                    </div>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @elseif ($banners->first()->type === 'single')
+                @if ($banners->first())
+                    @php $banner = $banners->first(); @endphp
+                    <div class="st-page-heading st-dynamic-bg" data-src="{{ $banner->image }}">
+                        <div class="container">
+                            <div class="st-page-heading-in text-center">
+                                <h1 class="st-page-heading-title">{{ $banner->banner_title }}</h1>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endif
+
+        @endif
         <div class="st-height-b100 st-height-lg-b80"></div>
         <div class="container">
             <div class="row">
@@ -30,13 +74,13 @@
                                             href="{{ route('service.details', ['id' => $service->id]) }}">{{ $service->service_name }}</a>
                                     </h2>
                                     <!-- <div class="st-post-meta">
-                                                <span>
-                                                <a href="#" class="st-post-avatar">
-                                                    <span class="st-post-avatar-text">Admin</span>
-                                                </a>
-                                                </span>
-                                                <span class="st-post-date">August 07, 2020</span>
-                                            </div> -->
+                                                    <span>
+                                                    <a href="#" class="st-post-avatar">
+                                                        <span class="st-post-avatar-text">Admin</span>
+                                                    </a>
+                                                    </span>
+                                                    <span class="st-post-date">August 07, 2020</span>
+                                                </div> -->
                                     <div class="st-post-text">
                                         {{ \Illuminate\Support\Str::limit($service->short_details, 150, '...') }}
                                     </div>

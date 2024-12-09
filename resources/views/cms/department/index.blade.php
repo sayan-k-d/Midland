@@ -17,6 +17,7 @@
                     'image' => 'Image',
                     'short_details' => 'Short Details',
                     'long_details' => 'Long Details',
+                    'is_active' => 'Active',
                 ],
                 'data' => $departments,
                 'wrapContent' => true,
@@ -50,5 +51,13 @@
         </script>
     @endif
 
-
+    @if ($errors->has('doctorIsHead'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Cannot Delete: Head Doctor Exists',
+                text: "{{ $errors->first('doctorIsHead') }}",
+            });
+        </script>
+    @endif
 @endsection

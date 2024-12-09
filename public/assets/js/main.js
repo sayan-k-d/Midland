@@ -77,12 +77,12 @@
     if ($.exists('.player')) {
       $('.player').YTPlayer();
     }
-    if ($.exists('#udate')) {
-      $('#udate').datepicker({
-        // dateFormat: 'dd/mm/yy',
-        minDate: 0
-      });
-    }
+    // if ($.exists('#udate')) {
+    //   $('#udate').datepicker({
+    //     // dateFormat: 'dd/mm/yy',
+    //     minDate: 0
+    //   });
+    // }
     if ($.exists('.st_select1')) {
       $(".st_select1").select2({
         placeholder: function () {
@@ -99,7 +99,7 @@
     beforeAfterSlider();
   });
 
-  $(window).on("scroll", function () {
+  $(window).on("scroll resize", function () {
     stickyHeader();
   });
 
@@ -149,7 +149,8 @@
   --------------------------------------------------------------*/
   function stickyHeader() {
     var scroll = $(window).scrollTop();
-    if (scroll >= 10) {
+    var windowWidth = $(window).width();
+    if (scroll >= 10 || windowWidth < 992) {
       $('.st-sticky-header').addClass('st-sticky-active');
     } else {
       $('.st-sticky-header').removeClass('st-sticky-active');

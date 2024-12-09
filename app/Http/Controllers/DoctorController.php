@@ -19,6 +19,7 @@ class DoctorController extends Controller
         } else {
             $data = Doctor::all();
         }
+        $department = null;
         foreach ($data as $doctor) {
             if ($doctor->image) {
                 // Detect MIME type dynamically
@@ -29,15 +30,16 @@ class DoctorController extends Controller
                 // Encode image with the detected MIME type
                 $doctor->image = 'data:' . $mimeType . ';base64,' . base64_encode($doctor->image);
             }
+            $doctor->department = $doctor->department ? Department::findOrFail($doctor->department)->department_name : null;
         }
-        $departments = Department::all();
-        return view("cms.doctors.index", ['doctors' => $data, 'departments' => $departments, "maxPageLimit" => $maxPageLimit, "totalDoctors" => $totalDoctors]);
+
+        return view("cms.doctors.index", ['doctors' => $data, "maxPageLimit" => $maxPageLimit, "totalDoctors" => $totalDoctors]);
     }
     public function create()
     {
         $editFlag = false;
         $doctor = null;
-        $departments = Department::all();
+        $departments = Department::where('is_active', true)->get();
         $existingHead = Doctor::where('isHead', 1)->exists();
         return view('cms.doctors.addDoctor', compact('doctor', 'editFlag', "departments", "existingHead"));
     }
@@ -48,22 +50,30 @@ class DoctorController extends Controller
             'doctor_name' => 'required|string|max:255',
             'phone' => 'required|string',
             'email' => 'required|email|unique:doctors,email',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:ratio=1/1',
             'doctor_post' => 'required|string|max:255',
             'department' => 'required|integer',
             'biography' => 'required|string',
             'education' => 'required|string',
             'experience' => 'required|numeric',
-            'languages' => 'required|string',
-            'address' => 'required|string',
-            'workingDays' => 'required|array',
-            'workingDays.*' => 'required|string',
-            'workingHours' => 'required|array',
-            'workingHours.*' => 'required|string',
+            // 'languages' => 'nullable|string',
+            // 'address' => 'required|string',
+            'workingDays' => 'nullable|array',
+            'workingDays.*' => 'nullable|string',
+            'workingHours' => 'nullable|array',
+            'workingHours.*' => 'nullable|string',
             'degree' => 'required|string',
             'isHead' => 'nullable|in:checked',
-        ]);
+            'is_active' => 'required|boolean',
+            'is_active_department' => 'required|boolean',
 
+            'facebook' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'linkedin' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'youtube' => 'nullable|url',
+        ]);
+        // dd($request);
         // Handle the image upload if there is one
         if ($request->hasFile('image')) {
             $imagePath = file_get_contents($request->file('image')->getRealPath());
@@ -73,10 +83,15 @@ class DoctorController extends Controller
 
         // Prepare working schedules
         $workingSchedules = [];
-        for ($i = 0; $i < count($request->workingDays); $i++) {
-            $workingSchedules[] = $request->workingDays[$i] . '=' . $request->workingHours[$i];
+        $workingDays = array_filter($request->workingDays, fn($day) => !is_null($day) && $day !== '');
+        $workingHours = array_filter($request->workingHours, fn($hour) => !is_null($hour) && $hour !== '');
+        if (count($workingDays) > 0 && count($workingHours) > 0 && count($workingDays) == count($workingHours)) {
+            for ($i = 0; $i < count($workingDays); $i++) {
+                $workingSchedules[] = $workingDays[$i] . '=' . $workingHours[$i];
+            }
         }
         $implodedSchedules = implode(", ", $workingSchedules);
+        // dd($implodedSchedules ? $implodedSchedules : null);
         // If the doctor being created is marked as the head, update the previous head's status
         $totalDoctors = Doctor::count();
         $existingHead = Doctor::where('isHead', 1)->first();
@@ -104,11 +119,19 @@ class DoctorController extends Controller
         $doctor->biography = $request->biography;
         $doctor->education = $request->education;
         $doctor->experience = $request->experience;
-        $doctor->languages = $request->languages;
-        $doctor->address = $request->address;
+        // $doctor->languages = $request->languages;
+        // $doctor->address = $request->address;
         $doctor->degree = $request->degree;
-        $doctor->workingSchedules = $implodedSchedules;
+        $doctor->workingSchedules = $implodedSchedules ? $implodedSchedules : null;
         $doctor->isHead = $isHead;
+        $doctor->is_active = $request->is_active;
+        $doctor->is_active_department = true;
+
+        $doctor->facebook = $request->facebook;
+        $doctor->instagram = $request->instagram;
+        $doctor->linkedin = $request->linkedin;
+        $doctor->twitter = $request->twitter;
+        $doctor->youtube = $request->youtube;
 
         // Save the doctor
         $doctor->save();
@@ -130,7 +153,11 @@ class DoctorController extends Controller
             // Encode image with the detected MIME type
             $doctor->image = 'data:' . $mimeType . ';base64,' . base64_encode($doctor->image);
         }
-        $workingSchedules = explode(',', $doctor->workingSchedules);
+        $workingSchedules = array_filter(
+            explode(',', $doctor->workingSchedules),
+            fn($schedule) => !is_null($schedule) && trim($schedule) !== ''
+        );
+        // dd($workingSchedules);
         $schedules = [];
         foreach ($workingSchedules as $schedule) {
             $schedule = explode('=', $schedule);
@@ -138,41 +165,57 @@ class DoctorController extends Controller
         }
         // $workingDays = array_map('trim', explode('=', $workingSchedules[0]));
         // $workingHours = array_map('trim', explode('=', $workingSchedules[1]));
-        $departments = Department::all();
+        $departments = Department::where('is_active', true)->get();
         return view('cms.doctors.addDoctor', compact('doctor', 'schedules', 'departments', 'editFlag', 'existingHead'));
     }
     public function update(Request $request, $id)
     {
         $doctor = Doctor::findOrFail($id);
-
         // Validate the input
         $request->validate([
             'doctor_name' => 'required|string|max:255',
             'phone' => 'required|string',
             'email' => 'required|email',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:ratio=1/1',
             'doctor_post' => 'required|string',
             'department' => 'required|integer',
             'biography' => 'required|string',
             'education' => 'required|string',
             'experience' => 'required|numeric',
-            'languages' => 'required|string',
-            'address' => 'required|string',
-            'workingDays' => 'required|array',
-            'workingDays.*' => 'required|string',
-            'workingHours' => 'required|array',
-            'workingHours.*' => 'required|string',
+            // 'languages' => 'nullable|string',
+            // 'address' => 'required|string',
+            'workingDays' => 'nullable|array',
+            'workingDays.*' => 'nullable|string',
+            'workingHours' => 'nullable|array',
+            'workingHours.*' => 'nullable|string',
             'degree' => 'required|string',
             'isHead' => 'nullable|in:checked',
+            'is_active' => 'required|boolean',
+            'is_active_department' => 'required|boolean',
+
+            'facebook' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'linkedin' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'youtube' => 'nullable|url',
         ]);
 
+        if ($request->department !== $doctor->department && !$doctor->is_active_department) {
+            $doctor->is_active_department = true;
+        } else {
+            $doctor->is_active_department = $request->is_active_department;
+        }
         // Update fields
         $workingSchedules = [];
-        for ($i = 0; $i < count($request->workingDays); $i++) {
-            $workingSchedules[] = $request->workingDays[$i] . '=' . $request->workingHours[$i];
+        $workingDays = array_filter($request->workingDays, fn($day) => !is_null($day) && $day !== '');
+        $workingHours = array_filter($request->workingHours, fn($hour) => !is_null($hour) && $hour !== '');
+        if (count($workingDays) > 0 && count($workingHours) > 0 && count($workingDays) == count($workingHours)) {
+            for ($i = 0; $i < count($workingDays); $i++) {
+                $workingSchedules[] = $workingDays[$i] . '=' . $workingHours[$i];
+            }
         }
-
         $implodedSchedules = implode(", ", $workingSchedules);
+        // dd($implodedSchedules);
         $doctor->doctor_name = $request->doctor_name;
         $doctor->phone = $request->phone;
         $doctor->email = $request->email;
@@ -181,10 +224,17 @@ class DoctorController extends Controller
         $doctor->biography = $request->biography;
         $doctor->education = $request->education;
         $doctor->experience = $request->experience;
-        $doctor->languages = $request->languages;
-        $doctor->address = $request->address;
+        // $doctor->languages = $request->languages;
+        // $doctor->address = $request->address;
         $doctor->degree = $request->degree;
         $doctor->workingSchedules = $implodedSchedules;
+        $doctor->is_active = $request->is_active;
+
+        $doctor->facebook = $request->facebook;
+        $doctor->instagram = $request->instagram;
+        $doctor->linkedin = $request->linkedin;
+        $doctor->twitter = $request->twitter;
+        $doctor->youtube = $request->youtube;
 
         // Handle image upload
         if ($request->hasFile('image')) {

@@ -17,6 +17,7 @@
                     'image' => 'Image',
                     'short_details' => 'Short Details',
                     'long_details' => 'Long Details',
+                    'is_active' => 'Active',
                 ],
                 'data' => $services,
                 'wrapContent' => true,

@@ -11,8 +11,22 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\Frontend\FormController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\ServicesController;
+use App\Models\Doctor;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/apcn', function () {
+    $data = [
+        "name" => "John Doe",
+        "phone" => "8617284931",
+        "email" => "test@test.com",
+        "department" => "Neurology",
+        "booking_date" => "December 15, 2024",
+        "doctor_name" => "Dr. Smith",
+        "message" => "lorem ipsum dolor sit amet lorem",
+    ];
+
+    return view('cms.layout.appoinment-email', ['data' => $data]);
+});
 Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('/frontend/about', [PageController::class, 'about'])->name('about');
 Route::get('/frontend/departments', [PageController::class, 'departments'])->name('departments');
@@ -29,6 +43,18 @@ Route::get('/frontend/contact', [PageController::class, 'contact'])->name('conta
 Route::post('/frontend/contact-form', [FormController::class, 'storeContactDetail'])->name('contact.store');
 Route::get('/frontend/appointment', [PageController::class, 'appointment'])->name('appointment');
 Route::post('/frontend/appointment-form', [FormController::class, 'storeAppointmentDetail'])->name('appointment.store');
+
+Route::get('/get-doctors/{departmentId}', function ($departmentId) {
+    // dd(is_numeric($departmentId));
+    $doctors = Doctor::where('is_active', true)->where('is_active_department', true)->where('department', $departmentId)->get();
+    $doctors = $doctors->map(function ($doctor) {
+        return [
+            'id' => $doctor->id,
+            'doctor_name' => mb_convert_encoding($doctor->doctor_name, 'UTF-8', 'UTF-8'),
+        ];
+    });
+    return response()->json($doctors, 200, [], JSON_INVALID_UTF8_SUBSTITUTE);
+});
 
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);

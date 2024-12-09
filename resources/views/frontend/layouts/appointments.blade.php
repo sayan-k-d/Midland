@@ -36,9 +36,8 @@
         <div class="col-lg-6">
             <div class="st-form-field st-style1">
                 <label>Booking Date</label>
-                <input name="udate" type="text" id="udate" placeholder="mm/dd/yyyy"
+                <input name="udate" type="date" id="udate" placeholder="mm/dd/yyyy"
                     value="{{ old('udate') }}">
-                <div class="form-field-icon"><i class="fa fa-calendar"></i></div>
                 @error('udate')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -48,12 +47,11 @@
             <div class="st-form-field st-style1">
                 <label>Department</label>
                 <div class="st-custom-select-wrap">
-                    <select name="udepartment" id="udepartment" class="st_select1" data-placeholder="Select department"
-                        required>
-                        <option></option>
+                    <select name="udepartment" id="udepartment" class="form-select" data-placeholder="Select department"
+                        required onchange="populateDoctors()">
+                        <option value="">Select Department</option>
                         @foreach ($departments as $department)
-                            <option value="{{ $department->department_name }}"
-                                {{ old('udepartment') == $department->department_name ? 'selected' : '' }}>
+                            <option value="{{ $department->id }}">
                                 {{ $department->department_name }}
                             </option>
                         @endforeach
@@ -64,19 +62,19 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-6">
             <div class="st-form-field st-style1">
                 <label>Doctor</label>
                 <div class="st-custom-select-wrap">
-                    <select name="udoctor" class="st_select1" id="udoctor" data-placeholder="Select doctor" required>
-                        <option></option>
-                        @foreach ($doctors as $doctor)
-                            <option value="{{ $doctor->doctor_name }}"
-                                {{ old('udoctor') == $doctor->doctor_name ? 'selected' : '' }}>
-                                {{ $doctor->doctor_name }}
-                            </option>
-                        @endforeach
+                    <select name="udoctor" class="form-select" id="udoctor" data-placeholder="Select doctor" required
+                        disabled>
+                        <option value="">Select Doctor</option>
                     </select>
+                    <span id="doctor-error-message" class="text-danger"></span>
+                    <div id="doctor-overlay"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; cursor: not-allowed;">
+                    </div>
                     @error('udoctor')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -98,3 +96,60 @@
         </div>
     </div>
 </form>
+
+<script>
+    const errorMessage = document.getElementById('doctor-error-message');
+    const overlay = document.getElementById('doctor-overlay');
+
+    overlay.addEventListener('click', function() {
+        errorMessage.textContent = 'Please select a Department first.';
+    });
+
+    function populateDoctors() {
+        var departmentId = document.getElementById('udepartment').value;
+        if (departmentId) {
+            // Enable the doctor dropdown and clear its previous options
+            var doctorDropdown = document.getElementById('udoctor');
+            doctorDropdown.disabled = false;
+            overlay.style.display = 'none';
+            errorMessage.textContent = '';
+            doctorDropdown.innerHTML = '<option value="">Select Doctor</option>'; // Reset options
+
+            // Fetch doctors based on the department selected
+            fetch('/get-doctors/' + departmentId)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    // console.log(response);
+
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && data.length > 0) {
+                        data.forEach(doctor => {
+                            var option = document.createElement('option');
+                            option.value = doctor.doctor_name;
+                            option.textContent = doctor.doctor_name;
+                            doctorDropdown.appendChild(option);
+                        });
+                    } else {
+                        var option = document.createElement('option');
+                        option.value = '';
+                        option.textContent = 'No doctors available';
+                        doctorDropdown.appendChild(option);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching doctors:', error);
+                });
+        } else {
+            // If no department is selected, disable the doctor dropdown
+            var doctorDropdown = document.getElementById('udoctor');
+            doctorDropdown.disabled = true;
+            overlay.style.display = 'block';
+            errorMessage.textContent = '';
+            doctorDropdown.innerHTML = '<option value="">Select Doctor</option>';
+        }
+    }
+</script>

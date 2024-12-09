@@ -18,11 +18,13 @@
                     'email' => 'Email',
                     'booking_date' => 'Booking Date',
                     'department' => 'Department',
-                    'doctor_name' => 'Doctor',
-                    'message' => 'Message',
                 ],
                 'data' => $appoinments,
                 'actions' => [
+                    [
+                        'class' => 'btn-primary',
+                        'label' => 'view',
+                    ],
                     [
                         'url' => fn($id) => "/editReschedule/$id",
                         'class' => 'btn-warning',
@@ -36,6 +38,7 @@
                         'label' => 'Delete',
                     ],
                 ],
+                'modalTitle' => 'Patient Details',
                 'totalData' => $totalAppoinments,
                 'maxPageLimit' => $maxPageLimit,
             ])

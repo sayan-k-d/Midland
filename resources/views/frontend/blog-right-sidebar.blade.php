@@ -17,7 +17,7 @@
                     <div class="st-height-b0 st-height-lg-b40"></div>
                     <div class="row">
                         @if ($totalBlogs > 0)
-                            @foreach ($recentBlogs as $recentBlog)
+                            @foreach ($blogs as $recentBlog)
                                 <div class="col-lg-6">
                                     <div class="st-post st-style3 st-zoom">
                                         <a href="{{ route('blog.details', ['id' => $recentBlog->id]) }}"
@@ -36,10 +36,10 @@
                                                     </a>
                                                 </span>
                                                 <span
-                                                    class="st-post-date">{{ \Carbon\Carbon::parse($blog->created_at)->format('F j, Y') }}</span>
+                                                    class="st-post-date">{{ \Carbon\Carbon::parse($recentBlog->created_at)->format('F j, Y') }}</span>
                                             </div>
                                             <div class="st-post-text">
-                                                {{ \Illuminate\Support\Str::limit($blog->short_description, 150, '...') }}
+                                                {{ \Illuminate\Support\Str::limit($recentBlog->short_description, 150, '...') }}
                                             </div>
                                         </div>
                                         <div class="st-post-footer">

@@ -61,6 +61,7 @@ class BlogController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'meta_header' => 'nullable|string',
             'meta_desc' => 'nullable|string',
+            'is_active' => 'required|boolean',
         ]);
         $image = $request->hasFile('image') ? $this->processImage($request->file('image')) : null;
 
@@ -74,6 +75,7 @@ class BlogController extends Controller
         $blog->meta_header = $request->meta_header;
         $blog->meta_desc = $request->meta_desc;
         $blog->image = $image;
+        $blog->is_active = $request->is_active;
 
         $blog->save();
 
@@ -102,6 +104,7 @@ class BlogController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'meta_header' => 'nullable|string',
             'meta_desc' => 'nullable|string',
+            'is_active' => 'required|boolean',
         ]);
 
         $blog->title = $request->title;
@@ -112,6 +115,7 @@ class BlogController extends Controller
         $blog->created_by = $request->created_by;
         $blog->meta_header = $request->meta_header;
         $blog->meta_desc = $request->meta_desc;
+        $blog->is_active = $request->is_active;
 
         if ($request->hasFile('image')) {
             $blog->image = $this->processImage($request->file('image'));

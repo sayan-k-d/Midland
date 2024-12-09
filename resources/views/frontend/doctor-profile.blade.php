@@ -47,17 +47,34 @@
                                 <div class="st-member-img">
                                     <img src="{{ $doctor->image ? $doctor->image : asset('assets/img/user.png') }}" alt
                                         class="st-zoom-in">
-                                    <div class="st-member-social-wrap">
-                                        <img src="{{ asset('assets/img/shape/member-shape.svg') }}" alt="shape"
-                                            class="st-member-social-bg">
-                                        <ul class="st-member-social st-mp0">
-                                            <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-pinterest-square"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-dribbble-square"></i></a></li>
-                                        </ul>
-                                    </div>
+                                    @if ($doctor->facebook || $doctor->instagram || $doctor->linkedin || $doctor->twitter || $doctor->youtube)
+                                        <div class="st-member-social-wrap">
+                                            <img src="{{ asset('assets/img/shape/member-shape.svg') }}" alt="shape"
+                                                class="st-member-social-bg">
+                                            <ul class="st-member-social st-mp0">
+                                                @if ($doctor->facebook)
+                                                    <li><a href="{{ $doctor->facebook }}"><i
+                                                                class="fab fa-facebook-square"></i></a></li>
+                                                @endif
+                                                @if ($doctor->instagram)
+                                                    <li><a href="{{ $doctor->instagram }}"><i
+                                                                class="fa-brands fa-instagram"></i></a></li>
+                                                @endif
+                                                @if ($doctor->linkedin)
+                                                    <li><a href="{{ $doctor->linkedin }}"><i
+                                                                class="fab fa-linkedin"></i></a></li>
+                                                @endif
+                                                @if ($doctor->twitter)
+                                                    <li><a href="{{ $doctor->twitter }}"><i
+                                                                class="fa-brands fa-x-twitter"></i></a></li>
+                                                @endif
+                                                @if ($doctor->youtube)
+                                                    <li><a href="{{ $doctor->youtube }}"><i
+                                                                class="fa-brands fa-youtube"></i></a></li>
+                                                @endif
+                                            </ul>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
 
@@ -65,11 +82,11 @@
                             <ul class="st-doctors-special st-mp0">
                                 <li><b>Speciality :</b><span>{{ $departmentName }}</span></li>
                                 <li><b>Experience :</b><span>{{ $doctor->experience }} Years+</span></li>
-                                <li><b>Languages :</b><span>{{ $doctor->languages }}</span></li>
+                                {{-- <li><b>Languages :</b><span>{{ $doctor->languages }}</span></li>
                                 <li><b>Types Of :</b><a
                                         href="{{ route('department.details', ['id' => $doctor->department]) }}">Department
                                         of
-                                        {{ $departmentName }}</a></li>
+                                        {{ $departmentName }}</a></li> --}}
                             </ul>
                             <div class="st-height-b30 st-height-lg-b30"></div>
                             <!-- <div class="row"> -->
@@ -79,9 +96,9 @@
                                     <h2 class="st-shedule-title">Contact info</h2>
                                     <div class="st-height-b10 st-height-lg-b10"></div>
                                     <ul class="st-footer-contact-list st-mp0">
-                                        <li><span class="st-footer-contact-title">Address:</span>
+                                        {{-- <li><span class="st-footer-contact-title">Address:</span>
                                             {{ $doctor->address }}
-                                        </li>
+                                        </li> --}}
                                         <li><span class="st-footer-contact-title">Email:</span>
                                             {{ $doctor->email }}</li>
                                         @php
@@ -103,19 +120,21 @@
                             <div class="st-height-b0 st-height-lg-b30"></div>
                             <!-- </div> -->
                             <!-- <div class="col-lg-5"> -->
-                            <div class="st-shedule-wrap st-style2">
-                                <div class="st-shedule">
-                                    <h2 class="st-shedule-title">Working hours</h2>
-                                    <ul class="st-shedule-list">
-                                        @foreach ($schedules as $schedule)
-                                            <li>
-                                                <div class="st-shedule-left">{{ $schedule[0] }} </div>
-                                                <div class="st-shedule-right">{{ $schedule[1] }} hours </div>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                            @if (count($schedules) > 0)
+                                <div class="st-shedule-wrap st-style2">
+                                    <div class="st-shedule">
+                                        <h2 class="st-shedule-title">Working hours</h2>
+                                        <ul class="st-shedule-list">
+                                            @foreach ($schedules as $schedule)
+                                                <li>
+                                                    <div class="st-shedule-left">{{ $schedule[0] }} </div>
+                                                    <div class="st-shedule-right">{{ $schedule[1] }} hours </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                             <!-- </div> -->
                             <!-- </div> -->
 
@@ -132,7 +151,8 @@
                             <div class="st-height-b20 st-height-lg-b20"></div>
 
                             <div class="st-hero-btn">
-                                <a href="#section2" id="scrollButton" class="st-btn st-style1 st-color1">Book
+                                <a href="#section2" id="scrollButton" class="st-btn st-style1 st-color1"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal">Book
                                     Appointment</a>
                             </div>
 
@@ -230,18 +250,183 @@
     </div>
     <!-- End Video Popup -->
 
-    <!-- Scripts -->
-    <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="assets/js/isotope.pkg.min.js"></script>
-    <script src="assets/js/jquery.slick.min.js"></script>
-    <script src="assets/js/mailchimp.min.js"></script>
-    <script src="assets/js/counter.min.js"></script>
-    <script src="assets/js/lightgallery.min.js"></script>
-    <script src="assets/js/ripples.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/jQueryUi.js"></script>
-    <script src="assets/js/textRotate.min.js"></script>
-    <script src="assets/js/select2.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Make an appointment</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('appointment.store') }}" class="st-appointment-form-modal">
+                        @csrf
+                        <div id="st-alert1"></div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="st-form-field st-style1">
+                                    <label>Full Name</label>
+                                    <input type="text" id="unamemodal" name="uname" placeholder="John Doe"
+                                        value="{{ old('uname') }}" required>
+                                    @error('uname')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="st-form-field st-style1">
+                                    <label>Email Address</label>
+                                    <input type="email" id="uemailmodal" name="uemail"
+                                        placeholder="example@gmail.com" value="{{ old('uemail') }}" required>
+                                    @error('uemail')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="st-form-field st-style1">
+                                    <label>Phone Number</label>
+                                    <input type="text" id="unumbermodal" name="unumber" placeholder="+00 141 23 234"
+                                        value="{{ old('unumber') }}" required>
+                                    @error('unumber')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="st-form-field st-style1">
+                                    <label>Booking Date</label>
+                                    <input name="udate" type="date" id="udatemodal" placeholder="mm/dd/yyyy"
+                                        value="{{ old('udate') }}">
+                                    @error('udate')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="st-form-field st-style1">
+                                    <label>Department</label>
+                                    <div class="st-custom-select-wrap">
+                                        <select name="udepartment" id="udepartmentmodal" class="form-select"
+                                            data-placeholder="Select department" required>
+                                            <option value="">Select Department</option>
+                                            @foreach ($departments as $department)
+                                                <option value="{{ $department->id }}">
+                                                    {{ $department->department_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('udepartment')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="st-form-field st-style1">
+                                    <label>Doctor</label>
+                                    <div class="st-custom-select-wrap">
+                                        <select name="udoctor" class="form-select" id="udoctormodal"
+                                            data-placeholder="Select doctor" required disabled>
+                                            <option value="">Select Doctor</option>
+                                        </select>
+                                        <span id="doctor-error-message-modal" class="text-danger"></span>
+                                        <div id="doctor-overlay-modal"
+                                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; cursor: not-allowed;">
+                                        </div>
+                                        @error('udoctor')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="st-form-field st-style1">
+                                    <label>Message</label>
+                                    <textarea cols="30" rows="10" id="umsgmodal" name="umsg" placeholder="Write something here...">{{ old('umsg') }}</textarea>
+                                    @error('umsg')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <button class="st-btn st-style1 st-color1 st-size-medium" type="submit"
+                                    id="appointment-submit" name="submit">Appointment</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('exampleModal');
+            const appointmentForm = document.querySelector('.st-appointment-form-modal');
+            const departmentSelector = document.getElementById('udepartmentmodal');
+            const doctorDropdown = document.getElementById('udoctormodal');
+            const errorMessage = document.getElementById('doctor-error-message-modal');
+            const overlay = document.getElementById('doctor-overlay-modal');
+
+            overlay.addEventListener('click', function() {
+                errorMessage.textContent = 'Please select a Department first.';
+            });
+            // Event listener for the department dropdown change
+            departmentSelector.addEventListener('change', function() {
+                const departmentId = departmentSelector.value;
+                if (departmentId) {
+                    // Enable the doctor dropdown and clear previous options
+                    doctorDropdown.disabled = false;
+                    overlay.style.display = 'none';
+                    errorMessage.textContent = '';
+                    doctorDropdown.innerHTML = '<option value="">Select Doctor</option>'; // Reset options
+
+                    // Fetch doctors based on the selected department
+                    fetch('/get-doctors/' + departmentId)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data && data.length > 0) {
+                                data.forEach(doctor => {
+                                    const option = document.createElement('option');
+                                    option.value = doctor.doctor_name;
+                                    option.textContent = doctor.doctor_name;
+                                    doctorDropdown.appendChild(option);
+                                });
+                            } else {
+                                const option = document.createElement('option');
+                                option.value = '';
+                                option.textContent = 'No doctors available';
+                                doctorDropdown.appendChild(option);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching doctors:', error);
+                        });
+                } else {
+                    // If no department is selected, disable the doctor dropdown
+                    doctorDropdown.disabled = true;
+                    overlay.style.display = 'block';
+                    errorMessage.textContent = '';
+                    doctorDropdown.innerHTML = '<option value="">Select Doctor</option>';
+                }
+            });
+
+            // Event listener to reset form fields when the modal is closed
+            $('#exampleModal').on('hidden.bs.modal', function() {
+                appointmentForm.reset(); // Reset all input fields in the form
+                doctorDropdown.disabled = true; // Disable the doctor dropdown
+                doctorDropdown.innerHTML =
+                    '<option value="">Select Doctor</option>'; // Reset doctor dropdown options
+            });
+        });
+    </script>
+
 @endsection

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppointmentDetail;
 use App\Models\Department;
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -44,6 +46,7 @@ class DepartmentController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif',
             'short_details' => 'required|string|max:500',
             'long_details' => 'required|string',
+            'is_active' => 'required|boolean',
         ]);
 
         // Handle image upload
@@ -61,6 +64,7 @@ class DepartmentController extends Controller
             'image' => $imagePath,
             'short_details' => $request->short_details,
             'long_details' => $request->long_details,
+            'is_active' => $request->is_active,
         ]);
         return redirect()->route('departmentDetails')->with('success', 'Department created successfully!');
     }
@@ -89,12 +93,45 @@ class DepartmentController extends Controller
             'short_details' => 'required|string|max:500',
             'long_details' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif',
+            'is_active' => 'required|boolean',
         ]);
 
+        if (!$request->is_active && $department->is_active !== $request->is_active) {
+            $doctors = Doctor::where('department', $id)->where('is_active_department', true)->get();
+            $appointments = AppointmentDetail::where('department_id', $id)->whereDate('booking_date', '>=', \Carbon\Carbon::today())->get();
+            $errorMessages = [];
+            foreach ($doctors as $doctor) {
+                if ($doctor->isHead) {
+                    $errorMessages[] = 'Cannot disable this department as it has a head doctor assigned. Please assign a new head doctor to another department before proceeding.';
+                    break;
+                }
+            }
+            if ($appointments->count() > 0) {
+                $errorMessages[] = 'Cannot disable this department as it has Appointments assigned.';
+            }
+            if (!empty($errorMessages)) {
+
+                return redirect()->back()->withErrors([
+                    'doctorIsHead' => implode(' ', $errorMessages),
+                ]);
+            }
+
+            foreach ($doctors as $doctor) {
+                $doctor->is_active_department = false;
+                $doctor->save();
+            }
+        } else if ($request->is_active && $department->is_active !== $request->is_active) {
+            $doctors = Doctor::where('department', $id)->where('is_active_department', false)->get();
+            foreach ($doctors as $doctor) {
+                $doctor->is_active_department = true;
+                $doctor->save();
+            }
+        }
         // Update fields
         $department->department_name = $request->department_name;
         $department->short_details = $request->short_details;
         $department->long_details = $request->long_details;
+        $department->is_active = $request->is_active;
 
         // Handle image upload
         if ($request->hasFile('image')) {
@@ -105,13 +142,24 @@ class DepartmentController extends Controller
 
         // Save the department
         $department->save();
+
         return redirect()->route('departmentDetails')->with('success', 'Department updated successfully.');
     }
     public function destroy($id)
     {
         // Find the service by its ID
         $department = Department::findOrFail($id);
-
+        $doctors = Doctor::where('department', $id)->where('is_active_department', true)->get();
+        foreach ($doctors as $doctor) {
+            if ($doctor->isHead) {
+                return redirect()->back()->withErrors([
+                    'doctorIsHead' => 'Cannot Delete this department as it has a head doctor assigned. Please assign a new head doctor to another department before proceeding.',
+                ]);
+            }
+            $doctor->department = null;
+            $doctor->is_active_department = false;
+            $doctor->save();
+        }
         // Perform soft delete
         $department->delete();
 

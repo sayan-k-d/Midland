@@ -35,7 +35,8 @@ class BannerController extends Controller
     public function create()
     {
         $editFlag = false;
-        return view('cms.banners.addBanner', compact('editFlag'));
+        $pages = ['Home', "About", "Departments", "Services", "Doctors", "Blogs", "Contact"];
+        return view('cms.banners.addBanner', compact('editFlag', 'pages'));
     }
 
     /**
@@ -51,6 +52,7 @@ class BannerController extends Controller
             'banner_title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'page_url' => 'nullable|string',
+            'button_label' => 'nullable|string',
             'type' => 'required|in:carousel,single',
             'position' => 'nullable|integer',
             'is_active' => 'required|boolean',
@@ -74,6 +76,7 @@ class BannerController extends Controller
             'banner_title' => $request->input('banner_title'),
             'description' => $request->input('description'),
             'page_url' => $request->input('page_url'),
+            'button_label' => $request->input('button_label'),
             'type' => $request->input('type'),
             'position' => $request->input('position'),
             'is_active' => $request->input('is_active'),
@@ -94,8 +97,8 @@ class BannerController extends Controller
             // Encode image with the detected MIME type
             $banner->image = 'data:' . $mimeType . ';base64,' . base64_encode($banner->image);
         }
-
-        return view('cms.banners.addBanner', compact('banner', 'editFlag'));
+        $pages = ['Home', "About", "Departments", "Services", "Doctors", "Blogs", "Contact"];
+        return view('cms.banners.addBanner', compact('banner', 'editFlag', 'pages'));
     }
     public function update(Request $request, $id)
     {
@@ -106,6 +109,7 @@ class BannerController extends Controller
             'banner_title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'page_url' => 'nullable|string',
+            'button_label' => 'nullable|string',
             'type' => 'required|in:carousel,single',
             'position' => 'nullable|integer',
             'is_active' => 'required|boolean',
@@ -116,6 +120,7 @@ class BannerController extends Controller
         $banner->page = $request->page;
         $banner->description = $request->description;
         $banner->page_url = $request->page_url;
+        $banner->button_label = $request->button_label;
         $banner->type = $request->type;
         $banner->position = $request->position;
         $banner->is_active = $request->is_active;

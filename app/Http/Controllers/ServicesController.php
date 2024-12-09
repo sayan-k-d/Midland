@@ -46,6 +46,7 @@ class ServicesController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif',
             'short_details' => 'required|string|max:500',
             'long_details' => 'required|string',
+            'is_active' => 'required|boolean',
         ]);
         // dd($request->all());
         // Handle image upload
@@ -62,6 +63,7 @@ class ServicesController extends Controller
             'image' => $imagePath,
             'short_details' => $request->short_details,
             'long_details' => $request->long_details,
+            'is_active' => $request->is_active,
         ]);
 
         return redirect()->route('serviceDetails')->with('success', 'service created successfully!');
@@ -92,12 +94,14 @@ class ServicesController extends Controller
             'short_details' => 'required|string|max:500',
             'long_details' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'is_active' => 'required|boolean',
         ]);
 
         // Update fields
         $service->service_name = $request->service_name;
         $service->short_details = $request->short_details;
         $service->long_details = $request->long_details;
+        $service->is_active = $request->is_active;
 
         // Handle image upload
         if ($request->hasFile('image')) {

@@ -40,17 +40,39 @@
                     @enderror
                 </div>
 
-                <div class="form-group mb-3">
-                    <label for="image" class="mb-1">Service Image</label>
-                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                    @if ($editFlag && $service->image)
-                        <div class="mt-2">
-                            <img src="{{ $service->image }}" alt="Service Image" width="100">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="image" class="mb-1">Service Image</label>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                            @if ($editFlag && $service->image)
+                                <div class="mt-2">
+                                    <img src="{{ $service->image }}" alt="Service Image" width="100">
+                                </div>
+                            @endif
+                            @error('image')
+                                <div class="text-danger mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
-                    @endif
-                    @error('image')
-                        <div class="text-danger mt-2">{{ $message }}</div>
-                    @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="is_active" class="form-label mb-1">Active</label>
+                            <select name="is_active" id="is_active" class="form-control" required>
+                                <option value="1"
+                                    {{ old('is_active', $editFlag ? $service->is_active : '') == '1' ? 'selected' : '' }}>
+                                    Yes
+                                </option>
+                                <option value="0"
+                                    {{ old('is_active', $editFlag ? $service->is_active : '') == '0' ? 'selected' : '' }}>
+                                    No
+                                </option>
+                            </select>
+                            @error('is_active')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group mb-3">

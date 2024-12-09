@@ -182,6 +182,20 @@
     }
 }
 
-.ck-editor__editable{
+.ck-editor__editable {
     min-height: 500px;
+}
+
+.divider {
+    height: 1.5rem;
+    width: 2px;
+    background: rgba(0, 0, 0, 50%);
+    margin: 0 0.5rem;
+}
+.color-40 {
+    i,
+    p,
+    ul > li {
+        color: rgba(0, 0, 0, 40%);
+    }
 }

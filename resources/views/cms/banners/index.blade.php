@@ -17,6 +17,7 @@
                     'page' => 'Page Name',
                     'image' => 'Image',
                     'description' => 'Description',
+                    'is_active' => 'Active',
                 ],
                 'data' => $banners,
                 'wrapContent' => true,

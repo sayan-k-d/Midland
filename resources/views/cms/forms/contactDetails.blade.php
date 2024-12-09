@@ -17,7 +17,7 @@
                     'phone' => 'Phone',
                     'email' => 'Email',
                     'subject' => 'Subject',
-                    'message' => 'Message',
+                    // 'message' => 'Message',
                 ],
                 'data' => $contactData,
                 'actions' => [
@@ -27,12 +27,17 @@
                     //     'label' => 'Edit',
                     // ],
                     [
+                        'class' => 'btn-primary',
+                        'label' => 'view',
+                    ],
+                    [
                         'url' => fn($id) => "/contact/delete/$id",
                         'route_name' => 'contact.destroy',
                         'class' => 'btn-danger',
                         'label' => 'Delete',
                     ],
                 ],
+                'modalTitle' => 'Customer Details',
                 'totalData' => $totalContacts,
                 'maxPageLimit' => $maxPageLimit,
             ])
