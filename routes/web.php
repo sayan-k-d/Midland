@@ -14,19 +14,6 @@ use App\Http\Controllers\ServicesController;
 use App\Models\Doctor;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/apcn', function () {
-    $data = [
-        "name" => "John Doe",
-        "phone" => "8617284931",
-        "email" => "test@test.com",
-        "department" => "Neurology",
-        "booking_date" => "December 15, 2024",
-        "doctor_name" => "Dr. Smith",
-        "message" => "lorem ipsum dolor sit amet lorem",
-    ];
-
-    return view('cms.layout.appoinment-email', ['data' => $data]);
-});
 Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('/frontend/about', [PageController::class, 'about'])->name('about');
 Route::get('/frontend/departments', [PageController::class, 'departments'])->name('departments');
