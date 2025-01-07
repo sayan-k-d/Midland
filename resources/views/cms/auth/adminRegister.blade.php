@@ -12,7 +12,15 @@
                     </div>
                 </div>
             </div>
-
+            @if (session('error'))
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{{ session('alertTitle') ?? 'Error' }}',
+                        text: '{{ session('error') }}',
+                    });
+                </script>
+            @endif
             <!-- Form Section -->
             <div class="form-container">
                 <h2>Add Users</h2>

@@ -45,7 +45,15 @@
                     </div>
                 @endif
             @endif
-
+        @else
+            <div class="st-page-heading st-dynamic-bg" data-src="{{ asset('public/assets/img/hero-bg17.jpg') }}">
+                <div class="container">
+                    <div class="st-page-heading-in text-center">
+                        <h1 class="st-page-heading-title">Our Latest News</h1>
+                        <div class="st-page-heading-subtitle">Gate all update news here</div>
+                    </div>
+                </div>
+            </div>
         @endif
         <div class="st-height-b100 st-height-lg-b80"></div>
         <div class="container">
@@ -57,7 +65,7 @@
                             <div
                                 class="st-post st-style3 st-zoom st_departments_otr blog-card d-flex flex-column justify-content-between overflow-hidden">
                                 <a href="{{ route('blog.details', ['id' => $blog->id]) }}" class="st-post-thumb">
-                                    <img class="st-zoom-in" src="{{ $blog->image }}" alt="blog1">
+                                    <img class="st-zoom-in" src="{{ $blog->image ?? asset('public/assets/img/blog.jpg') }}" alt="blog1">
                                 </a>
                                 <div class="st-post-info">
                                     <h2 class="st-post-title"><a
@@ -97,13 +105,13 @@
                     </div>
 
                 @endif
-                <div class="col-lg-12">
+                {{-- <div class="col-lg-12">
                     @if ($totalBlogs > $maxPageLimit)
                         <div class="text-center pagination-container">
                             {{ $blogs->links() }}
                         </div>
                     @endif
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="st-height-b100 st-height-lg-b80"></div>
@@ -125,15 +133,15 @@
     </div>
     <!-- End Video Popup -->
     <!-- Scripts -->
-    <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="assets/js/isotope.pkg.min.js"></script>
-    <script src="assets/js/jquery.slick.min.js"></script>
-    <script src="assets/js/mailchimp.min.js"></script>
-    <script src="assets/js/counter.min.js"></script>
-    <script src="assets/js/lightgallery.min.js"></script>
-    <script src="assets/js/ripples.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/select2.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="public/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="public/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="public/assets/js/isotope.pkg.min.js"></script>
+    <script src="public/assets/js/jquery.slick.min.js"></script>
+    <script src="public/assets/js/mailchimp.min.js"></script>
+    <script src="public/assets/js/counter.min.js"></script>
+    <script src="public/assets/js/lightgallery.min.js"></script>
+    <script src="public/assets/js/ripples.min.js"></script>
+    <script src="public/assets/js/wow.min.js"></script>
+    <script src="public/assets/js/select2.min.js"></script>
+    <script src="public/assets/js/main.js"></script>
 @endsection

@@ -146,7 +146,8 @@
         if (departmentId) {
             var doctorDropdown = document.getElementById('udoctor');
             doctorDropdown.innerHTML = `<option value="" selected>Select Doctor</option>`;
-            fetch('/get-doctors/' + departmentId)
+            var fetchUrl = "{{ route('getDoctorsOfDepartment', ['departmentId' => ':id']) }}".replace(':id', departmentId);
+            fetch(fetchUrl)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -179,7 +180,8 @@
 
             // Clear the existing doctor options
             doctorSelect.innerHTML = '<option value="">Select Doctor</option>';
-            fetch('/get-doctors/' + departmentId)
+            var fetchUrl = "{{ route('getDoctorsOfDepartment', ['departmentId' => ':id']) }}".replace(':id', departmentId);
+            fetch(fetchUrl)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -208,4 +210,13 @@
                 });
         });
     </script>
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('alertTitle') ?? 'Error' }}',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
 @endsection

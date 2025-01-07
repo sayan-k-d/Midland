@@ -13,7 +13,7 @@ class Doctor extends Model
     protected $dates = ['deleted_at'];
     use HasFactory;
     protected $fillable = [
-        'doctor_name', 'phone', 'email', 'image', 'doctor_post',
+        'doctor_name', 'phone', 'email', 'image', 'innerImage', 'doctor_post',
         'department', 'biography', 'education', 'experience',
         'languages', 'degree', 'workingSchedules', 'isHead', 'is_active', 'is_active_department', 'facebook', 'instagram', 'twitter', 'linkedin', 'youtube',
     ];

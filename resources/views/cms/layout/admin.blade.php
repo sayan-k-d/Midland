@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @include('\cms\commoncdn')
-    <link rel="stylesheet" href="{{ asset('cms/assets/css/dashboard.css') }}" />
-    <link rel="stylesheet" href="{{ asset('cms/assets/css/style2.css') }}" />
+    @include('cms.commoncdn')
+    <link rel="stylesheet" href="{{ asset('public/cms/assets/css/dashboard.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/cms/assets/css/style2.css') }}" />
     <title>Midland CMS</title>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 </head>
 
 <body>
-    @include('\cms\layout\dashboard-nav')
+    @include('cms.layout.dashboard-nav')
     <div id="sidebar" class="side-menu bg-dark">
         <div class="menu-header sticky-top d-flex align-items-center justify-content-between px-3">
             <a class="nav-link text-white d-flex align-items-center" href="{{ route('dashboard') }}">
@@ -95,7 +95,7 @@
 
     @yield('content')
     @yield('scripts')
-    <script src="{{ asset('cms/assets/js/dashboard.js') }}"></script>
+    <script src="{{ asset('public/cms/assets/js/dashboard.js') }}"></script>
 </body>
 
 </html>

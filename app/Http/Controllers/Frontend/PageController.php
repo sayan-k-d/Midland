@@ -15,17 +15,24 @@ class PageController extends Controller
     public function index()
     {
         $doctors = Doctor::where('is_active', true)->where('is_active_department', true)->get();
-        foreach ($doctors as $doctor) {
+        $hod = $doctors->firstWhere('isHead', 1);
+
+        $filteredDoctors = $doctors->filter(function ($doctor) {
+            return in_array($doctor->doctor_name, ['Dr. Divakar Dalela', 'Dr. Apoorva Singh', 'Dr. Urmila Singh', 'Dr Kanishka Siddharta']);
+        });
+        
+        foreach ($filteredDoctors as $doctor) {
             if ($doctor->image) {
                 $doctor->image = $this->encodeImage($doctor->image);
             }
             if ($doctor->department) {
                 $doctor->department = Department::findOrFail($doctor->department)->department_name;
             }
-            if ($doctor->isHead == 1) {
-                $hod = $doctor;
-            }
         }
+        if ($hod->image) {
+            $hod->image = $this->encodeImage($hod->image);
+        }
+        
         // dd($doctors);
         $departments = Department::where('is_active', true)->get();
         $banners = Banner::where('page', 'Home')
@@ -45,7 +52,7 @@ class PageController extends Controller
             }
         }
         // dd($banners);
-        return view('frontend.index', ['doctors' => $doctors, 'hod' => $hod, 'departments' => $departments, 'banners' => $banners, 'blogs' => $blogs]);
+        return view('frontend.index', ['doctors' => $filteredDoctors, 'hod' => $hod, 'departments' => $departments, 'banners' => $banners, 'blogs' => $blogs]);
     }
 
     public function about()
@@ -73,11 +80,11 @@ class PageController extends Controller
         $data = null;
         $maxPageLimit = 10;
         $totaldepartment = Department::where('is_active', true)->count();
-        if ($totaldepartment > $maxPageLimit) {
-            $data = Department::where('is_active', true)->paginate($maxPageLimit);
-        } else {
-            $data = Department::where('is_active', true)->get();
-        }
+        // if ($totaldepartment > $maxPageLimit) {
+        //     $data = Department::where('is_active', true)->paginate($maxPageLimit);
+        // } else {
+        $data = Department::where('is_active', true)->get();
+        // }
 
         foreach ($data as $department) {
             if ($department->image) {
@@ -106,9 +113,15 @@ class PageController extends Controller
         if ($department->image) {
             $department->image = $this->encodeImage($department->image);
         }
+        if ($department->innerImage) {
+            $department->innerImage = $this->encodeImage($department->innerImage);
+        }
         foreach ($doctors as $doc) {
             if ($doc->image) {
                 $doc->image = $this->encodeImage($doc->image);
+            }
+            if ($doc->innerImage) {
+                $doc->innerImage = $this->encodeImage($doc->innerImage);
             }
         }
         return view('frontend.departments-details', ['department' => $department, 'departments' => $departments, 'doctors' => $doctors]);
@@ -118,11 +131,11 @@ class PageController extends Controller
         $data = null;
         $maxPageLimit = 10;
         $totalServices = Services::where('is_active', true)->count();
-        if ($totalServices > $maxPageLimit) {
-            $data = Services::where('is_active', true)->paginate($maxPageLimit);
-        } else {
-            $data = Services::where('is_active', true)->get();
-        }
+        // if ($totalServices > $maxPageLimit) {
+        //     $data = Services::where('is_active', true)->paginate($maxPageLimit);
+        // } else {
+        $data = Services::where('is_active', true)->get();
+        // }
 
         foreach ($data as $service) {
             if ($service->image) {
@@ -149,6 +162,9 @@ class PageController extends Controller
         if ($service->image) {
             $service->image = $this->encodeImage($service->image);
         }
+        if ($service->innerImage) {
+            $service->innerImage = $this->encodeImage($service->innerImage);
+        }
         return view('frontend.service-details', ['service' => $service]);
     }
     public function doctors()
@@ -157,11 +173,11 @@ class PageController extends Controller
         $maxPageLimit = 10;
         $totalDoctors = Doctor::where('is_active', true)->where('is_active_department', true)->count();
         // dd($totalDoctors);
-        if ($totalDoctors > $maxPageLimit) {
-            $data = Doctor::where('is_active', true)->where('is_active_department', true)->paginate($maxPageLimit);
-        } else {
-            $data = Doctor::where('is_active', true)->where('is_active_department', true)->get();
-        }
+        // if ($totalDoctors > $maxPageLimit) {
+        //     $data = Doctor::where('is_active', true)->where('is_active_department', true)->paginate($maxPageLimit);
+        // } else {
+        $data = Doctor::where('is_active', true)->where('is_active_department', true)->get();
+        // }
         // dd($data);
         foreach ($data as $doctor) {
             if ($doctor->image) {
@@ -206,6 +222,9 @@ class PageController extends Controller
         if ($doctor->image) {
             $doctor->image = $this->encodeImage($doctor->image);
         }
+        if ($doctor->innerImage) {
+            $doctor->innerImage = $this->encodeImage($doctor->innerImage);
+        }
         if ($doctor->department) {
             $department = Department::findOrFail($doctor->department);
             $departmentName = $department->department_name;
@@ -233,11 +252,11 @@ class PageController extends Controller
         $data = null;
         $maxPageLimit = 10;
         $totalBlogs = Blog::where('is_active', true)->count();
-        if ($totalBlogs > $maxPageLimit) {
-            $data = Blog::where('is_active', true)->paginate($maxPageLimit);
-        } else {
-            $data = Blog::where('is_active', true)->get();
-        }
+        // if ($totalBlogs > $maxPageLimit) {
+        //     $data = Blog::where('is_active', true)->paginate($maxPageLimit);
+        // } else {
+        $data = Blog::where('is_active', true)->get();
+        // }
 
         foreach ($data as $blog) {
             $blog->image = $this->encodeImage($blog->image);
@@ -263,6 +282,7 @@ class PageController extends Controller
         $prevBlog = Blog::where('id', '<', $id)->where('is_active', true)->orderBy('id', 'desc')->first();
 
         $blog->image = $this->encodeImage($blog->image);
+        $blog->innerImage = $this->encodeImage($blog->innerImage);
 
         // $recentBlogs = Blog::where('is_recent', 1)->paginate(5);
         // $recentBlogs = Blog::where('is_active', true)->where('created_at', '>=', now()->subDays(3))->orderBy('created_at', 'desc') // Sort by newest
@@ -274,6 +294,7 @@ class PageController extends Controller
             ->get();
         foreach ($recentBlogs as $recentBlog) {
             $recentBlog->image = $this->encodeImage($recentBlog->image);
+            $recentBlog->innerImage = $this->encodeImage($recentBlog->innerImage);
         }
 
         return view('frontend.blog-details', ['blog' => $blog, 'recentBlogs' => $recentBlogs, 'nextBlog' => $nextBlog, 'prevBlog' => $prevBlog]);
@@ -283,6 +304,8 @@ class PageController extends Controller
     {
         $blog = Blog::findOrFail($id);
         $blog->image = $this->encodeImage($blog->image);
+        $blog->innerImage = $this->encodeImage($blog->innerImage);
+        // dd($blog);
 
         $recentBlogs = Blog::where('is_active', true)->orderBy('created_at', 'desc')->take(3)->get();
         $blogs = Blog::where('is_active', true)
@@ -296,8 +319,8 @@ class PageController extends Controller
                 ->paginate($maxPageLimit);
         }
 
-        foreach ($blogs as $blog) {
-            $blog->image = $this->encodeImage($blog->image);
+        foreach ($blogs as $blogData) {
+            $blogData->image = $this->encodeImage($blogData->image);
         }
         foreach ($recentBlogs as $recentBlog) {
             $recentBlog->image = $this->encodeImage($recentBlog->image);
@@ -323,9 +346,16 @@ class PageController extends Controller
     }
     public function appointment()
     {
+        $banner = Banner::where('page', 'Appointment')
+            ->where('type', 'single')
+            ->where('is_active', true)
+            ->first();
+        if ($banner && $banner->image) {
+            $banner->image = $this->encodeImage($banner->image);
+        }
         $departments = Department::where('is_active', true)->get();
         $doctors = Doctor::where('is_active', true)->where('is_active_department', true)->get();
-        return view('frontend.appointment', ['doctors' => $doctors, 'departments' => $departments]);
+        return view('frontend.appointment', ['banner' => $banner, 'doctors' => $doctors, 'departments' => $departments]);
     }
     // public function showDepartment()
     // {

@@ -13,7 +13,7 @@ class Services extends Model
     protected $dates = ['deleted_at'];
     use HasFactory;
     protected $fillable = [
-        'service_name', 'image', 'short_details', 'long_details', 'is_active',
+        'service_name', 'image', 'innerImage', 'short_details', 'long_details', 'is_active',
     ];
     public $timestamps = false;
 }

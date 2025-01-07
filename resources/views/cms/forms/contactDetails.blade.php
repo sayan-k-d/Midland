@@ -10,7 +10,7 @@
         </div>
 
         <div class="table-responsive mb-5">
-            @include('\cms\layout\dashboard-table', [
+            @include('cms.layout.dashboard-table', [
                 'columns' => [
                     'id' => '#',
                     'name' => 'Name',
@@ -31,7 +31,7 @@
                         'label' => 'view',
                     ],
                     [
-                        'url' => fn($id) => "/contact/delete/$id",
+                        'url' => fn($id) => route('contact.destroy', ['id' => $id]),
                         'route_name' => 'contact.destroy',
                         'class' => 'btn-danger',
                         'label' => 'Delete',
@@ -50,6 +50,15 @@
                 text: '{{ session('success') }}',
                 showConfirmButton: false,
                 timer: 1500
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('alertTitle') ?? 'Error' }}',
+                text: '{{ session('error') }}',
             });
         </script>
     @endif

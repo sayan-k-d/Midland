@@ -199,3 +199,13 @@
         color: rgba(0, 0, 0, 40%);
     }
 }
+
+.pagination-container{
+    margin: 0.5rem auto;
+}
+.w-5.h-5{
+ width: 30px;
+}
+.table-responsive{
+    overflow-y: hidden;
+}

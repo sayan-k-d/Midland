@@ -5,18 +5,36 @@
     <div class="container">
         <h2 class="text-center my-4">Change Password</h2>
 
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+        <!--@if(session('success'))-->
+        <!--    <div class="alert alert-success">-->
+        <!--        {{ session('success') }}-->
+        <!--    </div>-->
+        <!--@endif-->
 
-        @if(session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
+        <!--@if(session('error'))-->
+        <!--    <div class="alert alert-danger">-->
+        <!--        {{ session('error') }}-->
+        <!--    </div>-->
+        <!--@endif-->
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    text: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
         @endif
-
+        @if (session('error'))
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: '{{ session('alertTitle') ?? 'Error' }}',
+                    text: '{{ session('error') }}',
+                });
+            </script>
+        @endif
         <form action="{{ route('password.update') }}" method="POST">
             @csrf
             <div class="form-group mb-3">

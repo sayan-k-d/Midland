@@ -121,3 +121,12 @@
         });
     });
 </script>
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: '{{ session('alertTitle') ?? 'Error' }}',
+            text: '{{ session('error') }}',
+        });
+    </script>
+@endif

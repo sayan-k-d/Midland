@@ -117,9 +117,10 @@
             overlay.style.display = 'none';
             errorMessage.textContent = '';
             doctorDropdown.innerHTML = '<option value="">Select Doctor</option>'; // Reset options
-
+            var fetchUrl = "{{ route('getDoctorsOfDepartment', ['departmentId' => ':id']) }}".replace(':id',
+                departmentId);
             // Fetch doctors based on the department selected
-            fetch('/get-doctors/' + departmentId)
+            fetch(fetchUrl)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -156,3 +157,12 @@
         }
     }
 </script>
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: '{{ session('alertTitle') ?? 'Error' }}',
+            text: '{{ session('error') }}',
+        });
+    </script>
+@endif

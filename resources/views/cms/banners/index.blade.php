@@ -6,11 +6,11 @@
         <div class="d-flex align-items-center justify-content-between admin-details">
             {{-- <h3> Department Details</h3> --}}
             <h2 class="text-center my-4 text-uppercase fw-bold flex-grow-1">Banner Details</h2>
-            <div><a class="btn btn-success" href="/addBanners">Add Banner</a></div>
+            <div><a class="btn btn-success" href="{{ route('addBanners') }}">Add Banner</a></div>
         </div>
 
         <div class="table-responsive">
-            @include('\cms\layout\dashboard-table', [
+            @include('cms.layout.dashboard-table', [
                 'columns' => [
                     'id' => '#',
                     'banner_title' => 'Banner Title',
@@ -23,12 +23,12 @@
                 'wrapContent' => true,
                 'actions' => [
                     [
-                        'url' => fn($id) => "/banners/edit/$id",
+                        'url' => fn($id) => route('editBanner', ['id' => $id]),
                         'class' => 'btn-warning',
                         'label' => 'Edit',
                     ],
                     [
-                        'url' => fn($id) => "/banners/delete/$id",
+                        'url' => fn($id) => route('banners.destroy', ['id' => $id]),
                         'route_name' => 'banners.destroy',
                         'class' => 'btn-danger',
                         'label' => 'Delete',
@@ -50,6 +50,14 @@
             });
         </script>
     @endif
-
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('alertTitle') ?? 'Error' }}',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
 
 @endsection

@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="st-content">
-        {{-- <div class="st-page-heading st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg15.jpg') }}"> --}}
+        {{-- <div class="st-page-heading st-dynamic-bg" data-src="{{ asset('public/assets/img/hero-bg15.jpg') }}"> --}}
         @if ($banners->count() > 0)
             @if ($banners->first()->type === 'carousel')
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
@@ -46,12 +46,19 @@
                     </div>
                 @endif
             @endif
-
+        @else
+            <div class="st-page-heading st-dynamic-bg" data-src="{{ asset('public/assets/img/hero-bg15.jpg') }}">
+                <div class="container">
+                    <div class="st-page-heading-in text-center">
+                        <h1 class="st-page-heading-title">About Midland</h1>
+                    </div>
+                </div>
+            </div>
         @endif
         <!-- Start Our Story Section -->
         <section class="st-faq-wrap st-shape-wrap abt_stry_otr">
             <div class="st-shape5">
-                <img src="{{ asset('assets/img/shape/faq-bg.svg') }}" alt="shape1">
+                <img src="{{ asset('public/assets/img/shape/faq-bg.svg') }}" alt="shape1">
             </div>
             <div class="st-height-b120 st-height-lg-b80"></div>
             <div class="container">
@@ -77,19 +84,19 @@
                                             </div>
                                             <div class="carousel-inner" style="border-radius: 7px">
                                                 <div class="carousel-item">
-                                                    <img src="{{ asset('assets/img/story1.webp') }}" class="d-block w-100"
+                                                    <img src="{{ asset('public/assets/img/story1.webp') }}" class="d-block w-100"
                                                         alt="...">
                                                 </div>
                                                 <div class="carousel-item active">
-                                                    <img src="{{ asset('assets/img/story2.webp') }}" class="d-block w-100"
+                                                    <img src="{{ asset('public/assets/img/story2.webp') }}" class="d-block w-100"
                                                         alt="...">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img src="{{ asset('assets/img/story3.webp') }}" class="d-block w-100"
+                                                    <img src="{{ asset('public/assets/img/story3.webp') }}" class="d-block w-100"
                                                         alt="...">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img src="{{ asset('assets/img/story4.webp') }}" class="d-block w-100"
+                                                    <img src="{{ asset('public/assets/img/story4.JPG') }}" class="d-block w-100"
                                                         alt="...">
                                                 </div>
                                             </div>
@@ -100,7 +107,7 @@
                                             <div class="slick-slide-in">
                                                 <div class="st-member st-style1 st-zoom">
                                                     <div class="st-member-img">
-                                                        <img src="{{ asset('assets/img/story2.webp') }}" alt="story2"
+                                                        <img src="{{ asset('public/assets/img/story2.webp') }}" alt="story2"
                                                             class="st-zoom-in">
                                                         <!-- <a class="st-doctor-link"
                                                         href="doctor-profile.html"><i
@@ -137,7 +144,7 @@
                                             <div class="slick-slide-in">
                                                 <div class="st-member st-style1 st-zoom">
                                                     <div class="st-member-img">
-                                                        <img src="{{ asset('assets/img/story1.webp') }}" alt="story1"
+                                                        <img src="{{ asset('public/assets/img/story1.webp') }}" alt="story1"
                                                             class="st-zoom-in">
                                                         <!-- <a class="st-doctor-link"
                                                         href="doctor-profile.html"><i
@@ -173,7 +180,7 @@
                                             <div class="slick-slide-in">
                                                 <div class="st-member st-style1 st-zoom">
                                                     <div class="st-member-img">
-                                                        <img src="{{ asset('assets/img/story3.webp') }}" alt="story3"
+                                                        <img src="{{ asset('public/assets/img/story3.webp') }}" alt="story3"
                                                             class="st-zoom-in">
                                                         <!-- <a class="st-doctor-link"
                                                         href="doctor-profile.html"><i
@@ -210,7 +217,7 @@
                                             <div class="slick-slide-in">
                                                 <div class="st-member st-style1 st-zoom">
                                                     <div class="st-member-img">
-                                                        <img src="{{ asset('assets/img/story4.webp') }}" alt="story4"
+                                                        <img src="{{ asset('public/assets/img/story4.JPG') }}" alt="story4"
                                                             class="st-zoom-in">
                                                         <!-- <a class="st-doctor-link"
                                                         href="doctor-profile.html"><i
@@ -257,8 +264,7 @@
                         <div class="st-height-b0 st-height-lg-b30"></div>
                     </div>
                     <div class="col-lg-6">
-                        <h2 class="st-accordian-heading">Provide Quality Healthcare <br>
-                            Welcome to Midland healthcare</h2>
+                        <h2 class="st-accordian-heading">Welcome to Midland Healthcare – Providing Quality Healthcare for All</h2>
                         <div class="st-accordian-wrap">
                             <div class="st-accordian active ">
                                 <div class="st-accordian-title">
@@ -547,7 +553,7 @@
         <!-- Start About Seciton -->
         <section class="st-about-wrap" id="about">
             <div class="st-shape-bg">
-                <img src="{{ asset('assets/img/shape/about-bg-shape.svg') }}" alt="shape">
+                <img src="{{ asset('public/assets/img/shape/about-bg-shape.svg') }}" alt="shape">
             </div>
             <div class="st-height-b120 st-height-lg-b50"></div>
             <div class="container">
@@ -604,7 +610,7 @@
                     </div><!-- .col -->
                     <div class="col-lg-6 wow fadeInRight" data-wow-duration="0.8s" data-wow-delay="0.2s">
                         <div class="st-leader-img">
-                            <img src="{{ asset('assets/img/abt_ldr.webp') }}" alt="Leader_img">
+                            <img src="{{ asset('public/assets/img/abt_ldr.webp') }}" alt="Leader_img">
                         </div>
                         <!--<div class="st-shedule-wrap">
                                 <div class="st-shedule">
@@ -698,7 +704,61 @@
             </div>
         </section>
         <!-- End About Seciton -->
+        <section class="st-about-wrap abt_tpa_otr" id="about">
+            <div class="st-shape-bg">
+                <img src="assets/img/shape/about-bg-shape.svg" alt="shape">
+            </div>
+            <div class="st-height-b120 st-height-lg-b50"></div>
+            <div class="container">
+                <div class="st-section-heading st-style1">
+                    <h2 class="st-section-heading-title">
+                        OUR ACHIEVEMENTS
+                    </h2>
+                    <div class="st-seperator">
+                        <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
+                        <div class="st-seperator-center"><img src="{{ asset('public/assets/img/icons/4.png') }}"
+                                alt="icon">
+                        </div>
+                        <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="list-group achievement-list">
+                            <li class="list-group-item border-0">Pioneer in Pulmonary Healthcare Initiatives Since Past 20
+                                Years
+                            </li>
+                            <li class="list-group-item border-0">Pioneer in Sleep Medicine</li>
+                            <li class="list-group-item border-0">First Pulmonary Rehabilitation Center in U.P.</li>
+                            <li class="list-group-item border-0">One of the only Healthcare Center in the entire Asia to be
+                                selected for involvement in prestigious international trials for lung diseases.</li>
+                            <li class="list-group-item border-0">First Cryobiopsy Center in U.P. & the Only Private Unit
+                                Offering the Facility</li>
+                            <li class="list-group-item border-0">More than 5000+ Bronchoscopy Performed</li>
+                            <li class="list-group-item border-0">Pioneer in Women Healthcare since past 40 years</li>
+                            <li class="list-group-item border-0">The modern NICU has the least mortality rate compared to
+                                any other
+                                hospitals in the region
+                            </li>
+                            <li class="list-group-item border-0">More than 2000+ EBUS Performed</li>
+                            <li class="list-group-item border-0">One of the few well-eqquipped centers to successfully
+                                perform
+                                Joint Replacement Surgery</li>
+                            <li class="list-group-item border-0">Nodal Center in the region for Collaboration for
+                                Lung Transplant Procedure</li>
+                            <li class="list-group-item border-0">On forefront of treating critical COVID patients with
+                                state-of-art
+                                facilities like ECMO unit
+                            </li>
 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Start About Seciton -->
         <section class="st-about-wrap abt_tpa_otr" id="about">
             <div class="st-shape-bg">
@@ -711,7 +771,7 @@
                         TPA & Corporate</h2>
                     <div class="st-seperator">
                         <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
-                        <div class="st-seperator-center"><img src="{{ asset('assets/img/icons/4.png') }}"
+                        <div class="st-seperator-center"><img src="{{ asset('public/assets/img/icons/4.png') }}"
                                 alt="icon">
                         </div>
                         <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s">
@@ -841,27 +901,32 @@
                         <div class="slick-wrapper">
                             <div class="slick-slide-in">
                                 <div class="st-logo-carousel st-style1">
-                                    <img src="{{ asset('assets/img/tpa1.webp') }}" alt="client1">
+                                    <img src="{{ asset('public/assets/img/tpa1.webp') }}" alt="client1">
                                 </div>
                             </div><!-- .slick-slide-in -->
                             <div class="slick-slide-in">
                                 <div class="st-logo-carousel st-style1">
-                                    <img src="{{ asset('assets/img/tpa2.webp') }}" alt="client2">
+                                    <img src="{{ asset('public/assets/img/tpa2.webp') }}" alt="client2">
                                 </div>
                             </div><!-- .slick-slide-in -->
                             <div class="slick-slide-in">
                                 <div class="st-logo-carousel st-style1">
-                                    <img src="{{ asset('assets/img/tpa3.webp') }}" alt="client3">
+                                    <img src="{{ asset('public/assets/img/tpa3.webp') }}" alt="client3">
                                 </div>
                             </div><!-- .slick-slide-in -->
                             <div class="slick-slide-in">
                                 <div class="st-logo-carousel st-style1">
-                                    <img src="{{ asset('assets/img/tpa4.webp') }}" alt="client4">
+                                    <img src="{{ asset('public/assets/img/tpa4.webp') }}" alt="client4">
                                 </div>
                             </div><!-- .slick-slide-in -->
                             <div class="slick-slide-in">
                                 <div class="st-logo-carousel st-style1">
-                                    <img src="{{ asset('assets/img/tpa5.webp') }}" alt="client5">
+                                    <img src="{{ asset('public/assets/img/tpa5.webp') }}" alt="client5">
+                                </div>
+                            </div><!-- .slick-slide-in -->
+                            <div class="slick-slide-in">
+                                <div class="st-logo-carousel st-style1">
+                                    <img src="{{ asset('public/assets/img/tpa6.webp') }}" alt="client5">
                                 </div>
                             </div><!-- .slick-slide-in -->
                         </div>

@@ -20,7 +20,7 @@
         <div class="d-flex align-items-center justify-content-between admin-details">
             {{-- <h3> Department Details</h3> --}}
             <h2 class="text-center my-4 text-uppercase fw-bold flex-grow-1">Blog Details</h2>
-            <div><a class="btn btn-success" href="/addBlog">Add Blogs</a></div>
+            <div><a class="btn btn-success" href="{{ route('addBlog') }}">Add Blogs</a></div>
         </div>
 
         <div class="table-responsive mb-5">
@@ -75,10 +75,11 @@
                                         data-row="{{ json_encode($row) }}" data-label = "Blog Details">
                                         <i class="bi bi-eye"></i>
                                     </button>
-                                    <a href="/blogs/edit/{{ $row['id'] }}" class="btn btn-warning text-uppercase">
+                                    <a href="{{ route('editBlogs', ['id' => $row['id']]) }}"
+                                        class="btn btn-warning text-uppercase">
                                         Edit
                                     </a>
-                                    <form action="/blogs/delete/{{ $row['id'] }}" method="POST"
+                                    <form action="{{ route('blog.destroy', ['id' => $row['id']]) }}" method="POST"
                                         onsubmit="return confirm('Are you sure you want to delete this blog?');">
                                         @csrf
                                         @method('DELETE')
@@ -231,4 +232,13 @@
             });
         });
     </script>
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('alertTitle') ?? 'Error' }}',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
 @endsection

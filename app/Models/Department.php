@@ -14,7 +14,7 @@ class Department extends Model
 
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'department_name', 'image', 'short_details', 'long_details', 'is_active',
+        'department_name', 'image', 'innerImage', 'short_details', 'long_details', 'is_active',
     ];
     public function appointments()
     {

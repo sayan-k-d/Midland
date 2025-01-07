@@ -6,11 +6,11 @@
         <div class="d-flex align-items-center justify-content-between admin-details">
             {{-- <h3> service Details</h3> --}}
             <h2 class="text-center my-4 text-uppercase fw-bold flex-grow-1">Service Details</h2>
-            <div><a class="btn btn-success" href="/addService">Add Service</a></div>
+            <div><a class="btn btn-success" href="{{ route('addservice') }}">Add Service</a></div>
         </div>
 
         <div class="table-responsive mb-5">
-            @include('\cms\layout\dashboard-table', [
+            @include('cms.layout.dashboard-table', [
                 'columns' => [
                     'id' => '#',
                     'service_name' => 'Name',
@@ -23,12 +23,12 @@
                 'wrapContent' => true,
                 'actions' => [
                     [
-                        'url' => fn($id) => "services/edit/$id",
+                        'url' => fn($id) => route('editServices', ['id' => $id]),
                         'class' => 'btn-warning',
                         'label' => 'Edit',
                     ],
                     [
-                        'url' => fn($id) => "services/delete/$id",
+                        'url' => fn($id) => route('service.destroy', ['id' => $id]),
                         'route_name' => 'service.destroy',
                         'class' => 'btn-danger',
                         'label' => 'Delete',
@@ -51,5 +51,13 @@
             });
         </script>
     @endif
-
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('alertTitle') ?? 'Error' }}',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
 @endsection

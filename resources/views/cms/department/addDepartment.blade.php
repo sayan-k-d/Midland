@@ -26,6 +26,15 @@
                     <h3> {{ $editFlag ? 'Edit Department Details' : 'Add Department Details' }}</h3>
                 </div>
             </div>
+            @if (session('error'))
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{{ session('alertTitle') ?? 'Error' }}',
+                        text: '{{ session('error') }}',
+                    });
+                </script>
+            @endif
             <form
                 action="{{ $editFlag ? route('department.update', ['id' => $department->id]) : route('department.store') }}"
                 method="POST" enctype="multipart/form-data">
@@ -48,6 +57,9 @@
                         <div class="form-group mb-3">
                             <label for="image" class="mb-1">Department Image</label>
                             <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                            <small class="form-text text-muted">
+                                Please upload an image with a size of up to 2MB and Dimension of 600 x 400
+                            </small>
                             @if ($editFlag && $department->image)
                                 <div class="mt-2">
                                     <img src="{{ $department->image }}" alt="Department Image"
@@ -79,6 +91,21 @@
                     </div>
                 </div>
 
+                <div class="form-group mb-3">
+                    <label for="innerImage" class="mb-1">Department Inner Banner Image</label>
+                    <input type="file" class="form-control" id="innerImage" name="innerImage" accept="image/*">
+                    <small class="form-text text-muted">Please upload an image with a size of up to 5MB and Dimension of 1920 x 1080
+                    </small>
+                    @if ($editFlag && $department->innerImage)
+                        <div class="mt-2">
+                            <img src="{{ $department->innerImage }}" alt="Department Banner Image"
+                                style="width: 100px; height: auto;">
+                        </div>
+                    @endif
+                    @error('innerImage')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 <div class="form-group mb-3">
                     <label for="short_details" class="mb-1">Short Details</label>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="{{ asset('cms/assets/css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/cms/assets/css/login.css') }}">
 </head>
 
 <body>
@@ -31,7 +31,15 @@
                 {{ $errors->first() }}
             </div>
         @endif
-
+        @if (session('error'))
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: '{{ session('alertTitle') ?? 'Error' }}',
+                    text: '{{ session('error') }}',
+                });
+            </script>
+        @endif
         <!-- Login Form -->
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -41,7 +49,7 @@
             <button type="submit" id="loginButton">Login</button>
         </form>
     </div>
-    <script src="{{ asset('cms/assets/js/login.js') }}"></script>
+    <script src="{{ asset('public/cms/assets/js/login.js') }}"></script>
 </body>
 
 </html>

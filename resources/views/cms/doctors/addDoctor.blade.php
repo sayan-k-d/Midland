@@ -23,7 +23,15 @@
                     <h3>{{ $editFlag ? 'Edit doctor' : 'Add doctor' }}</h3>
                 </div>
             </div>
-
+            @if (session('error'))
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{{ session('alertTitle') ?? 'Error' }}',
+                        text: '{{ session('error') }}',
+                    });
+                </script>
+            @endif
             <form action="{{ $editFlag ? route('doctor.update', $doctor->id) : route('doctor.store') }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
@@ -58,20 +66,44 @@
                     @enderror
                 </div>
 
-                <div class="form-group mb-3">
-                    <label for="image" class="mb-1">Doctor Image</label>
-                    <input type="file" class="form-control" id="image" name="image" accept="image/*" />
-                    <small class="form-text text-muted">
-                        Please upload an image with a size of up to 2MB and a 1:1 aspect ratio (e.g., 100x100, 200x200).
-                    </small>
-                    @if ($editFlag && $doctor->image)
-                        <div class="mt-2">
-                            <img src="{{ $doctor->image }}" alt="Doctor Image" width="100">
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="image" class="mb-1">Doctor Image</label>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/*" />
+                            <small class="form-text text-muted">
+                                Please upload an image with a size of up to 2MB and a 1:1 aspect ratio (e.g., 100x100,
+                                200x200).
+                            </small>
+                            @if ($editFlag && $doctor->image)
+                                <div class="mt-2">
+                                    <img src="{{ $doctor->image }}" alt="Doctor Image" width="100">
+                                </div>
+                            @endif
+                            @error('image')
+                                <div class="text-danger mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
-                    @endif
-                    @error('image')
-                        <div class="text-danger mt-2">{{ $message }}</div>
-                    @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="innerImage" class="mb-1">Doctor Inner Banner Image</label>
+                            <input type="file" class="form-control" id="innerImage" name="innerImage" accept="image/*">
+                            <small class="form-text text-muted">Please upload an image with a size of up to 5MB and Dimension of 1920 x 1080</small>
+                            @if ($editFlag && $doctor->innerImage)
+                                <div class="mt-2">
+                                    <img src="{{ $doctor->innerImage }}" alt="Doctor Banner Image"
+                                        style="width: 100px; height: auto;">
+                                </div>
+                            @endif
+                            @error('innerImage')
+                                <div class="text-danger mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="form-group mb-3">
@@ -109,7 +141,8 @@
                 <div class="form-group mb-3">
                     <label for="education" class="mb-1">Education</label>
                     <input class="form-control" id="education" name="education" required
-                        value="{{ old('education', $doctor->education ?? '') }}" placeholder="Separate With Commas(',')" />
+                        value="{{ old('education', $doctor->education ?? '') }}"
+                        placeholder="Separate With Commas(',')" />
                     @error('education')
                         <div class="text-danger mt-2">{{ $message }}</div>
                     @enderror

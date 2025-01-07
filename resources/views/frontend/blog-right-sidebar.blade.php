@@ -2,7 +2,9 @@
 @section('title', 'Blogs Page')
 @section('content')
     <div class="st-content">
-        <div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg6.jpg') }}">
+        <div class="st-page-heading st-size-md st-dynamic-bg"
+            data-src="{{ $blog->innerImage ?? asset('public/assets/img/hero-bg6.jpg') }}"
+            style="background-size: auto;background-repeat: no-repeat;">
             <div class="container">
                 <div class="st-page-heading-in text-center">
                     <h1 class="st-page-heading-title">Our Latest News</h1>

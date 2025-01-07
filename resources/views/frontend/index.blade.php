@@ -18,7 +18,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="bnr_btn_box">
+                    <div class="bnr_btn_box">Ou
                         <div class="bnr_btn_next">
                             <i class="fa-solid fa-arrow-right"></i>
                         </div>
@@ -45,7 +45,7 @@
                             <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
                                 <img src="{{ $banner->image }}" class="d-block w-100" alt="{{ $banner->banner_title }}">
                                 @if (!empty($banner->banner_title) || !empty($banner->page_url))
-                                    <div class="carousel-caption d-none d-md-block text-start"
+                                    <div class="carousel-caption d-block text-start home_hdr_txt"
                                         style="left: 10%; top: 0; transform: translateY(40%); max-width: 700px;">
                                         <h1 class="text-white">{{ $banner->banner_title }}</h1>
                                         <h5>{{ $banner->description }}</h5>
@@ -71,7 +71,15 @@
                     </div>
                 @endif
             @endif
-
+        @else
+            <div class="st-page-heading st-dynamic-bg" data-src="{{ asset('public/assets/img/bnr_1.webp') }}">
+                <div class="container">
+                    <div class="st-page-heading-in text-center">
+                        <h1 class="st-page-heading-title">Home</h1>
+                        <div class="st-page-heading-subtitle">Expert care for a healthier heart</div>
+                    </div>
+                </div>
+            </div>
         @endif
 
         <!-- End Hero Seciton -->
@@ -243,7 +251,7 @@
         <!-- Start About Seciton -->
         <section class="st-about-wrap" id="about">
             <div class="st-shape-bg">
-                <img src="assets/img/shape/about-bg-shape.svg" alt="shape">
+                <img src="public/assets/img/shape/about-bg-shape.svg" alt="shape">
             </div>
             <div class="st-height-b120 st-height-lg-b50"></div>
             <div class="container">
@@ -251,7 +259,7 @@
                     <h2 class="st-section-heading-title">Who We Are</h2>
                     <div class="st-seperator">
                         <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
-                        <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+                        <div class="st-seperator-center"><img src="public/assets/img/icons/4.png" alt="icon"></div>
                         <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s"></div>
                     </div>
                     <div class="st-section-heading-subtitle">Midland Healthcare has
@@ -288,7 +296,7 @@
                                     <div class="st-height-b25 st-height-lg-b25"></div>
                                     <div class="st-text-block-avatar">
                                         <div class="st-avatar-img"><img
-                                                src="{{ $hod->image ? $hod->image : asset('assets/img/avatar1.png') }}"
+                                                src="{{ $hod->image ? $hod->image : asset('public/assets/img/avatar1.png') }}"
                                                 alt="avatar"></div>
                                         <div class="st-avatar-info">
                                             <h4 class="st-avatar-name">
@@ -386,12 +394,12 @@
             <div class="st-height-b120 st-height-lg-b80"></div>
             <div class="container">
                 <div class="st-section-heading st-style1">
-                    <h2 class="st-section-heading-title">Our department</h2>
+                    <h2 class="st-section-heading-title text-uppercase">Our department</h2>
                     <div class="st-seperator">
                         <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"
                             style="visibility: visible; animation-duration: 1s; animation-delay: 0.2s; animation-name: fadeInLeft;">
                         </div>
-                        <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+                        <div class="st-seperator-center"><img src="public/assets/img/icons/4.png" alt="icon"></div>
                         <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s"
                             style="visibility: visible; animation-duration: 1s; animation-delay: 0.2s; animation-name: fadeInRight;">
                         </div>
@@ -440,6 +448,12 @@
                                 <span>Neurology &amp; neurosurgery</span>
                             </a>
                         </li>
+                        <li class="st-tab-title">
+                            <a href="#Cardiology" class="st-lavender-box">
+                                <i class="fa-solid fa-heart-pulse ficon"></i>
+                                <span>Cardiology</span>
+                            </a>
+                        </li>
                     </ul>
                     <div class="st-height-b25 st-height-lg-b25"></div>
                     <div class="tab-content">
@@ -447,7 +461,7 @@
                             <div class="st-imagebox st-style2">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="st-imagebox-img"><img src="assets/img/crutches.png" alt="service">
+                                        <div class="st-imagebox-img"><img src="public/assets/img/crutches.png" alt="service">
                                         </div>
                                         <div class="st-height-b0 st-height-lg-b30"></div>
                                     </div>
@@ -455,10 +469,10 @@
                                         <div class="st-vertical-middle">
                                             <div class="st-vertical-middle-in">
                                                 <div class="st-imagebox-info">
-                                                    <h2 class="st-imagebox-title">Welcome to our
+                                                    {{-- <h2 class="st-imagebox-title">Welcome to our
                                                         <span>Midland Healthcare &amp;
                                                             Research</span>
-                                                    </h2>
+                                                    </h2> --}}
                                                     <h4 class="st-imagebox-subtitle">Midland Healthcare
                                                         &amp; Research Center offers a complete range of
                                                         compassionate,
@@ -490,17 +504,17 @@
                             <div class="st-imagebox st-style2">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="st-imagebox-img"><img src="assets/img/xray.png" alt="service"></div>
+                                        <div class="st-imagebox-img"><img src="public/assets/img/xray.png" alt="service"></div>
                                         <div class="st-height-b0 st-height-lg-b30"></div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="st-vertical-middle">
                                             <div class="st-vertical-middle-in">
                                                 <div class="st-imagebox-info">
-                                                    <h2 class="st-imagebox-title">Welcome to our
+                                                    {{-- <h2 class="st-imagebox-title">Welcome to our
                                                         <span>Midland Healthcare &amp;
                                                             Research</span>
-                                                    </h2>
+                                                    </h2> --}}
                                                     <h4 class="st-imagebox-subtitle">At Midland
                                                         Healthcare in Lucknow, our thoracic surgery
                                                         department offers a specialized and comprehensive
@@ -534,7 +548,7 @@
                             <div class="st-imagebox st-style2">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="st-imagebox-img"><img src="assets/img/pulmonary.png" alt="service">
+                                        <div class="st-imagebox-img"><img src="public/assets/img/pulmonary.png" alt="service">
                                         </div>
                                         <div class="st-height-b0 st-height-lg-b30"></div>
                                     </div>
@@ -542,10 +556,10 @@
                                         <div class="st-vertical-middle">
                                             <div class="st-vertical-middle-in">
                                                 <div class="st-imagebox-info">
-                                                    <h2 class="st-imagebox-title">Welcome to our
+                                                    {{-- <h2 class="st-imagebox-title">Welcome to our
                                                         <span>Midland Healthcare &amp;
                                                             Research</span>
-                                                    </h2>
+                                                    </h2> --}}
                                                     <h4 class="st-imagebox-subtitle">Midland Healthcare
                                                         is home to one of the pioneer Pulmonary
                                                         rehabilitation Center in Lucknow designed to help
@@ -578,7 +592,7 @@
                             <div class="st-imagebox st-style2">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="st-imagebox-img"><img src="assets/img/cardiology.png" alt="service">
+                                        <div class="st-imagebox-img"><img src="public/assets/img/cardiology.png" alt="service">
                                         </div>
                                         <div class="st-height-b0 st-height-lg-b30"></div>
                                     </div>
@@ -586,10 +600,10 @@
                                         <div class="st-vertical-middle">
                                             <div class="st-vertical-middle-in">
                                                 <div class="st-imagebox-info">
-                                                    <h2 class="st-imagebox-title">Welcome to our
+                                                    {{-- <h2 class="st-imagebox-title">Welcome to our
                                                         <span>Midland Healthcare &amp;
                                                             Research</span>
-                                                    </h2>
+                                                    </h2> --}}
                                                     <h4 class="st-imagebox-subtitle">Respiratory and
                                                         Critical Care Lucknow unit at Midland include the
                                                         diagnosis and management of disorders of the
@@ -624,7 +638,7 @@
                             <div class="st-imagebox st-style2">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="st-imagebox-img"><img src="assets/img/dental-care.png"
+                                        <div class="st-imagebox-img"><img src="public/assets/img/dental-care.png"
                                                 alt="service"></div>
                                         <div class="st-height-b0 st-height-lg-b30"></div>
                                     </div>
@@ -632,10 +646,10 @@
                                         <div class="st-vertical-middle">
                                             <div class="st-vertical-middle-in">
                                                 <div class="st-imagebox-info">
-                                                    <h2 class="st-imagebox-title">Welcome to our
+                                                    {{-- <h2 class="st-imagebox-title">Welcome to our
                                                         <span>Midland Healthcare &amp;
                                                             Research</span>
-                                                    </h2>
+                                                    </h2> --}}
                                                     <h4 class="st-imagebox-subtitle">Midland
                                                         Healthcare’s Urology Department offers a full
                                                         spectrum of advanced diagnostics and treatment for
@@ -667,7 +681,7 @@
                             <div class="st-imagebox st-style2">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="st-imagebox-img"><img src="assets/img/neurology.png" alt="service">
+                                        <div class="st-imagebox-img"><img src="public/assets/img/neurology.png" alt="service">
                                         </div>
                                         <div class="st-height-b0 st-height-lg-b30"></div>
                                     </div>
@@ -675,10 +689,10 @@
                                         <div class="st-vertical-middle">
                                             <div class="st-vertical-middle-in">
                                                 <div class="st-imagebox-info">
-                                                    <h2 class="st-imagebox-title">Welcome to our
+                                                    {{-- <h2 class="st-imagebox-title">Welcome to our
                                                         <span>Midland Healthcare &amp;
                                                             Research</span>
-                                                    </h2>
+                                                    </h2> --}}
                                                     <h4 class="st-imagebox-subtitle">Neurology &amp;
                                                         Neurosurgery a branch of medicine involved with
                                                         prevention, diagnosis, treatment, and
@@ -703,6 +717,36 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="Cardiology" class="st-tab">
+                            <div class="st-imagebox st-style2">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="st-imagebox-img"><img src="public/assets/img/cardiology.png" alt="service">
+                                        </div>
+                                        <div class="st-height-b0 st-height-lg-b30"></div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="st-vertical-middle">
+                                            <div class="st-vertical-middle-in">
+                                                <div class="st-imagebox-info">
+                                                    {{-- <h2 class="st-imagebox-title">Welcome to our
+                                                        <span>Midland Healthcare &amp;
+                                                            Research</span>
+                                                    </h2> --}}
+                                                    <h4 class="st-imagebox-subtitle">Cardiology & Cardiac Surgery, a branch of medicine focused on the prevention, diagnosis, treatment, and management of heart-related disorders, is one of the key specialties at Midland Healthcare.</h4>
+                                                    <div class="st-imagebox-text">Our Cardiac Sciences department, supported by highly experienced Cardiologists in Lucknow, skilled Cardiac Surgeons, and a dedicated team, is renowned as one of the best cardiology and cardiac surgery centers in Lucknow. With a legacy of advanced care, innovation, and excellence, we provide comprehensive heart health solutions, ensuring the best possible outcomes for our patients.</div>
+                                                </div>
+                                                <div class="st-imagebox-btn">
+                                                    <a href="#"
+                                                        class="st-btn st-style1 st-size-medium st-color1">Read
+                                                        More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div><!-- .st-tabs -->
             </div>
@@ -713,10 +757,10 @@
         <!-- Start Service Section -->
         <section id="appointment" class="st-shape-wrap st-gray-bg">
             <div class="st-shape4">
-                <img src="assets/img/shape/section_shape.png" alt="shape1">
+                <img src="public/assets/img/shape/section_shape.png" alt="shape1">
             </div>
             <div class="st-shape6">
-                <img src="assets/img/shape/contact-shape3.svg" alt="shape3">
+                <img src="public/assets/img/shape/contact-shape3.svg" alt="shape3">
             </div>
             <div class="st-height-b120 st-height-lg-b80"></div>
             <div class="container">
@@ -724,14 +768,14 @@
                     <h2 class="st-section-heading-title">Make an appointment</h2>
                     <div class="st-seperator">
                         <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
-                        <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+                        <div class="st-seperator-center"><img src="public/assets/img/icons/4.png" alt="icon"></div>
                         <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s">
                         </div>
                     </div>
-                    <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy
+                    {{-- <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy
                         text of the printing and typesetting
                         industry. <br>Lorem Ipsum the industry's standard dummy
-                        text.</div>
+                        text.</div> --}}
                 </div>
                 <div class="st-height-b40 st-height-lg-b40"></div>
             </div>
@@ -755,7 +799,7 @@
                         <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"
                             style="visibility: visible; animation-duration: 1s; animation-delay: 0.2s; animation-name: fadeInLeft;">
                         </div>
-                        <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+                        <div class="st-seperator-center"><img src="public/assets/img/icons/4.png" alt="icon"></div>
                         <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s"
                             style="visibility: visible; animation-duration: 1s; animation-delay: 0.2s; animation-name: fadeInRight;">
                         </div>
@@ -772,13 +816,13 @@
                         data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="3"
                         data-lg-slides="4" data-add-slides="4">
                         <div class="slick-wrapper slick-initialized slick-slider">
-                            <div class="slick-list draggable">
-                                <div class="slick-track"
-                                    style="opacity: 1; width: 1148px; transform: translate3d(0px, 0px, 0px);">
+                            <div class="slick-list draggable spcl_scroll">
+                                <div class="slick-track d-flex justify-content-center"
+                                    style="opacity: 1; width: 100%; transform: translate3d(0px, 0px, 0px);">
                                     @foreach ($doctors as $index => $doctor)
                                         <div class="slick-slide slick-current slick-active"
                                             data-slick-index="{{ $index }}" aria-hidden="false"
-                                            style="width: 287px;">
+                                            style="width: 287px; min-width: 287px;">
                                             <div>
                                                 <div class="slick-slide-in" style="width: 100%; display: inline-block;">
                                                     <div class="st-member st-style1 st-zoom">
@@ -790,7 +834,7 @@
                                                                     class="fas fa-link"></i></a>
                                                             @if ($doctor->facebook || $doctor->instagram || $doctor->linkedin || $doctor->twitter || $doctor->youtube)
                                                                 <div class="st-member-social-wrap">
-                                                                    <img src="{{ asset('assets/img/shape/member-shape.svg') }}"
+                                                                    <img src="{{ asset('public/assets/img/shape/member-shape.svg') }}"
                                                                         alt="shape" class="st-member-social-bg">
                                                                     <ul class="st-member-social st-mp0">
                                                                         @if ($doctor->facebook)
@@ -825,7 +869,7 @@
                                                         <div class="st-member-meta">
                                                             <div class="st-member-meta-in">
                                                                 <h3 class="st-member-name"><a
-                                                                        href="doctor-profile.html">{{ $doctor->doctor_name }}</a>
+                                                                        href="{{ route('doctor-profile', ['id' => $doctor->id]) }}">{{ $doctor->doctor_name }}</a>
                                                                 </h3>
                                                                 <div class="st-member-designation">Department of
                                                                     {{ $doctor->department }}</div>
@@ -856,21 +900,21 @@
         <!-- End Team Section -->
         <hr>
         <!-- Start gallery Section -->
-        <section id="gallery">
+        <section id="gallery" class="d-none">
             <div class="st-height-b120 st-height-lg-b80"></div>
             <div class="container">
                 <div class="st-section-heading st-style1">
                     <h2 class="st-section-heading-title">View our gallery</h2>
                     <div class="st-seperator">
                         <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
-                        <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+                        <div class="st-seperator-center"><img src="public/assets/img/icons/4.png" alt="icon"></div>
                         <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s">
                         </div>
                     </div>
-                    <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy
+                    {{-- <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy
                         text of the printing and typesetting
                         industry. <br>
-                        Lorem Ipsum the industry's standard dummy text.</div>
+                        Lorem Ipsum the industry's standard dummy text.</div> --}}
                 </div>
                 <div class="st-height-b40 st-height-lg-b40"></div>
             </div>
@@ -889,63 +933,63 @@
                     <div class="st-isotop st-style1 st-port-col-3 st-has-gutter st-lightgallery">
                         <div class="st-grid-sizer"></div>
                         <div class="st-isotop-item cardiology urology">
-                            <a href="assets/img/project1_lg.jpg"
+                            <a href="public/assets/img/project1_lg.jpg"
                                 class="st-project st-zoom st-lightbox-item st-link-hover-wrap">
-                                <div class="st-project-img st-zoom-in"><img src="assets/img/project1.jpg" alt="project1">
+                                <div class="st-project-img st-zoom-in"><img src="public/assets/img/project1.jpg" alt="project1">
                                 </div>
                                 <span class="st-link-hover"><i class="fas fa-arrows-alt"></i></span>
                             </a>
                         </div><!-- .st-isotop-item -->
 
                         <div class="st-isotop-item cardiology neurology">
-                            <a href="assets/img/project2_lg.jpg"
+                            <a href="public/assets/img/project2_lg.jpg"
                                 class="st-project st-zoom st-lightbox-item st-link-hover-wrap">
-                                <div class="st-project-img st-zoom-in"><img src="assets/img/project2.jpg" alt="project2">
+                                <div class="st-project-img st-zoom-in"><img src="public/assets/img/project2.jpg" alt="project2">
                                 </div>
                                 <span class="st-link-hover"><i class="fas fa-arrows-alt"></i></span>
                             </a>
                         </div><!-- .st-isotop-item -->
 
                         <div class="st-isotop-item urology pulmonary">
-                            <a href="assets/img/project3_lg.jpg"
+                            <a href="public/assets/img/project3_lg.jpg"
                                 class="st-project st-zoom st-lightbox-item st-link-hover-wrap">
-                                <div class="st-project-img st-zoom-in"><img src="assets/img/project3.jpg" alt="project3">
+                                <div class="st-project-img st-zoom-in"><img src="public/assets/img/project3.jpg" alt="project3">
                                 </div>
                                 <span class="st-link-hover"><i class="fas fa-arrows-alt"></i></span>
                             </a>
                         </div><!-- .st-isotop-item -->
 
                         <div class="st-isotop-item neurology traumatology">
-                            <a href="assets/img/project4_lg.jpg"
+                            <a href="public/assets/img/project4_lg.jpg"
                                 class="st-project st-zoom st-lightbox-item st-link-hover-wrap">
-                                <div class="st-project-img st-zoom-in"><img src="assets/img/project4.jpg" alt="project4">
+                                <div class="st-project-img st-zoom-in"><img src="public/assets/img/project4.jpg" alt="project4">
                                 </div>
                                 <span class="st-link-hover"><i class="fas fa-arrows-alt"></i></span>
                             </a>
                         </div><!-- .st-isotop-item -->
 
                         <div class="st-isotop-item cardiology pulmonary">
-                            <a href="assets/img/project5_lg.jpg"
+                            <a href="public/assets/img/project5_lg.jpg"
                                 class="st-project st-zoom st-lightbox-item st-link-hover-wrap">
-                                <div class="st-project-img st-zoom-in"><img src="assets/img/project5.jpg" alt="project5">
+                                <div class="st-project-img st-zoom-in"><img src="public/assets/img/project5.jpg" alt="project5">
                                 </div>
                                 <span class="st-link-hover"><i class="fas fa-arrows-alt"></i></span>
                             </a>
                         </div><!-- .st-isotop-item -->
 
                         <div class="st-isotop-item neurology traumatology">
-                            <a href="assets/img/project6_lg.jpg"
+                            <a href="public/assets/img/project6_lg.jpg"
                                 class="st-project st-zoom st-lightbox-item st-link-hover-wrap">
-                                <div class="st-project-img st-zoom-in"><img src="assets/img/project6.jpg" alt="project6">
+                                <div class="st-project-img st-zoom-in"><img src="public/assets/img/project6.jpg" alt="project6">
                                 </div>
                                 <span class="st-link-hover"><i class="fas fa-arrows-alt"></i></span>
                             </a>
                         </div><!-- .st-isotop-item -->
 
                         <div class="st-isotop-item urology pulmonary traumatology">
-                            <a href="assets/img/project7_lg.jpg"
+                            <a href="public/assets/img/project7_lg.jpg"
                                 class="st-project st-zoom st-lightbox-item st-link-hover-wrap">
-                                <div class="st-project-img st-zoom-in"><img src="assets/img/project7.jpg" alt="project6">
+                                <div class="st-project-img st-zoom-in"><img src="public/assets/img/project7.jpg" alt="project6">
                                 </div>
                                 <span class="st-link-hover"><i class="fas fa-arrows-alt"></i></span>
                             </a>
@@ -960,7 +1004,7 @@
         <!-- Start FunFact Aection -->
         <section class="st-gray-bg st-shape-wrap">
             <div class="st-shape4">
-                <img src="assets/img/shape/section_shape.png" alt="shape1">
+                <img src="public/assets/img/shape/section_shape.png" alt="shape1">
             </div>
             <div class="st-height-b120 st-height-lg-b80"></div>
             <div class="container">
@@ -985,7 +1029,7 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <h2 class="st-funfact-number st-counter">20</h2>
+                                    <h2 class="st-funfact-number st-counter">11</h2>
                                     <div class="st-funfact-title">Years of experience</div>
                                 </div>
                                 <div class="st-height-b30 st-height-lg-b30"></div>
@@ -1075,7 +1119,7 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <h2 class="st-funfact-number st-counter">2354</h2>
+                                    <h2 class="st-funfact-number">1 Lakh+</h2>
                                     <div class="st-funfact-title">Happy Patients</div>
                                 </div>
                                 <div class="st-height-b30 st-height-lg-b30"></div>
@@ -1161,7 +1205,7 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <h2 class="st-funfact-number st-counter">99</h2>
+                                    <h2 class="st-funfact-number">75+</h2>
                                     <div class="st-funfact-title">Qualified Doctors</div>
                                 </div>
                                 <div class="st-height-b30 st-height-lg-b30"></div>
@@ -1189,8 +1233,8 @@
                     <div class="col-xl-6 wow fadeInRight" data-wow-duration="0.8s" data-wow-delay="0.2s">
                         <div class="st-video-block st-style1 st-zoom">
                             <div class="st-video-block-img st-zoom-in st-dynamic-bg"
-                                data-src="assets/img/video-block-img.jpg"></div>
-                            <a href="https://www.youtube.com/embed/jRcfE2xxSAw?autoplay=1"
+                                data-src="public/assets/img/video-block-img.jpg"></div>
+                            <a href="https://www.youtube.com/embed/Y1EJC9on0-4?autoplay=1"
                                 class="st-play-btn st-style1 st-video-open">
                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 336 336"
@@ -1233,7 +1277,7 @@
                         <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"
                             style="visibility: visible; animation-duration: 1s; animation-delay: 0.2s; animation-name: fadeInLeft;">
                         </div>
-                        <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+                        <div class="st-seperator-center"><img src="public/assets/img/icons/4.png" alt="icon"></div>
                         <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s"
                             style="visibility: visible; animation-duration: 1s; animation-delay: 0.2s; animation-name: fadeInRight;">
                         </div>
@@ -1261,7 +1305,7 @@
                                                     style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInLeft;">
                                                     <div class="st-testimonial-info">
                                                         <!--<div class="st-testimonial-img"><img-->
-                                                        <!--    src="assets/img/avatar2.png" alt="avatar1"></div>-->
+                                                        <!--    src="public/assets/img/avatar2.png" alt="avatar1"></div>-->
                                                         <div class="st-testimonial-meta">
                                                             <h4 class="st-testimonial-name">Shruti
                                                                 Agarwal</h4>
@@ -1287,7 +1331,7 @@
                                                 <div class="st-testimonial st-style1">
                                                     <div class="st-testimonial-info">
                                                         <!--<div class="st-testimonial-img"><img-->
-                                                        <!--    src="assets/img/avatar3.png" alt="avatar2"></div>-->
+                                                        <!--    src="public/assets/img/avatar3.png" alt="avatar2"></div>-->
                                                         <div class="st-testimonial-meta">
                                                             <h4 class="st-testimonial-name">George PRT</h4>
                                                             <div class="st-testimonial-designation">Thailand</div>
@@ -1315,7 +1359,7 @@
                                                     style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInRight;">
                                                     <div class="st-testimonial-info">
                                                         <!--<div class="st-testimonial-img"><img-->
-                                                        <!--    src="assets/img/avatar4.png" alt="avatar3"></div>-->
+                                                        <!--    src="public/assets/img/avatar4.png" alt="avatar3"></div>-->
                                                         <div class="st-testimonial-meta">
                                                             <h4 class="st-testimonial-name">Neetu
                                                                 Rastogi</h4>
@@ -1357,7 +1401,7 @@
         <!-- Start FAQ Section -->
         <section class="st-faq-wrap st-shape-wrap">
             <div class="st-shape5">
-                <img src="assets/img/shape/faq-bg.svg" alt="shape1">
+                <img src="public/assets/img/shape/faq-bg.svg" alt="shape1">
             </div>
             <div class="st-height-b120 st-height-lg-b80"></div>
             <div class="container">
@@ -1366,7 +1410,7 @@
                         <div class="st-vertical-middle">
                             <div class="st-vertical-middle-in">
                                 <div class="st-faq-img">
-                                    <img src="assets/img/faq-img.png" alt="Faq Image">
+                                    <img src="public/assets/img/faq-img.png" alt="Faq Image">
                                 </div>
                             </div>
                         </div>
@@ -1443,7 +1487,7 @@
                     <h2 class="st-section-heading-title">Latest News</h2>
                     <div class="st-seperator">
                         <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
-                        <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+                        <div class="st-seperator-center"><img src="public/assets/img/icons/4.png" alt="icon"></div>
                         <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s">
                         </div>
                     </div>
@@ -1505,27 +1549,32 @@
                         <div class="slick-wrapper">
                             <div class="slick-slide-in">
                                 <div class="st-logo-carousel st-style1">
-                                    <img src="assets/img/tpa1.webp" alt="client1">
+                                    <img src="public/assets/img/tpa1.webp" alt="client1">
                                 </div>
                             </div><!-- .slick-slide-in -->
                             <div class="slick-slide-in">
                                 <div class="st-logo-carousel st-style1">
-                                    <img src="assets/img/tpa2.webp" alt="client2">
+                                    <img src="public/assets/img/tpa2.webp" alt="client2">
                                 </div>
                             </div><!-- .slick-slide-in -->
                             <div class="slick-slide-in">
                                 <div class="st-logo-carousel st-style1">
-                                    <img src="assets/img/tpa3.webp" alt="client3">
+                                    <img src="public/assets/img/tpa3.webp" alt="client3">
                                 </div>
                             </div><!-- .slick-slide-in -->
                             <div class="slick-slide-in">
                                 <div class="st-logo-carousel st-style1">
-                                    <img src="assets/img/tpa4.webp" alt="client4">
+                                    <img src="public/assets/img/tpa4.webp" alt="client4">
                                 </div>
                             </div><!-- .slick-slide-in -->
                             <div class="slick-slide-in">
                                 <div class="st-logo-carousel st-style1">
-                                    <img src="assets/img/tpa5.webp" alt="client5">
+                                    <img src="public/assets/img/tpa5.webp" alt="client5">
+                                </div>
+                            </div><!-- .slick-slide-in -->
+                            <div class="slick-slide-in">
+                                <div class="st-logo-carousel st-style1">
+                                    <img src="public/assets/img/tpa6.webp" alt="client6">
                                 </div>
                             </div><!-- .slick-slide-in -->
                         </div>
@@ -1545,8 +1594,8 @@
 
         <!-- Start Contact Section -->
         <section class="st-shape-wrap" id="contact">
-            <div class="st-shape1"><img src="assets/img/shape/contact-shape1.svg" alt="shape1"></div>
-            <div class="st-shape2"><img src="assets/img/shape/contact-shape2.svg" alt="shape2"></div>
+            <div class="st-shape1"><img src="public/assets/img/shape/contact-shape1.svg" alt="shape1"></div>
+            <div class="st-shape2"><img src="public/assets/img/shape/contact-shape2.svg" alt="shape2"></div>
             <div class="st-height-b120 st-height-lg-b80"></div>
             <div class="container">
                 <div class="st-section-heading st-style1">
@@ -1554,14 +1603,14 @@
                     <div class="st-seperator">
                         <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s">
                         </div>
-                        <div class="st-seperator-center"><img src="assets/img/icons/4.png" alt="icon"></div>
+                        <div class="st-seperator-center"><img src="public/assets/img/icons/4.png" alt="icon"></div>
                         <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s">
                         </div>
                     </div>
-                    <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy
+                    {{-- <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy
                         text of the printing and typesetting
                         industry. <br>Lorem Ipsum the industry's standard dummy
-                        text.</div>
+                        text.</div> --}}
                 </div>
                 <div class="st-height-b40 st-height-lg-b40"></div>
             </div>

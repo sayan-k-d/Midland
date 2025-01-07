@@ -23,7 +23,15 @@
                     <h3>{{ $editFlag ? 'Edit Service' : 'Add Service' }}</h3>
                 </div>
             </div>
-
+            @if (session('error'))
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{{ session('alertTitle') ?? 'Error' }}',
+                        text: '{{ session('error') }}',
+                    });
+                </script>
+            @endif
             <form action="{{ $editFlag ? route('service.update', $service->id) : route('service.store') }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
@@ -45,6 +53,8 @@
                         <div class="form-group mb-3">
                             <label for="image" class="mb-1">Service Image</label>
                             <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                            <small class="form-text text-muted">Please upload an image with a size of up to 2MB and Dimension of 600 x 400
+                            </small>
                             @if ($editFlag && $service->image)
                                 <div class="mt-2">
                                     <img src="{{ $service->image }}" alt="Service Image" width="100">
@@ -74,7 +84,21 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="form-group mb-3">
+                    <label for="innerImage" class="mb-1">Service Inner Banner Image</label>
+                    <input type="file" class="form-control" id="innerImage" name="innerImage" accept="image/*">
+                    <small class="form-text text-muted">Please upload an image with a size of up to 5MB and Dimension of 1920 x 1080
+                    </small>
+                    @if ($editFlag && $service->innerImage)
+                        <div class="mt-2">
+                            <img src="{{ $service->innerImage }}" alt="Service Banner Image"
+                                style="width: 100px; height: auto;">
+                        </div>
+                    @endif
+                    @error('innerImage')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
                 <div class="form-group mb-3">
                     <label for="short_details" class="mb-1">Short Details</label>
                     <textarea class="form-control" id="short_details" name="short_details" rows="3" required>{{ old('short_details', $service->short_details ?? '') }}</textarea>

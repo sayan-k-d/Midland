@@ -6,11 +6,11 @@
         <div class="d-flex align-items-center justify-content-between admin-details">
             {{-- <h3> Department Details</h3> --}}
             <h2 class="text-center my-4 text-uppercase fw-bold flex-grow-1">Department Details</h2>
-            <div><a class="btn btn-success" href="/addDepartment">Add Department</a></div>
+            <div><a class="btn btn-success" href="{{ route('addDepartment') }}">Add Department</a></div>
         </div>
 
         <div class="table-responsive mb-5">
-            @include('\cms\layout\dashboard-table', [
+            @include('cms.layout.dashboard-table', [
                 'columns' => [
                     'id' => '#',
                     'department_name' => 'Name',
@@ -23,12 +23,12 @@
                 'wrapContent' => true,
                 'actions' => [
                     [
-                        'url' => fn($id) => "/department/edit/$id",
+                        'url' => fn($id) => route('editDepartment', ['id' => $id]),
                         'class' => 'btn-warning',
                         'label' => 'Edit',
                     ],
                     [
-                        'url' => fn($id) => "/department/delete/$id",
+                        'url' => fn($id) => route('department.destroy', ['id' => $id]),
                         'route_name' => 'department.destroy',
                         'class' => 'btn-danger',
                         'label' => 'Delete',
@@ -57,6 +57,15 @@
                 icon: 'error',
                 title: 'Cannot Delete',
                 text: "{{ $errors->first('doctorIsHead') }}",
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('alertTitle') ?? 'Error' }}',
+                text: '{{ session('error') }}',
             });
         </script>
     @endif

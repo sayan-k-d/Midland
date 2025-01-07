@@ -3,7 +3,7 @@
 @section('content')
     <div class="st-content">
         {{-- @foreach ($banners as $banner)
-            <!-- <div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg6.jpg') }}"> -->
+            <!-- <div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ asset('public/assets/img/hero-bg6.jpg') }}"> -->
             <div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ $banner->image }}">
                 <div class="container">
                     <div class="st-page-heading-in text-center">
@@ -60,7 +60,7 @@
 
                                 @if (!empty($banner->page_url))
                                     <div class="st-hero-btn">
-                                        <a href="/frontend/appointment"
+                                        <a href="{{ route('appointment') }}"
                                             class="st-btn st-style1 st-color1 st-smooth-move">Appointment</a>
                                     </div>
                                 @endif
@@ -69,7 +69,19 @@
                     </div>
                 @endif
             @endif
-
+        @else
+            <div class="st-page-heading st-dynamic-bg" data-src="{{ asset('public/assets/img/hero-bg2.jpg') }}">
+                <div class="container">
+                    <div class="st-page-heading-in text-center">
+                        <h1 class="st-page-heading-title">Doctors</h1>
+                        <div class="st-page-heading-subtitle mb-4">Our diversified team of experienced and renowned physicians and surgeons is dedicated to providing the best possible care.</div>
+                        <div class="st-hero-btn">
+                            <a href="{{ route('appointment') }}"
+                                class="st-btn st-style1 st-color1 st-smooth-move">Appointment</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endif
         <div class="st-height-b100 st-height-lg-b80"></div>
         <div class="container">
@@ -79,9 +91,9 @@
                     <h3>Founder, Head of Department</h3>
                     <div class="st-post st-style3 st-zoom st_departments_otr st_doc_otr mt-4">
                         <div class="founder_img">
-                            <a href="{{ route('doctor-profile', ['id' => $hod->id]) }}" class="st-post-thumb">
+                            <a href="{{ route('doctor-profile', ['id' => @$hod->id]) }}" class="st-post-thumb">
                                 <img class="st-zoom-in"
-                                    src="{{ $hod->isHead && $hod->image ? $hod->image : asset('assets/img/user.png') }}"
+                                    src="{{ @$hod->isHead && @$hod->image ? @$hod->image : asset('public/assets/img/doctor.jpg') }}"
                                     alt="blog1">
 
                             </a>
@@ -89,18 +101,18 @@
                         <div class="founder_details">
                             <div class="st-post-info">
                                 <h2 class="st-post-title blue_text"><a
-                                        href="{{ route('doctor-profile', ['id' => $hod->id]) }}">
-                                        {{ $hod->isHead ? $hod->doctor_name : 'N/A' }}</a></h2>
+                                        href="{{ route('doctor-profile', ['id' => @$hod->id]) }}">
+                                        {{ @$hod->isHead ? @$hod->doctor_name : 'N/A' }}</a></h2>
                                 <div class="st-post-meta">
-                                    <span class="st-post-date">Department of {{ $hod->isHead ? $hod->department : 'N/A' }}
+                                    <span class="st-post-date">Department of {{ @$hod->isHead ? @$hod->department : 'N/A' }}
                                     </span>
                                 </div>
-                                <div class="st-post-text">{{ $hod->isHead ? $hod->biography : 'N/A' }}
+                                <div class="st-post-text">{{ @$hod->isHead ? @$hod->biography : 'N/A' }}
 
                                 </div>
                             </div>
                             <div class="st-post-footer">
-                                <a href="{{ route('doctor-profile', ['id' => $hod->id]) }}"
+                                <a href="{{ route('doctor-profile', ['id' => @$hod->id]) }}"
                                     class="st-btn st-style2 st-color1 st-size-medium">Read
                                     More</a>
                             </div>
@@ -286,7 +298,7 @@
                                         <a href="{{ route('doctor-profile', ['id' => $doctor->id]) }}"
                                             class="st-post-thumb doctor-image">
                                             <img class="st-zoom-in"
-                                                src="{{ $doctor->image ? $doctor->image : asset('assets/img/user.png') }}"
+                                                src="{{ $doctor->image ? $doctor->image : asset('public/assets/img/doctor.jpg') }}"
                                                 alt="blog1">
                                         </a>
                                         <div class="st-post-info ">
@@ -324,15 +336,7 @@
                     </div>
 
                 </div>
-
-                <div class="pagination" id="pagination">
-                    @if ($totalDoctors > $maxPageLimit)
-                        <div class="text-center pagination-container">
-                            {{ $doctors->links() }}
-                        </div>
-                    @endif
-                </div>
-
+                
             </div>
         </div>
         <div class="st-height-b100 st-height-lg-b80"></div>

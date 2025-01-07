@@ -45,7 +45,14 @@
                     </div>
                 @endif
             @endif
-
+        @else
+            <div class="st-page-heading st-dynamic-bg" data-src="{{ asset('public/assets/img/hero-bg6.jpg') }}">
+                <div class="container">
+                    <div class="st-page-heading-in text-center">
+                        <h1 class="st-page-heading-title">Departments</h1>
+                    </div>
+                </div>
+            </div>
         @endif
         <div class="st-height-b100 st-height-lg-b80"></div>
         <div class="container">
@@ -57,7 +64,7 @@
                                 class="st-post st-style3 st-zoom st_departments_otr departments-card d-flex flex-column justify-content-between overflow-hidden">
                                 <a href="{{ route('department.details', ['id' => $department->id]) }}"
                                     class="st-post-thumb">
-                                    <img class="st-zoom-in" src="{{ $department->image }}" alt="blog1">
+                                    <img class="st-zoom-in" src="{{ $department->image ?? asset('public/assets/img/department.jpg') }}" alt="blog1">
                                 </a>
                                 <div class="st-post-info">
                                     <h2 class="st-post-title"><a
@@ -126,7 +133,7 @@
                                 </div>
                                 <div class="st-height-b30 st-height-lg-b30"></div>
                               </div> -->
-                <div class="col-lg-12">
+                {{-- <div class="col-lg-12">
                     @if ($totaldepartment > $maxPageLimit)
                         <div class="text-center pagination-container">
                             {{ $departments->links() }}
@@ -141,7 +148,7 @@
                                   <li class="page-item"><a class="page-link" href="#">3</a></li>
                                   <li class="page-item"><a class="page-link" href="#">Next</a></li>
                                 </ul> -->
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="st-height-b100 st-height-lg-b80"></div>

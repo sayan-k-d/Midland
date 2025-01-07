@@ -3,15 +3,14 @@
 @section('content')
     <div class="st-content">
         <!-- Start Doctors Profile -->
-        <div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg6.jpg') }}">
+        <div class="st-page-heading st-dynamic-bg" style="background-size: auto;"
+            data-src="{{ $doctor->innerImage ?? asset('public/assets/img/hero-bg6.jpg') }}">
             <div class="container">
                 <div class="st-page-heading-in text-center">
                     <h1 class="st-page-heading-title">Doctors Profile</h1>
-                    <div class="st-page-heading-subtitle mb-4"></div>
                 </div>
             </div>
         </div>
-
         <div class="st-perloader">
             <div class="st-perloader-in">
                 <div class="st-wave-first">
@@ -37,7 +36,7 @@
         <div class="st-height-b125 st-height-lg-b80"></div>
         <section class="st-shape-wrap">
             <div class="st-shape6">
-                <img src="{{ asset('assets/img/shape/contact-shape3.svg') }}" alt="shape3">
+                <img src="{{ asset('public/assets/img/shape/contact-shape3.svg') }}" alt="shape3">
             </div>
             <div class="container">
                 <div class="row">
@@ -45,12 +44,12 @@
                         <div class="st-doctors-info-left">
                             <div class="st-member st-style1 st-zoom">
                                 <div class="st-member-img">
-                                    <img src="{{ $doctor->image ? $doctor->image : asset('assets/img/user.png') }}" alt
-                                        class="st-zoom-in">
+                                    <img src="{{ $doctor->image ? $doctor->image : asset('public/assets/img/doctor.jpg') }}"
+                                        alt class="st-zoom-in">
                                     @if ($doctor->facebook || $doctor->instagram || $doctor->linkedin || $doctor->twitter || $doctor->youtube)
                                         <div class="st-member-social-wrap">
-                                            <img src="{{ asset('assets/img/shape/member-shape.svg') }}" alt="shape"
-                                                class="st-member-social-bg">
+                                            <img src="{{ asset('public/assets/img/shape/member-shape.svg') }}"
+                                                alt="shape" class="st-member-social-bg">
                                             <ul class="st-member-social st-mp0">
                                                 @if ($doctor->facebook)
                                                     <li><a href="{{ $doctor->facebook }}"><i
@@ -202,23 +201,24 @@
         <hr>
         <!-- Start Service Section -->
         <section id="section2" class="st-shape-wrap">
-            <div class="st-shape2"><img src="{{ asset('assets/img/shape/contact-shape2.svg') }}" alt="shape2"></div>
+            <div class="st-shape2"><img src="{{ asset('public/assets/img/shape/contact-shape2.svg') }}" alt="shape2">
+            </div>
             <div class="st-height-b120 st-height-lg-b80"></div>
             <div class="container">
                 <div class="st-section-heading st-style1">
                     <h2 class="st-section-heading-title">Make an appointment</h2>
                     <div class="st-seperator">
                         <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
-                        <div class="st-seperator-center"><img src="{{ asset('assets/img/icons/4.png') }}"
+                        <div class="st-seperator-center"><img src="{{ asset('public/assets/img/icons/4.png') }}"
                                 alt="icon">
                         </div>
                         <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s">
                         </div>
                     </div>
-                    <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy
+                    {{-- <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy
                         text of the printing and typesetting
                         industry. <br>Lorem Ipsum the industry's standard dummy
-                        text.</div>
+                        text.</div> --}}
                 </div>
                 <div class="st-height-b40 st-height-lg-b40"></div>
             </div>
@@ -386,9 +386,10 @@
                     overlay.style.display = 'none';
                     errorMessage.textContent = '';
                     doctorDropdown.innerHTML = '<option value="">Select Doctor</option>'; // Reset options
-
+                    var fetchUrl = "{{ route('getDoctorsOfDepartment', ['departmentId' => ':id']) }}"
+                        .replace(':id', departmentId);
                     // Fetch doctors based on the selected department
-                    fetch('/get-doctors/' + departmentId)
+                    fetch(fetchUrl)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Network response was not ok');
@@ -431,5 +432,13 @@
             });
         });
     </script>
-
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('alertTitle') ?? 'Error' }}',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
 @endsection

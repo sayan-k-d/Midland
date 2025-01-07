@@ -12,7 +12,7 @@
     <!-- Page Title -->
     <title>Midland Healthcare & Research</title>
     <!-- Favicon Icon -->
-    <link rel="icon" href="{{ asset('assets/img/favicon.png') }}" />
+    <link rel="icon" href="{{ asset('public/assets/img/favicon.png') }}" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -22,15 +22,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/lightgallery.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/jQueryUi.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/textRotate.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/assets/css/fontawesome.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/assets/css/slick.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/assets/css/lightgallery.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/assets/css/animate.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/assets/css/jQueryUi.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/assets/css/textRotate.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/assets/css/select2.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/assets/css/style.css') }}" />
     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 </head>
 
@@ -101,7 +101,7 @@
                 <div class="st-main-header-in">
                     <div class="st-main-header-left">
                         <a class="st-site-branding" href="index.html"><img
-                                src="{{ asset('assets/img/logo_white.png') }}" alt="Nischinto"></a>
+                                src="{{ asset('public/assets/img/logo_white.png') }}" alt="Nischinto"></a>
                     </div>
                     <div class="st-main-header-right">
                         <div class="st-nav">

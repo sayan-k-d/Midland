@@ -3,7 +3,8 @@
 @section('content')
     <div id="blogEditor">
         <div class="st-content">
-            <div class="st-page-heading st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg2.jpg') }}">
+            <div class="st-page-heading st-dynamic-bg"
+                data-src="{{ $blog->innerImage ?? asset('public/assets/img/hero-bg2.jpg') }}" style="background-size: auto;">
                 <div class="container">
                     <div class="st-page-heading-in text-center">
                         <h1 class="st-page-heading-title">Midland Healthcare: {{ $blog->title }}</h1>
@@ -80,7 +81,7 @@
                                         <div class="comment-body">
                                             <div class="comment-meta">
                                                 <div class="comment-author">
-                                                    <img src="{{ asset('assets/img/comment1.jpg') }}" alt="comment1"
+                                                    <img src="{{ asset('public/assets/img/comment1.jpg') }}" alt="comment1"
                                                         class="avatar">
                                                     <a href="#" class="nm">Smith Jhon</a>
                                                 </div><!-- .comment-author -->
@@ -99,8 +100,8 @@
                                                 <div class="comment-body">
                                                     <div class="comment-meta">
                                                         <div class="comment-author">
-                                                            <img src="{{ asset('assets/img/comment2.jpg') }}" alt="comment1"
-                                                                class="avatar">
+                                                            <img src="{{ asset('public/assets/img/comment2.jpg') }}"
+                                                                alt="comment1" class="avatar">
                                                             <span class="nm"><a href="#">Robat
                                                                     Newman</a></span>
                                                         </div><!-- .comment-author -->
@@ -122,7 +123,7 @@
                                         <div class="comment-body">
                                             <div class="comment-meta">
                                                 <div class="comment-author">
-                                                    <img src="{{ asset('assets/img/comment1.jpg') }}" alt="comment1"
+                                                    <img src="{{ asset('public/assets/img/comment1.jpg') }}" alt="comment1"
                                                         class="avatar">
                                                     <span class="nm"><a href="#">Hannibal
                                                             Lecter</a></span>
@@ -203,7 +204,8 @@
                                                         href="{{ route('blog-details-right', ['id' => $recentBlog->id]) }}">{{ $recentBlog->title }}</a>
                                                 </h2>
                                                 <div class="st-post-date">
-                                                    {{ \Carbon\Carbon::parse($recentBlog->created_at)->format('F j, Y') }}</div>
+                                                    {{ \Carbon\Carbon::parse($recentBlog->created_at)->format('F j, Y') }}
+                                                </div>
                                             </div>
                                         </div>
                                     </li>

@@ -762,7 +762,11 @@ hr {
     fill: #9ea0a5;
     background-color: rgba(158, 160, 165, 0.1);
 }
-
+.st-lavender-box {
+    color: #5e548e;
+    fill: #5e548e;
+    background-color: rgba(207, 186, 240, 0.1);
+}
 .st-pink-box {
     color: #ff375f;
     fill: #ff375f;
@@ -1701,13 +1705,14 @@ hr {
     }
 
     .st-nav .st-nav-list {
+        z-index:20;
         position: absolute;
         width: 100vw;
         left: 0;
         background-color: #07b6cb;
         padding: 10px 0;
         display: none;
-        top: 100%;
+        top: 80px;
         border-top: 1px solid #eaeaea;
         border-bottom: 1px solid #eaeaea;
         overflow: auto;
@@ -2200,6 +2205,11 @@ hr {
     margin-right: -15px;
 }
 
+.st-slider .spcl_scroll {
+    position: relative;
+    overflow-x: auto;
+}
+
 .st-slider.st-style2 .slick-arrow {
     -webkit-box-shadow: 0px 5px 10px 0px rgba(106, 106, 106, 0.15);
     box-shadow: 0px 5px 10px 0px rgba(106, 106, 106, 0.15);
@@ -2313,7 +2323,11 @@ hr {
         display: block;
         margin-top: 20px;
     }
-
+    
+    .slick-track {
+        justify-content: normal !important;
+    }
+    
     .st-slider .pagination.st-style1 ul,
     .st-slider .pagination.st-style2 ul {
         -webkit-box-pack: center;
@@ -2445,7 +2459,7 @@ hr {
 .st-hero.st-style1 .st-appointment-form {
     width: 460px;
     background: #fff;
-    padding: 60px 40px;
+    padding: 60px 20px;
     border-radius: 20px;
     position: absolute;
     top: 50%;
@@ -5773,6 +5787,31 @@ hr {
         font-size: 20px;
         margin-top: 20px;
     }
+    
+      .st-sticky-header {
+        position: static;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .home_hdr_txt {
+        /*top: 20% !important;*/
+        transform: translate(-50%, 0%) !important;
+        text-align: center !important;
+        left: 50% !important;
+    }
+    
+    .home_hdr_txt h1 {
+        font-size: 30px;
+    }
+    
+     .home_hdr_txt h5 {
+        font-size: 13px;
+    }
+    
+    .carousel-item .btn {
+        padding: 0.5rem 1rem !important;
+    }
 }
 
 @media screen and (max-width: 575px) {
@@ -5785,6 +5824,37 @@ hr {
         width: 100%;
         margin-bottom: 15px;
     }
+    
+    .home_hdr_txt {
+        /*top: 15% !important;*/
+        text-align: center !important;
+    }
+    
+       .home_hdr_txt h1 {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    
+     .home_hdr_txt h5 {
+        font-size: 11px;
+        margin-bottom: 0;
+    }
+    
+    .carousel-item .btn {
+        font-size: 13px;
+    }
+    
+}
+
+@media screen and (max-width: 413px) {
+    .home_hdr_txt {
+        top: 0 !important;
+    }
+    
+    .carousel-item .btn {
+        padding: 0.2rem 1rem !important;
+    }
+    
 }
 
 /*--------------------------------------------------------------
@@ -6923,6 +6993,10 @@ hr {
     background-color: #9ea0a5;
 }
 
+.st-tab-links.st-style1 li.active a.st-lavender-box {
+    color: #5e548e;
+    background-color: #cfbaf0;
+}
 .st-tab-links.st-style1 li.active a.st-gray-box:before {
     background-color: #9ea0a5;
 }
@@ -8128,7 +8202,7 @@ RTL - Right to Left
 .departments-card,
 .services-card,
 .doctors-card {
-    height: 400px;
+    height: 450px;
 }
 .blog-card {
     max-height: 550px;
@@ -8316,4 +8390,40 @@ RTL - Right to Left
     border-radius: 5px;
     display: inline-block;
     margin-top: 10px;
+}
+
+@media screen and (max-width: 991px) {
+    .doctor-image {
+        img{
+            height: 100%;
+        }
+    }
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        img {
+            width: auto !important;
+        }
+        .st-post-info .st-post-meta {
+            justify-content: center;
+        }
+    }
+}
+
+.achievement-list li::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #489fb5;
+    top: 50%;
+    left: 0%;
+    transform: translate(-100%, -50%);
+    border-radius: 50%;
+}
+
+@media (max-width: 575px) {
+    .achievement-list li::before {
+        display: none;
+    }
 }

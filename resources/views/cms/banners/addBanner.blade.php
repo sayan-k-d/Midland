@@ -9,7 +9,15 @@
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
-
+            @if (session('error'))
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{{ session('alertTitle') ?? 'Error' }}',
+                        text: '{{ session('error') }}',
+                    });
+                </script>
+            @endif
             <form action="{{ $editFlag ? route('banners.update', ['id' => $banner->id]) : route('banners.store') }}"
                 method="POST" enctype="multipart/form-data">
                 @csrf

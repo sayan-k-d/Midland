@@ -4,7 +4,7 @@
 
     <div class="st-content">
         {{-- @foreach ($banners as $banner)
-        <!--<div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ asset('assets/img/hero-bg6.jpg') }}"> -->
+        <!--<div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ asset('public/assets/img/hero-bg6.jpg') }}"> -->
         <div class="st-page-heading st-size-md st-dynamic-bg" data-src="{{ $banner->image }}">
             <div class="container">
                 <div class="st-page-heading-in text-center">
@@ -56,7 +56,14 @@
                     </div>
                 @endif
             @endif
-
+        @else
+            <div class="st-page-heading st-dynamic-bg" data-src="{{ asset('public/assets/img/hero-bg5.jpg') }}">
+                <div class="container">
+                    <div class="st-page-heading-in text-center">
+                        <h1 class="st-page-heading-title">Services</h1>
+                    </div>
+                </div>
+            </div>
         @endif
         <div class="st-height-b100 st-height-lg-b80"></div>
         <div class="container">
@@ -67,7 +74,7 @@
                             <div
                                 class="st-post st-style3 st-zoom st_departments_otr services-card d-flex flex-column justify-content-between overflow-hidden">
                                 <a href="{{ route('service.details', ['id' => $service->id]) }}" class="st-post-thumb">
-                                    <img class="st-zoom-in" src="{{ $service->image }}" alt="blog1">
+                                    <img class="st-zoom-in" src="{{ $service->image ?? asset('public/assets/img/service.jpg') }}" alt="blog1">
                                 </a>
                                 <div class="st-post-info">
                                     <h2 class="st-post-title"><a
@@ -140,13 +147,13 @@
 
 
 
-                <div class="col-lg-12">
+                {{-- <div class="col-lg-12">
                     @if ($totalServices > $maxPageLimit)
                         <div class="text-center pagination-container">
                             {{ $services->links() }}
                         </div>
                     @endif
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="st-height-b100 st-height-lg-b80"></div>

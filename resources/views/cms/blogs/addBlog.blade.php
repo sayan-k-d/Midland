@@ -10,7 +10,15 @@
                     <li class="breadcrumb-item active">{{ $editFlag ? 'Edit Blog' : 'Add Blog' }}</li>
                 </ul>
             </div>
-
+            @if (session('error'))
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{{ session('alertTitle') ?? 'Error' }}',
+                        text: '{{ session('error') }}',
+                    });
+                </script>
+            @endif
             <form action="{{ $editFlag ? route('blog.update', $blog->id) : route('blog.store') }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
@@ -77,18 +85,38 @@
                         </div>
                     </div>
                 </div>
-
-
-                <div class="form-group mb-3">
-                    <label for="image" class="mb-1">Blog Image</label>
-                    <input type="file" class="form-control" id="image" name="image" accept="image/*" />
-                    @if ($editFlag && $blog->image)
-                        <div class="mt-2">
-                            <img src="{{ $blog->image }}" alt="blog image" width="100">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="image" class="mb-1">Blog Image</label>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/*" />
+                            <small class="form-text text-muted">Please upload an image with a size of up to 2MB and Dimension of 600 x 400
+                            </small>
+                            @if ($editFlag && $blog->image)
+                                <div class="mt-2">
+                                    <img src="{{ $blog->image }}" alt="blog image" width="100">
+                                </div>
+                            @endif
                         </div>
-                    @endif
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="innerImage" class="mb-1">Blog Inner Banner Image</label>
+                            <input type="file" class="form-control" id="innerImage" name="innerImage" accept="image/*">
+                            <small class="form-text text-muted">Please upload an image with a size of up to 5MB and Dimension of 1920 x 1080
+                            </small>
+                            @if ($editFlag && $blog->innerImage)
+                                <div class="mt-2">
+                                    <img src="{{ $blog->innerImage }}" alt="Blog Banner Image"
+                                        style="width: 100px; height: auto;">
+                                </div>
+                            @endif
+                            @error('innerImage')
+                                <div class="text-danger mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
-
                 <div class="form-group mb-3">
                     <label for="meta_header" class="mb-1">Meta Header</label>
                     <input class="form-control" id="meta_header" name="meta_header"

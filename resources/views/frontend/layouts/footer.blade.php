@@ -1,12 +1,12 @@
  <!-- Start Footer -->
- <footer class="st-site-footer st-dynamic-bg"data-src="{{ asset('assets/img/footer-bg.png') }}">
+ <footer class="st-site-footer st-dynamic-bg"data-src="{{ asset('public/assets/img/footer-bg.png') }}">
      <div class="st-main-footer">
          <div class="container">
              <div class="row">
                  <div class="col-lg-3">
                      <div class="st-footer-widget">
                          <div class="st-text-field">
-                             <img src="{{ asset('assets/img/footer-logo.png') }}" alt="Nischinto" class="st-footer-logo">
+                             <img src="{{ asset('public/assets/img/footer-logo.png') }}" alt="Nischinto" class="st-footer-logo">
                              <div class="st-height-b25 st-height-lg-b25"></div>
                              <div class="st-footer-text">Midland Healthcare & Research
                                  Center is one of the best hospitals in Lucknow. The
@@ -48,12 +48,16 @@
                      <div class="st-footer-widget">
                          <h2 class="st-footer-widget-title">Departments</h2>
                          <ul class="st-footer-widget-nav st-mp0">
-                             @foreach ($footerData['departments'] as $department)
-                                 <li><a href="/frontend/departmentDetails/{{ $department->id }}"><i
+                             @foreach ($footerData['departments'] as $key => $department)
+                                 <li class="department-item {{ $key >= 7 ? 'd-none' : '' }}"><a
+                                         href="{{ route('department.details', ['id' => $department->id]) }}"><i
                                              class="fas fa-chevron-right"></i>{{ $department->department_name }}</a>
                                  </li>
                              @endforeach
                          </ul>
+                         @if (count($footerData['departments']) > 7)
+                             <button id="toggle-btn" class="btn btn-outline-dark btn-sm mt-2">Show More</button>
+                         @endif
                      </div>
                  </div><!-- .col -->
                  <div class="col-lg-3">
@@ -113,22 +117,48 @@
  <!-- Swiper JS -->
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
  <!-- Scripts -->
- <script src="{{ asset('assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
- <script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
- <script src="{{ asset('assets/js/isotope.pkg.min.js') }}"></script>
- <script src="{{ asset('assets/js/jquery.slick.min.js') }}"></script>
- <script src="{{ asset('assets/js/mailchimp.min.js') }}"></script>
- <script src="{{ asset('assets/js/counter.min.js') }}"></script>
- <script src="{{ asset('assets/js/lightgallery.min.js') }}"></script>
- <script src="{{ asset('assets/js/ripples.min.js') }}"></script>
- <script src="{{ asset('assets/js/wow.min.js') }}"></script>
- <script src="{{ asset('assets/js/jQueryUi.js') }}"></script>
- <script src="{{ asset('assets/js/textRotate.min.js') }}"></script>
- <script src="{{ asset('assets/js/select2.min.js') }}"></script>
- <script src="{{ asset('assets/js/main.js') }}"></script>
+ <script src="{{ asset('public/assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
+ <script src="{{ asset('public/assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+ <script src="{{ asset('public/assets/js/isotope.pkg.min.js') }}"></script>
+ <script src="{{ asset('public/assets/js/jquery.slick.min.js') }}"></script>
+ <script src="{{ asset('public/assets/js/mailchimp.min.js') }}"></script>
+ <script src="{{ asset('public/assets/js/counter.min.js') }}"></script>
+ <script src="{{ asset('public/assets/js/lightgallery.min.js') }}"></script>
+ <script src="{{ asset('public/assets/js/ripples.min.js') }}"></script>
+ <script src="{{ asset('public/assets/js/wow.min.js') }}"></script>
+ <script src="{{ asset('public/assets/js/jQueryUi.js') }}"></script>
+ <script src="{{ asset('public/assets/js/textRotate.min.js') }}"></script>
+ <script src="{{ asset('public/assets/js/select2.min.js') }}"></script>
+ <script src="{{ asset('public/assets/js/main.js') }}"></script>
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+ </script>
+ <script>
+     document.addEventListener('DOMContentLoaded', function() {
+         const toggleBtn = document.getElementById('toggle-btn');
+         if (toggleBtn) {
+             toggleBtn.addEventListener('click', function() {
+                 const hiddenItems = document.querySelectorAll('.department-item.d-none');
+                 const isExpanded = hiddenItems.length === 0;
+
+                 if (isExpanded) {
+                     // Collapse the list
+                     document.querySelectorAll('.department-item').forEach((item, index) => {
+                         if (index >= 7) {
+                             item.classList.add('d-none');
+                         }
+                     });
+                     toggleBtn.textContent = 'Show More';
+                 } else {
+                     // Expand the list
+                     hiddenItems.forEach((item) => item.classList.remove('d-none'));
+                     toggleBtn.textContent = 'Show Less';
+                 }
+             });
+         }
+
+     });
  </script>
  </body>
 

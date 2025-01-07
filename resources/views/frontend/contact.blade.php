@@ -45,7 +45,14 @@
                     </div>
                 @endif
             @endif
-
+        @else
+            <div class="st-page-heading st-dynamic-bg" data-src="{{ asset('public/assets/img/hero-bg4.jpg') }}">
+                <div class="container">
+                    <div class="st-page-heading-in text-center">
+                        <h1 class="st-page-heading-title">Contact Us</h1>
+                    </div>
+                </div>
+            </div>
         @endif
         <!-- Start Feature Seciton -->
         <section>
@@ -214,22 +221,22 @@
         <!-- Start Contact Section -->
         <div class="st-height-b120 st-height-lg-b80 abt_ftr_otr"></div>
         <section class="st-shape-wrap" id="contact">
-            <div class="st-shape1"><img src="{{ asset('assets/img/shape/contact-shape1.svg') }}" alt="shape1"></div>
-            <div class="st-shape2"><img src="{{ asset('assets/img/shape/contact-shape2.svg') }}" alt="shape2"></div>
+            <div class="st-shape1"><img src="{{ asset('public/assets/img/shape/contact-shape1.svg') }}" alt="shape1"></div>
+            <div class="st-shape2"><img src="{{ asset('public/assets/img/shape/contact-shape2.svg') }}" alt="shape2"></div>
             <div class="st-height-b120 st-height-lg-b80"></div>
             <div class="container">
                 <div class="st-section-heading st-style1">
                     <h2 class="st-section-heading-title">Stay connect with us</h2>
                     <div class="st-seperator">
                         <div class="st-seperator-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s"></div>
-                        <div class="st-seperator-center"><img src="{{ asset('assets/img/icons/4.png') }}" alt="icon">
+                        <div class="st-seperator-center"><img src="{{ asset('public/assets/img/icons/4.png') }}" alt="icon">
                         </div>
                         <div class="st-seperator-right wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.2s"></div>
                     </div>
-                    <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy
+                    {{-- <div class="st-section-heading-subtitle">Lorem Ipsum is simply dummy
                         text of the printing and typesetting
                         industry. <br>Lorem Ipsum the industry's standard dummy
-                        text.</div>
+                        text.</div> --}}
                 </div>
                 <div class="st-height-b40 st-height-lg-b40"></div>
             </div>
